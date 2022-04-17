@@ -12,4 +12,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\EntityConfigurations\" />
+    <Folder Include="Persistence\Repositories\" />
+  </ItemGroup>
+
 </Project>

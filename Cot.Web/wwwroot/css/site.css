@@ -1,71 +1,84 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿:root {
+    --color-1: #FFFFFF;
+    --color-2: #E7E7E7;
+    --color-3: #D0D0D0;
+    --color-4: #B9B9B9;
+    --color-5: #A2A2A2;
+    --color-6: #8B8B8B;
+    --color-7: #747474;
+    --color-8: #5D5D5D;
+    --color-9: #464646;
+    --color-10: #2F2F2F;
+    --color-11: #181818;
+    --color-12: #000000;
 }
 
-/* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    text-decoration: none;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('../fonts/SourceSansPro-Regular.ttf') format('truetype');
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.nav-link {
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.nav-link:hover{
+    text-decoration: underline;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
+.bg-1 { background-color: var(--color-1); }
+.bg-2 { background-color: var(--color-2); }
+.bg-3 { background-color: var(--color-3); }
+.bg-4 { background-color: var(--color-4); }
+.bg-5 { background-color: var(--color-5); }
+.bg-6 { background-color: var(--color-6); }
+.bg-7 { background-color: var(--color-7); }
+.bg-8 { background-color: var(--color-8); }
+.bg-9 { background-color: var(--color-9); }
+.bg-10 { background-color: var(--color-10); }
+.bg-11 { background-color: var(--color-11); }
+.bg-12 { background-color: var(--color-12); }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
+.text-1 { color: var(--color-1); }
+.text-2 { color: var(--color-2); }
+.text-3 { color: var(--color-3); }
+.text-4 { color: var(--color-4); }
+.text-5 { color: var(--color-5); }
+.text-6 { color: var(--color-6); }
+.text-7 { color: var(--color-7); }
+.text-8 { color: var(--color-8); }
+.text-9 { color: var(--color-9); }
+.text-10 { color: var(--color-10); }
+.text-11 { color: var(--color-11); }
+.text-12 { color: var(--color-12); }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
+.hover-bg-1:hover { background-color: var(--color-1); }
+.hover-bg-2:hover { background-color: var(--color-2); }
+.hover-bg-3:hover { background-color: var(--color-3); }
+.hover-bg-4:hover { background-color: var(--color-4); }
+.hover-bg-5:hover { background-color: var(--color-5); }
+.hover-bg-6:hover { background-color: var(--color-6); }
+.hover-bg-7:hover { background-color: var(--color-7); }
+.hover-bg-8:hover { background-color: var(--color-8); }
+.hover-bg-9:hover { background-color: var(--color-9); }
+.hover-bg-10:hover { background-color: var(--color-10); }
+.hover-bg-11:hover { background-color: var(--color-11); }
+.hover-bg-12:hover { background-color: var(--color-12); }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
-}
+.hover-text-1:hover { color: var(--color-1); }
+.hover-text-2:hover { color: var(--color-2); }
+.hover-text-3:hover { color: var(--color-3); }
+.hover-text-4:hover { color: var(--color-4); }
+.hover-text-5:hover { color: var(--color-5); }
+.hover-text-6:hover { color: var(--color-6); }
+.hover-text-7:hover { color: var(--color-7); }
+.hover-text-8:hover { color: var(--color-8); }
+.hover-text-9:hover { color: var(--color-9); }
+.hover-text-10:hover { color: var(--color-10); }
+.hover-text-11:hover { color: var(--color-11); }
+.hover-text-12:hover { color: var(--color-12); }

@@ -1,6 +1,3 @@
-using Cot.Web.Core;
-using Cot.Web.Core.Domain;
-using Cot.Web.Core.Repositories;
 using Cot.Web.Persistence;
 using Cot.Web.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;

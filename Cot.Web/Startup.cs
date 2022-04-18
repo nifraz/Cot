@@ -1,3 +1,4 @@
+using Cot.Web.Core;
 using Cot.Web.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,6 +28,14 @@ namespace Cot.Web
         {
             services.AddDbContextPool<CotDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("CotDb")));
             services.AddControllersWithViews();
+
+            services.AddScoped<>
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //#region Repositories
+            //services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            //services.AddTransient<IDeveloperRepository, DeveloperRepository>();
+            //services.AddTransient<IProjectRepository, ProjectRepository>();
+            //#endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,8 +12,8 @@ namespace Cot.Web.Core.Repositories
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> GetAsync(params object[] keyValues);
 
-        Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate);
         Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate);
 
         void Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entities);

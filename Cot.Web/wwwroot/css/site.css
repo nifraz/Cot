@@ -25,9 +25,17 @@ a {
 .nav-link {
     font-family: 'Source Sans Pro', sans-serif;
 }
-
+/*
 .nav-link:hover{
     text-decoration: underline;
+}*/
+
+.nav-link.active{
+    background-color: var(--color-8);
+}
+
+.navbar-toggler:not(.collapsed) {
+    background-color: var(--color-8);
 }
 
 

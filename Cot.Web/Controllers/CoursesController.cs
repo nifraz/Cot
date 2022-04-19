@@ -13,17 +13,17 @@ namespace Cot.Web.Controllers
 {
     public class CoursesController : Controller
     {
-        private readonly CotDbContext context;
+        private readonly IUnitOfWork unitOfWork;
 
-        public CoursesController(CotDbContext context)
+        public CoursesController(IUnitOfWork unitOfWork)
         {
-            this.context = context;
+            this.unitOfWork = unitOfWork;
         }
 
         // GET: Courses
         public async Task<IActionResult> Index()
         {
-            return View(await context.Courses.ToListAsync());
+            return View(await unitOfWork.Courses.GetAllAsync());
         }
 
         // GET: Courses/Details/5
@@ -33,9 +33,8 @@ namespace Cot.Web.Controllers
             {
                 return NotFound();
             }
-
-            var course = await context.Courses
-                .FirstOrDefaultAsync(m => m.Code == id);
+            var course = await unitOfWork.Courses
+                .FindAsync(m => m.Code == id);
             if (course == null)
             {
                 return NotFound();
@@ -59,8 +58,9 @@ namespace Cot.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Add(course);
-                await context.SaveChangesAsync();
+                //_context.Add(course);
+                unitOfWork.Courses.Add(course);
+                await unitOfWork.CompleteAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(course);
@@ -74,7 +74,7 @@ namespace Cot.Web.Controllers
                 return NotFound();
             }
 
-            var course = await context.Courses.FindAsync(id);
+            var course = await unitOfWork.Courses.GetAsync(id);
             if (course == null)
             {
                 return NotFound();
@@ -98,12 +98,13 @@ namespace Cot.Web.Controllers
             {
                 try
                 {
-                    context.Update(course);
-                    await context.SaveChangesAsync();
+                    //unitOfWork.Update(course);
+                    unitOfWork.Courses.Update(course);
+                    await unitOfWork.CompleteAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CourseExists(course.Code))
+                    if (!await CourseExistsAsync(course.Code))
                     {
                         return NotFound();
                     }
@@ -125,8 +126,8 @@ namespace Cot.Web.Controllers
                 return NotFound();
             }
 
-            var course = await context.Courses
-                .FirstOrDefaultAsync(m => m.Code == id);
+            var course = await unitOfWork.Courses
+                .FindAsync(m => m.Code == id);
             if (course == null)
             {
                 return NotFound();
@@ -140,15 +141,17 @@ namespace Cot.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var course = await context.Courses.FindAsync(id);
-            context.Courses.Remove(course);
-            await context.SaveChangesAsync();
+            var course = await unitOfWork.Courses.GetAsync(id);
+            //context.Courses.Remove(course);
+            unitOfWork.Courses.Remove(course);
+            await unitOfWork.CompleteAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CourseExists(string id)
+        private async Task<bool> CourseExistsAsync(string id)
         {
-            return context.Courses.Any(e => e.Code == id);
+            //return context.Courses.Any(e => e.Code == id);
+            return await unitOfWork.Courses.FindAsync(e => e.Code == id) != null;
         }
     }
 }

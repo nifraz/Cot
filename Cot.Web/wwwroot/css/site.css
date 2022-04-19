@@ -25,17 +25,21 @@ a {
 .nav-link {
     font-family: 'Source Sans Pro', sans-serif;
 }
-/*
-.nav-link:hover{
-    text-decoration: underline;
-}*/
 
-.nav-link.active{
-    background-color: var(--color-8);
+a:hover {
+    text-decoration: underline;
+}
+
+.nav-link.active {
+    background-color: var(--color-9);
+}
+
+.navbar-toggler.collapsed {
+    background-color: var(--color-9);
 }
 
 .navbar-toggler:not(.collapsed) {
-    background-color: var(--color-8);
+    background-color: var(--color-11);
 }
 
 

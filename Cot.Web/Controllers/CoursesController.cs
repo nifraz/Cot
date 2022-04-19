@@ -14,12 +14,10 @@ namespace Cot.Web.Controllers
     public class CoursesController : Controller
     {
         private readonly CotDbContext context;
-        private readonly IUnitOfWork unitOfWork;
 
-        public CoursesController(CotDbContext context, IUnitOfWork unitOfWork)
+        public CoursesController(CotDbContext context)
         {
             this.context = context;
-            this.unitOfWork = unitOfWork;
         }
 
         // GET: Courses

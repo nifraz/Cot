@@ -22,7 +22,8 @@ namespace Cot.Web.Persistence.Repositories
 
         protected IQueryable<TEntity> GetQueryable()
         {
-            return entitySet.AsQueryable();
+            return entitySet
+                .AsQueryable();
         }
 
         //public IEnumerable<TEntity> GetAllCached()
@@ -33,22 +34,31 @@ namespace Cot.Web.Persistence.Repositories
 
         public async Task<TEntity> GetAsync(params object[] keyValues)
         {
-            return await entitySet.FindAsync(keyValues).AsTask();
+            return await entitySet
+                .FindAsync(keyValues)
+                .AsTask();
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return await entitySet.ToListAsync();
+            return await entitySet
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await entitySet.Where(predicate).FirstOrDefaultAsync();
+            return await entitySet
+                .Where(predicate)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await entitySet.Where(predicate).ToListAsync();
+            return await entitySet
+                .AsNoTracking()
+                .Where(predicate)
+                .ToListAsync();
         }
 
 

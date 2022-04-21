@@ -22,9 +22,9 @@ namespace Cot.Web.Controllers
         }
 
         // GET: Courses
-        public async Task<IActionResult> Index(int? pageNumber, int? pageSize)
+        public async Task<IActionResult> Index(int? pageNumber, int? pageSize, string sortField, string sortOrder, string searchString)
         {
-            return View(await unitOfWork.Courses.GetAllPagedListAsync(pageNumber ?? 1, pageSize ?? 20));
+            return View(await unitOfWork.Courses.GetAllPagedListAsync(pageNumber, pageSize, sortField, sortOrder, searchString));
         }
 
         // GET: Courses/Details/5

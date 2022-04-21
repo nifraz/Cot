@@ -2,12 +2,19 @@
 
 @{
     ViewData["Title"] = "Courses";
+
+    var pageNumber = Context.Request.Query["PageNumber"];
+    var pageSize = Context.Request.Query["PageSize"];
+    var sortField = Context.Request.Query["SortField"];
+    var sortOrder = Context.Request.Query["SortOrder"];
+    var newSortOrder = sortOrder == "Asc" ? "Desc" : "Asc";
+    var sortIconClass = sortOrder == "Asc" ? "bi-sort-up" : "bi-sort-down";
 }
 
 <h1>Courses List</h1>
 
 <p>
-    <a class="btn btn-outline-primary" asp-action="Create">Create New</a>
+    <a class="btn btn-success" asp-action="Create">Create New</a>
 </p>
 
 @Html.PagedListPager(Model,
@@ -29,13 +36,40 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.First().Code)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Title)
-            </th>
-            <th>
+                <a 
+                   asp-action="Index" 
+                   asp-route-PageNumber="@pageNumber" 
+                   asp-route-PageSize="@pageSize" 
+                   asp-route-SortField="Code" 
+                   asp-route-SortOrder="@newSortOrder">
+                    Code
+                    @if (sortField == "Code")
+                    {
+                        <i class="bi @sortIconClass"></i>
+                    }
+                </a>
 
+            </th>
+            <th>
+                <a 
+                   asp-action="Index" 
+                   asp-route-PageNumber="@pageNumber" 
+                   asp-route-PageSize="@pageSize" 
+                   asp-route-SortField="Title" 
+                   asp-route-SortOrder="@newSortOrder">
+                    Title
+                    @if (sortField == "Title")
+                    {
+                        <i class="bi @sortIconClass"></i>
+                    }
+                </a>
+            </th>
+            <th>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control-sm" id="search" placeholder="Search Text" value="@Context.Request.Query["SearchString"]">
+                    <button class="btn btn-sm btn-outline-secondary" title="Search"><i class="bi bi-search"></i></button>
+                    <a class="btn btn-sm btn-outline-secondary" title="Clear" asp-action="Index"><i class="bi bi-x"></i></a>
+                </div>
             </th>
         </tr>
     </thead>
@@ -50,9 +84,9 @@
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td class="">
-                    <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Code">Details</a> |
-                    <a class="btn btn-sm btn-secondary" asp-action="Edit" asp-route-id="@item.Code">Edit</a> |
-                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Code">Delete</a>
+                    <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Code" title="Details"><i class="bi bi-info"></i></a> |
+                    <a class="btn btn-sm btn-secondary" asp-action="Edit" asp-route-id="@item.Code" title="Edit"><i class="bi bi-pencil"></i></a> |
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Code" title="Delete"><i class="bi bi-trash"></i></a>
                 </td>
             </tr>
         }

@@ -47,11 +47,11 @@ namespace Cot.Web.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IPagedList<TEntity>> GetAllPagedListAsync(int pageNumber, int pageSize)
+        public async Task<IPagedList<TEntity>> GetAllPagedListAsync(int? pageNumber, int? pageSize, string sortField, string sortValue, string searchText)
         {
             return await entitySet
                 .AsNoTracking()
-                .ToPagedListAsync(pageNumber, pageSize);
+                .ToPagedListAsync(pageNumber ?? 1, pageSize ?? 10);
         }
 
         public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)

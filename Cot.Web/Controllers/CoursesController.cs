@@ -9,6 +9,7 @@ using Cot.Web.Core.Domain;
 using Cot.Web.Persistence;
 using Cot.Web.Core;
 using X.PagedList;
+using Cot.Web.Models;
 
 namespace Cot.Web.Controllers
 {
@@ -22,9 +23,18 @@ namespace Cot.Web.Controllers
         }
 
         // GET: Courses
-        public async Task<IActionResult> Index(int? pageNumber, int? pageSize, string sortField, string sortOrder, string searchString)
+        public async Task<IActionResult> Index(CoursesListViewModel model)
         {
-            return View(await unitOfWork.Courses.GetAllPagedListAsync(pageNumber, pageSize, sortField, sortOrder, searchString));
+            var newModel = new CoursesListViewModel()
+            {
+                PageNumber = model.PageNumber,
+                PageSize = model.PageSize,
+                SortField = model.SortField,
+                SortOrder = model.SortOrder,
+                SearchText = model.SearchText,
+                CoursesList = await unitOfWork.Courses.GetAllPagedListAsync(model.PageNumber, model.PageSize, model.SortField, model.SortOrder, model.SearchText)
+            };
+            return View(newModel);
         }
 
         // GET: Courses/Details/5

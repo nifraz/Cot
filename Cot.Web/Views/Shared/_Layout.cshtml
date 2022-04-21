@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body class="bg-1">
+
+    <!-- Header -->
     <header class="sticky-top">
         <nav class="bg-11 navbar navbar-expand-sm navbar-dark border-bottom py-1">
             <div class="container-fluid">
@@ -39,17 +41,21 @@
             </ol>
         </nav>
     </header>
-    <div class="container-fluid">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="fixed-bottom border-top bg-11 fs-6 fw-light text-muted">
+    <!-- Main -->
+    <main role="main">
+        <div class="container-fluid pb-2">
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-top bg-11 fs-6 fw-light text-muted">
         <div class="container-fluid">
             &copy; @DateTime.Today.Year - College of Technology - Site created by <a title="Email Developer" class="text-muted" href="mailto:nifraz@live.com">nifraz@live.com</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Cot.Web.Core.Domain;
 using Cot.Web.Persistence;
 using Cot.Web.Core;
+using X.PagedList;
 
 namespace Cot.Web.Controllers
 {
@@ -21,9 +22,9 @@ namespace Cot.Web.Controllers
         }
 
         // GET: Courses
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber, int? pageSize)
         {
-            return View(await unitOfWork.Courses.GetAllAsync());
+            return View(await unitOfWork.Courses.GetAllPagedListAsync(pageNumber ?? 1, pageSize ?? 20));
         }
 
         // GET: Courses/Details/5

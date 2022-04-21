@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace Cot.Web.Persistence.Repositories
 {
@@ -44,6 +45,13 @@ namespace Cot.Web.Persistence.Repositories
             return await entitySet
                 .AsNoTracking()
                 .ToListAsync();
+        }
+
+        public async Task<IPagedList<TEntity>> GetAllPagedListAsync(int pageNumber, int pageSize)
+        {
+            return await entitySet
+                .AsNoTracking()
+                .ToPagedListAsync(pageNumber, pageSize);
         }
 
         public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
@@ -88,6 +96,8 @@ namespace Cot.Web.Persistence.Repositories
         {
             entitySet.RemoveRange(entities);
         }
+
+        
 
 
         //public Task<int> CountAll()

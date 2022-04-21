@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace Cot.Web.Core.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class, IEntity, new()
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<IPagedList<TEntity>> GetAllPagedListAsync(int pageNumber, int pageSize);
         Task<TEntity> GetAsync(params object[] keyValues);
 
         Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate);

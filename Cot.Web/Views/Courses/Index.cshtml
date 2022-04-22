@@ -8,44 +8,47 @@
 }
 
 <!-- Header -->
-<div class="row bg-3 px-1 pt-3">
+<div class="row px-1 pt-3 pb-2 border-bottom">
     <div class="col-sm-auto">
         <h3>Manage <b>Courses</b></h3>
     </div>
-    <div class="col-sm-auto">
+    <div class="col-sm-auto ms-auto">
         <form method="get">
-            <div class="input-group mb-3">
-                <span class="input-group-text">Items</span>
-                <input type="number" class="form-control" id="pageSize" name="PageSize" placeholder="10" min="1" max="@Model.PagedList.TotalItemCount" value="@(Model.PageSize ?? 10)">
-                <input type="hidden" asp-for="PageNumber" />
-                <input type="hidden" asp-for="SearchText" />
-                <input type="hidden" asp-for="SortField" />
-                <input type="hidden" asp-for="SortOrder" />
-                <button class="btn btn btn-outline-secondary" type="submit" title="Go"><i class="bi bi-arrow-right-circle"></i></button>
-            </div>
-        </form>
-    </div>
-    <div class="col-sm-auto justify-content-end">
-        <form method="get">
-            <div class="input-group mb-3">
-                <span class="input-group-text">Search</span>
-                <input type="search" class="form-control" id="search" name="SearchText" placeholder="Text" value="@Model.SearchText">
-                <input type="hidden" asp-for="PageNumber" />
-                <input type="hidden" asp-for="PageSize" />
-                <input type="hidden" asp-for="SortField" />
-                <input type="hidden" asp-for="SortOrder" />
-                <button class="btn btn btn-outline-secondary" type="submit" title="Search"><i class="bi bi-search"></i></button>
+            <div class="row g-2">
+                <div class="col-sm-auto">
+                    <input type="hidden" asp-for="PageNumber" />
+                    <div class="input-group">
+                        <span class="input-group-text">Items</span>
+                        <input type="number" class="form-control" id="pageSize" name="PageSize" placeholder="10" min="1" max="@Model.PagedList.TotalItemCount" value="@(Model.PageSize ?? 10)">
+                    </div>
+                </div>
+                <div class="col-sm-auto">
+                    <input type="hidden" asp-for="SortField" />
+                    <input type="hidden" asp-for="SortOrder" />
+                    <div class="input-group">
+                        <span class="input-group-text">Search</span>
+                        <input type="search" class="form-control" id="search" name="SearchText" placeholder="Text" value="@Model.SearchText">
+                    </div>
+                </div>
+                <div class="col-sm-auto">
+                    <button class="btn btn btn-primary" type="submit" title="Go"><i class="bi bi-arrow-right-circle"></i></button>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
 <!-- Table -->
-<div class="row table-responsive mt-2">
+<div class="row table-responsive mt-1">
     <div class="col">
         <table class="table table-sm table-hover">
             <thead>
                 <tr>
+                    <th>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="selectAll" />
+                        </div>
+                    </th>
                     <th>
                         <a asp-action="Index"
                            asp-route-PageNumber="@Model.PageNumber"
@@ -76,7 +79,7 @@
                     </th>
                     <th>
                         <div class="d-flex justify-content-end">
-                            <a class="btn btn-success" title="Create New Record" asp-action="Create"><i class="bi bi-plus-circle"></i> ADD NEW</a>
+                            <a class="btn btn-sm btn-success mb-1" title="Create New Record" asp-action="Create"><i class="bi bi-plus-circle"></i> ADD NEW</a>
                         </div>
                     </th>
                 </tr>
@@ -85,6 +88,11 @@
                 @foreach (var item in Model.PagedList)
                 {
                     <tr class="">
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="select_@item.Code" />
+                            </div>
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Code)
                         </td>
@@ -106,16 +114,16 @@
 </div>
 
 <!-- Footer -->
-<div class="row bg-3 px-1 align-items-center">
+<div class="row border-top px-1 align-items-center">
     <div class="col-sm-3">
-        <div>Showing @Model.PagedList.FirstItemOnPage - @Model.PagedList.LastItemOnPage of @Model.PagedList.TotalItemCount total item(s)</div>
+        <div>Showing @Model.PagedList.FirstItemOnPage - @Model.PagedList.LastItemOnPage of @Model.PagedList.TotalItemCount item(s)</div>
     </div>
     <div class="col-sm-9 justify-content-end">
         @Html.PagedListPager(Model.PagedList,
 p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.SearchText }),
 new PagedListRenderOptions
 {
-    ContainerDivClasses = new string[] { "d-flex justify-content-end pt-3" },
+    ContainerDivClasses = new string[] { "d-flex justify-content-end pt-2" },
     LiElementClasses = new string[] { "page-item" },
     PageClasses = new string[] { "page-link" },
     DisplayLinkToFirstPage = PagedListDisplayMode.Always,

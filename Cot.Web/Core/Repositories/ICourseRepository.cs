@@ -3,10 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace Cot.Web.Core.Repositories
 {
-    public interface ICourseRepository : IRepository<Course>
+    public interface ICourseRepository : IRepository<Course>, IEntityRepository<Course>
     {
+
     }
 }

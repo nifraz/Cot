@@ -23,18 +23,10 @@ namespace Cot.Web.Controllers
         }
 
         // GET: Courses
-        public async Task<IActionResult> Index(CoursesListViewModel model)
+        public async Task<IActionResult> Index(ListViewModel model)
         {
-            var newModel = new CoursesListViewModel()
-            {
-                PageNumber = model.PageNumber,
-                PageSize = model.PageSize,
-                SortField = model.SortField,
-                SortOrder = model.SortOrder,
-                SearchText = model.SearchText,
-                CoursesList = await unitOfWork.Courses.GetAllPagedListAsync(model.PageNumber, model.PageSize, model.SortField, model.SortOrder, model.SearchText)
-            };
-            return View(newModel);
+            model.PagedList = await unitOfWork.Courses.GetAllPagedListAsync(model.PageNumber, model.PageSize, model.SortField, model.SortOrder, model.SearchText);
+            return View(model);
         }
 
         // GET: Courses/Details/5

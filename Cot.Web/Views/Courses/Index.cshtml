@@ -1,4 +1,4 @@
-﻿@model CoursesListViewModel
+﻿@model ListViewModel
 
 @{
     ViewData["Title"] = "Courses";
@@ -8,14 +8,28 @@
 }
 
 <!-- Header -->
-<div class="row bg-2 px-1 pt-3">
-    <div class="col-sm-8">
+<div class="row bg-3 px-1 pt-3">
+    <div class="col-sm-auto">
         <h3>Manage <b>Courses</b></h3>
     </div>
-    <div class="col-sm-4 justify-content-end">
+    <div class="col-sm-auto">
         <form method="get">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" id="search" name="SearchText" placeholder="Search" value="@Model.SearchText">
+                <span class="input-group-text">Items</span>
+                <input type="number" class="form-control" id="pageSize" name="PageSize" placeholder="10" min="1" max="@Model.PagedList.TotalItemCount" value="@(Model.PageSize ?? 10)">
+                <input type="hidden" asp-for="PageNumber" />
+                <input type="hidden" asp-for="SearchText" />
+                <input type="hidden" asp-for="SortField" />
+                <input type="hidden" asp-for="SortOrder" />
+                <button class="btn btn btn-outline-secondary" type="submit" title="Go"><i class="bi bi-arrow-right-circle"></i></button>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-auto justify-content-end">
+        <form method="get">
+            <div class="input-group mb-3">
+                <span class="input-group-text">Search</span>
+                <input type="search" class="form-control" id="search" name="SearchText" placeholder="Text" value="@Model.SearchText">
                 <input type="hidden" asp-for="PageNumber" />
                 <input type="hidden" asp-for="PageSize" />
                 <input type="hidden" asp-for="SortField" />
@@ -68,7 +82,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.CoursesList)
+                @foreach (var item in Model.PagedList)
                 {
                     <tr class="">
                         <td>
@@ -92,21 +106,21 @@
 </div>
 
 <!-- Footer -->
-<div class="row bg-2 px-1 align-items-center">
+<div class="row bg-3 px-1 align-items-center">
     <div class="col-sm-3">
-        <div>Showing 1 - 10 of 90 total records</div>
+        <div>Showing @Model.PagedList.FirstItemOnPage - @Model.PagedList.LastItemOnPage of @Model.PagedList.TotalItemCount total item(s)</div>
     </div>
     <div class="col-sm-9 justify-content-end">
-        @Html.PagedListPager(Model.CoursesList,
+        @Html.PagedListPager(Model.PagedList,
 p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.SearchText }),
 new PagedListRenderOptions
 {
-   ContainerDivClasses = new string[] { "d-flex justify-content-end pt-3" },
-   LiElementClasses = new string[] { "page-item" },
-   PageClasses = new string[] { "page-link" },
-   DisplayLinkToFirstPage = PagedListDisplayMode.Always,
-   DisplayLinkToLastPage = PagedListDisplayMode.Always,
-   MaximumPageNumbersToDisplay = 7,
+    ContainerDivClasses = new string[] { "d-flex justify-content-end pt-3" },
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" },
+    DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+    DisplayLinkToLastPage = PagedListDisplayMode.Always,
+    MaximumPageNumbersToDisplay = 7,
 })
     </div>
 </div>

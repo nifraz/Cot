@@ -11,7 +11,7 @@ namespace Cot.Web.Core.Repositories
     public interface IRepository<TEntity> where TEntity : class, IEntity, new()
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<IPagedList<TEntity>> GetAllPagedListAsync(int? pageNumber, int? pageSize, string sortField, string sortValue, string searchText);
+        Task<IPagedList<TEntity>> GetAllPagedListAsync(int? pageNumber, int? pageSize);
         Task<TEntity> GetAsync(params object[] keyValues);
 
         Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate);

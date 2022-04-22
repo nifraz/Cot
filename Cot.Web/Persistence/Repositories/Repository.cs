@@ -12,58 +12,52 @@ namespace Cot.Web.Persistence.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
     {
-        private readonly CotDbContext context;
-        private readonly DbSet<TEntity> entitySet;
+        //private readonly CotDbContext context;
+        private readonly DbSet<TEntity> entities;
 
         public Repository(CotDbContext context)
         {
-            this.context = context;
-            this.entitySet = context.Set<TEntity>();
+            //this.context = context;
+            entities = context.Set<TEntity>();
         }
 
         protected IQueryable<TEntity> GetQueryable()
         {
-            return entitySet
-                .AsQueryable();
+            return entities
+                .AsNoTracking();
         }
-
-        //public IEnumerable<TEntity> GetAllCached()
-        //{
-        //    return _entities.Local.ToList();
-        //}
-
 
         public async Task<TEntity> GetAsync(params object[] keyValues)
         {
-            return await entitySet
+            return await entities
                 .FindAsync(keyValues)
                 .AsTask();
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return await entitySet
+            return await entities
                 .AsNoTracking()
                 .ToListAsync();
         }
 
-        public async Task<IPagedList<TEntity>> GetAllPagedListAsync(int? pageNumber, int? pageSize, string sortField, string sortValue, string searchText)
+        public async Task<IPagedList<TEntity>> GetAllPagedListAsync(int? pageNumber, int? pageSize)
         {
-            return await entitySet
+            return await entities
                 .AsNoTracking()
                 .ToPagedListAsync(pageNumber ?? 1, pageSize ?? 10);
         }
 
         public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await entitySet
+            return await entities
                 .Where(predicate)
                 .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await entitySet
+            return await entities
                 .AsNoTracking()
                 .Where(predicate)
                 .ToListAsync();
@@ -72,32 +66,30 @@ namespace Cot.Web.Persistence.Repositories
 
         public void Add(TEntity entity)
         {
-            entitySet.Add(entity);
+            entities.Add(entity);
         }
 
         public void AddRange(IEnumerable<TEntity> entities)
         {
-            entitySet.AddRange(entities);
+            this.entities.AddRange(entities);
         }
 
         public void Update(TEntity entity)
         {
-            entitySet.Update(entity);
+            entities.Update(entity);
             //entitySet.Attach(entity);
             //context.Entry(entity).State = EntityState.Modified;
         }
 
         public void Remove(TEntity entity)
         {
-            entitySet.Remove(entity);
+            entities.Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
-            entitySet.RemoveRange(entities);
+            this.entities.RemoveRange(entities);
         }
-
-        
 
 
         //public Task<int> CountAll()

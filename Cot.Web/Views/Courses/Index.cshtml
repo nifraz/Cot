@@ -6,95 +6,107 @@
     var newSortOrder = Model.SortOrder == "Descending" ? "Ascending" : "Descending";
     var sortIconClass = Model.SortOrder == "Descending" ? "bi-sort-down" : "bi-sort-up";
 }
-<div class="d-flex justify-content-between mt-2">
-    <h2>Courses List</h2>
-    <form method="get">
-        <div class="input-group mb-3">
-            <input type="hidden" asp-for="PageNumber" />
-            <input type="hidden" asp-for="PageSize" />
-            <input type="hidden" asp-for="SortField" />
-            <input type="hidden" asp-for="SortOrder" />
-            <input type="text" class="form-control" id="search" name="SearchText" placeholder="Search Text" value="@Model.SearchText">
-            <button class="btn btn btn-outline-secondary" type="submit" title="Search"><i class="bi bi-search"></i></button>
-        </div>
-    </form>
+
+<!-- Header -->
+<div class="row bg-2 px-1 pt-3">
+    <div class="col-sm-8">
+        <h3>Manage <b>Courses</b></h3>
+    </div>
+    <div class="col-sm-4 justify-content-end">
+        <form method="get">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="search" name="SearchText" placeholder="Search" value="@Model.SearchText">
+                <input type="hidden" asp-for="PageNumber" />
+                <input type="hidden" asp-for="PageSize" />
+                <input type="hidden" asp-for="SortField" />
+                <input type="hidden" asp-for="SortOrder" />
+                <button class="btn btn btn-outline-secondary" type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </div>
+        </form>
+    </div>
 </div>
 
-<div class="table-responsive">
-    <table class="table table-sm table-hover">
-        <thead>
-            <tr>
-                <th>
-                    <a asp-action="Index"
-                       asp-route-PageNumber="@Model.PageNumber"
-                       asp-route-PageSize="@Model.PageSize"
-                       asp-route-SortField="Code"
-                       asp-route-SortOrder="@newSortOrder"
-                       asp-route-SearchText="@Model.SearchText">
-                        Code
-                        @if (Model.SortField == "Code")
-                        {
-                            <i class="bi @sortIconClass"></i>
-                        }
-                    </a>
-
-                </th>
-                <th>
-                    <a asp-action="Index"
-                       asp-route-PageNumber="@Model.PageNumber"
-                       asp-route-PageSize="@Model.PageSize"
-                       asp-route-SortField="Title"
-                       asp-route-SortOrder="@newSortOrder"
-                       asp-route-SearchText="@Model.SearchText">
-                        Title
-                        @if (Model.SortField == "Title")
-                        {
-                            <i class="bi @sortIconClass"></i>
-                        }
-                    </a>
-                </th>
-                <th>
-                    <div class="d-flex justify-content-end">
-                        <a class="btn btn-sm btn-success" title="Create New Record" asp-action="Create"><i class="bi bi-plus"></i> Create New</a>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.CoursesList)
-            {
-                <tr class="align-middle">
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Code)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        <div class="d-flex justify-content-end gap-1">
-                            <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Code" title="Details"><i class="bi bi-info"></i></a>
-                            <a class="btn btn-sm btn-secondary" asp-action="Edit" asp-route-id="@item.Code" title="Edit"><i class="bi bi-pencil"></i></a>
-                            <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Code" title="Delete"><i class="bi bi-trash"></i></a>
+<!-- Table -->
+<div class="row table-responsive mt-2">
+    <div class="col">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        <a asp-action="Index"
+                           asp-route-PageNumber="@Model.PageNumber"
+                           asp-route-PageSize="@Model.PageSize"
+                           asp-route-SortField="Code"
+                           asp-route-SortOrder="@newSortOrder"
+                           asp-route-SearchText="@Model.SearchText">
+                            Code
+                            @if (Model.SortField == "Code")
+                            {
+                                <i class="bi @sortIconClass"></i>
+                            }
+                        </a>
+                    </th>
+                    <th>
+                        <a asp-action="Index"
+                           asp-route-PageNumber="@Model.PageNumber"
+                           asp-route-PageSize="@Model.PageSize"
+                           asp-route-SortField="Title"
+                           asp-route-SortOrder="@newSortOrder"
+                           asp-route-SearchText="@Model.SearchText">
+                            Title
+                            @if (Model.SortField == "Title")
+                            {
+                                <i class="bi @sortIconClass"></i>
+                            }
+                        </a>
+                    </th>
+                    <th>
+                        <div class="d-flex justify-content-end">
+                            <a class="btn btn-success" title="Create New Record" asp-action="Create"><i class="bi bi-plus-circle"></i> ADD NEW</a>
                         </div>
-                    </td>
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CoursesList)
+                {
+                    <tr class="">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-end gap-1">
+                                <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.Code" title="Details"><i class="bi bi-info-circle"></i></a>
+                                <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Code" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                                <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Code" title="Delete"><i class="bi bi-trash3"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<div class="">
-    @Html.PagedListPager(Model.CoursesList,
-    p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.SearchText }),
-    new PagedListRenderOptions
-    {
-        ContainerDivClasses = new string[] { "d-flex justify-content-end" },
-        LiElementClasses = new string[] { "page-item" },
-        PageClasses = new string[] { "page-link" },
-        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
-        DisplayLinkToLastPage = PagedListDisplayMode.Always,
-        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
-        DisplayLinkToNextPage = PagedListDisplayMode.Always,
-        MaximumPageNumbersToDisplay = 7,
-    })
+<!-- Footer -->
+<div class="row bg-2 px-1 align-items-center">
+    <div class="col-sm-3">
+        <div>Showing 1 - 10 of 90 total records</div>
+    </div>
+    <div class="col-sm-9 justify-content-end">
+        @Html.PagedListPager(Model.CoursesList,
+p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.SearchText }),
+new PagedListRenderOptions
+{
+   ContainerDivClasses = new string[] { "d-flex justify-content-end pt-3" },
+   LiElementClasses = new string[] { "page-item" },
+   PageClasses = new string[] { "page-link" },
+   DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+   DisplayLinkToLastPage = PagedListDisplayMode.Always,
+   MaximumPageNumbersToDisplay = 7,
+})
+    </div>
 </div>

@@ -11,12 +11,12 @@
 <body class="bg-1">
 
     <!-- Header -->
-    <header class="sticky-top">
+    <header class="sticky-top shadow-sm">
         <nav class="bg-11 navbar navbar-expand-sm navbar-dark border-bottom py-1">
             <div class="container-fluid">
                 <a title="Home" class="navbar-brand p-0 px-1 pe-2 m-0" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/images/cot-logo-white.svg" alt="COT Logo" style="height: 35px; width: 35px; vertical-align: middle;" />
-                    <span class="brand-name text-white" style="font: bold 16px Arial, sans-serif; line-height: 20px; letter-spacing: 1px; display: inline-block; padding-top: 2px; vertical-align: middle; ">COLLEGE OF<br />TECHNOLOGY</span>
+                    <img src="~/images/cot-logo-white.svg" alt="COT Logo" style="height: 32px; width: 32px; vertical-align: middle;" />
+                    <span class="brand-name text-white" style="font: bold 16px Arial, sans-serif; line-height: 18px; letter-spacing: 1px; display: inline-block; padding-top: 2px; vertical-align: middle; ">COLLEGE OF<br />TECHNOLOGY</span>
                 </a>
                 <button class="navbar-toggler collapsed bg-9 p-1" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -25,16 +25,16 @@
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav ms-auto mt-1 mt-sm-0">
                         <li class="nav-item">
-                            <a title="Courses" class="nav-link text-light p-1 px-2 d-flex justify-content-between @(ViewContext.RouteData.Values["Controller"].ToString() == "Courses" ? "active" : "")" asp-area="" asp-controller="Courses" asp-action="Index"><span>COURSES</span><i class="bi bi-book d-sm-none me-1"></i></a>
+                            <a title="Courses" class="nav-link text-light px-3 rounded-pill d-flex justify-content-between @(ViewContext.RouteData.Values["Controller"].ToString() == "Courses" ? "active" : "")" asp-area="" asp-controller="Courses" asp-action="Index"><span>COURSES</span><i class="bi bi-book d-sm-none me-1"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a title="Privacy" class="nav-link text-light p-1 px-2 d-flex justify-content-between @(ViewContext.RouteData.Values["Action"].ToString() == "Privacy" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Privacy"><span>PRIVACY</span><i class="bi bi-shield d-sm-none me-1"></i></a>
+                            <a title="Privacy" class="nav-link text-light px-3 rounded-pill d-flex justify-content-between @(ViewContext.RouteData.Values["Action"].ToString() == "Privacy" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Privacy"><span>PRIVACY</span><i class="bi bi-shield d-sm-none me-1"></i></a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <nav class="bg-3 px-3 d-none d-sm-flex shadow-sm" style="height:25px; --bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <nav class="bg-1 px-3 d-none d-sm-flex small" style="height:20px; --bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Index</li>
@@ -43,16 +43,17 @@
     </header>
 
     <!-- Main -->
-    <main role="main">
-        <div class="container-fluid pb-2">
-            @RenderBody()
-        </div>
+    <main class="container-fluid" role="main">
+        @RenderBody()
     </main>
 
     <!-- Footer -->
-    <footer class="border-top bg-11 fs-6 fw-light text-muted">
-        <div class="container-fluid">
-            &copy; @DateTime.Today.Year - College of Technology - Site created by <a title="Email Developer" class="text-muted" href="mailto:nifraz@live.com">nifraz@live.com</a>
+    <footer class="container-fluid border-top bg-11 fs-6 fw-light text-muted" style="height: auto;">
+        <div class="row">
+            <div class="col d-flex justify-content-between small">
+                <span>&copy; @DateTime.Today.Year - College of Technology</span>
+                <span>Site created by <a title="Email Developer" class="text-muted" href="mailto:nifraz@live.com">nifraz@live.com</a></span>
+            </div>
         </div>
     </footer>
 

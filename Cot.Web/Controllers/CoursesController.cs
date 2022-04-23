@@ -23,9 +23,11 @@ namespace Cot.Web.Controllers
         }
 
         // GET: Courses
-        public async Task<IActionResult> Index(ListViewModel model)
+        public async Task<IActionResult> Index(ListViewModel<Course> model)
         {
-            model.PagedList = await unitOfWork.Courses.GetAllPagedListAsync(model.PageNumber, model.PageSize, model.SortField, model.SortOrder, model.SearchText);
+            model.PagedList = await unitOfWork.Courses.GetAllPagedListAsync(model.PageNumber, model.PageSize, model.SortField, model.SortOrder, model.FilterText);
+            model.PageNumber = model.PagedList.PageNumber;
+            model.PageSize = model.PagedList.PageSize;
             return View(model);
         }
 

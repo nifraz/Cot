@@ -9,6 +9,6 @@ namespace Cot.Web.Core.Repositories
 {
     public interface IEntityRepository<TEntity> where TEntity : class, IEntity, new()
     {
-        Task<IPagedList<TEntity>> GetAllPagedListAsync(int? pageNumber, int? pageSize, string sortField, string sortValue, string searchText);
+        Task<IPagedList<TEntity>> GetAllPagedListAsync(int? pageNumber, int? pageSize, string sortField, string sortValue, string filterText);
     }
 }

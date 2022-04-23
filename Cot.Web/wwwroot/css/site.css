@@ -31,12 +31,13 @@ a {
     font-style: normal;
 }
 
-* {
+body {
     font-family: 'Roboto', sans-serif;
 }
 
 .nav-link {
     font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
 }
 
 .nav-link:hover {
@@ -55,6 +56,14 @@ a {
     background-color: var(--color-11);
 }
 
+.page-item.active .page-link {
+    background-color: var(--color-4);
+    border-color: var(--color-4);
+}
+
+mark{
+    padding: 0;
+}
 
 .bg-1 { background-color: var(--color-1); }
 .bg-2 { background-color: var(--color-2); }

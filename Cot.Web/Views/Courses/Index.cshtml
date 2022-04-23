@@ -1,16 +1,16 @@
-﻿@model ListViewModel
+﻿@model ListViewModel<Course>
 
 @{
     ViewData["Title"] = "Courses";
 
-    var newSortOrder = Model.SortOrder == "Descending" ? "Ascending" : "Descending";
+    var newSortOrder = (string.IsNullOrEmpty(Model.SortOrder) || Model.SortOrder == "Descending") ? "Ascending" : "Descending";
     var sortIconClass = Model.SortOrder == "Descending" ? "bi-sort-down" : "bi-sort-up";
 }
 
 <!-- Header -->
-<div class="row px-1 pt-3 pb-2 border-bottom">
+<div class="row my-2 p-0">
     <div class="col-sm-auto">
-        <h3>Manage <b>Courses</b></h3>
+        <h2 class="m-0">Manage <b>Courses</b></h2>
     </div>
     <div class="col-sm-auto ms-auto">
         <form method="get">
@@ -18,16 +18,16 @@
                 <div class="col-sm-auto">
                     <input type="hidden" asp-for="PageNumber" />
                     <div class="input-group">
-                        <span class="input-group-text">Items</span>
-                        <input type="number" class="form-control" id="pageSize" name="PageSize" placeholder="10" min="1" max="@Model.PagedList.TotalItemCount" value="@(Model.PageSize ?? 10)">
+                        <span class="input-group-text"><i class="bi bi-eye"></i>&nbsp;No. of Items</span>
+                        <input type="number" class="form-control" id="pageSize" name="PageSize" placeholder="10" min="1" max="100" value="@Model.PageSize">
                     </div>
                 </div>
                 <div class="col-sm-auto">
                     <input type="hidden" asp-for="SortField" />
                     <input type="hidden" asp-for="SortOrder" />
                     <div class="input-group">
-                        <span class="input-group-text">Search</span>
-                        <input type="search" class="form-control" id="search" name="SearchText" placeholder="Text" value="@Model.SearchText">
+                        <span class="input-group-text"><i class="bi bi-filter"></i>&nbsp;Filter</span>
+                        <input type="search" class="form-control" id="filter" name="FilterText" placeholder="Text" value="@Model.FilterText">
                     </div>
                 </div>
                 <div class="col-sm-auto">
@@ -38,12 +38,44 @@
     </div>
 </div>
 
+<div class="row my-2 p-0 align-items-center">
+    <div class="col-sm-auto">
+        <div class="">
+            <a class="btn btn-success" title="Create New Record" asp-action="Create"><i class="bi bi-plus-circle"></i> ADD NEW</a>
+        </div>
+    </div>
+    <div class="col-sm-auto ms-auto">
+        <div class="row align-items-center">
+            <div class="col-sm-auto">
+                <div>Showing @Model.PagedList.FirstItemOnPage - @Model.PagedList.LastItemOnPage of @Model.PagedList.TotalItemCount item(s)</div>
+            </div>
+            <div class="col-sm-auto">
+                <div>Page @Model.PagedList.PageNumber of @Model.PagedList.PageCount</div>
+            </div>
+            <div class="col-sm-auto">
+                @Html.PagedListPager(Model.PagedList,
+        p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.FilterText }),
+        new PagedListRenderOptions
+        {
+            ContainerDivClasses = new string[] { "" },
+            UlElementClasses = new string[] { "pagination m-0" },
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" },
+            DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+            DisplayLinkToLastPage = PagedListDisplayMode.Always,
+            MaximumPageNumbersToDisplay = 7,
+        })
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Table -->
-<div class="row table-responsive mt-1">
+<div class="row table-responsive border-top">
     <div class="col">
-        <table class="table table-sm table-hover">
+        <table class="table table-sm my-2 table-hover">
             <thead>
-                <tr>
+                <tr class="align-items-center">
                     <th>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="selectAll" />
@@ -55,7 +87,7 @@
                            asp-route-PageSize="@Model.PageSize"
                            asp-route-SortField="Code"
                            asp-route-SortOrder="@newSortOrder"
-                           asp-route-SearchText="@Model.SearchText">
+                           asp-route-SearchText="@Model.FilterText">
                             Code
                             @if (Model.SortField == "Code")
                             {
@@ -69,7 +101,7 @@
                            asp-route-PageSize="@Model.PageSize"
                            asp-route-SortField="Title"
                            asp-route-SortOrder="@newSortOrder"
-                           asp-route-SearchText="@Model.SearchText">
+                           asp-route-SearchText="@Model.FilterText">
                             Title
                             @if (Model.SortField == "Title")
                             {
@@ -78,9 +110,7 @@
                         </a>
                     </th>
                     <th>
-                        <div class="d-flex justify-content-end">
-                            <a class="btn btn-sm btn-success mb-1" title="Create New Record" asp-action="Create"><i class="bi bi-plus-circle"></i> ADD NEW</a>
-                        </div>
+                        
                     </th>
                 </tr>
             </thead>
@@ -110,25 +140,5 @@
                 }
             </tbody>
         </table>
-    </div>
-</div>
-
-<!-- Footer -->
-<div class="row border-top px-1 align-items-center">
-    <div class="col-sm-3">
-        <div>Showing @Model.PagedList.FirstItemOnPage - @Model.PagedList.LastItemOnPage of @Model.PagedList.TotalItemCount item(s)</div>
-    </div>
-    <div class="col-sm-9 justify-content-end">
-        @Html.PagedListPager(Model.PagedList,
-p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.SearchText }),
-new PagedListRenderOptions
-{
-    ContainerDivClasses = new string[] { "d-flex justify-content-end pt-2" },
-    LiElementClasses = new string[] { "page-item" },
-    PageClasses = new string[] { "page-link" },
-    DisplayLinkToFirstPage = PagedListDisplayMode.Always,
-    DisplayLinkToLastPage = PagedListDisplayMode.Always,
-    MaximumPageNumbersToDisplay = 7,
-})
     </div>
 </div>

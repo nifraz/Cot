@@ -15,13 +15,13 @@ namespace Cot.Web.Persistence.Repositories
 
         }
 
-        public Task<IPagedList<Course>> GetAllPagedListAsync(int? pageNumber, int? pageSize, string sortField, string sortValue, string searchText)
+        public Task<IPagedList<Course>> GetAllPagedListAsync(int? pageNumber, int? pageSize, string sortField, string sortValue, string filterText)
         {
             var query = GetQueryable();
 
-            if (!string.IsNullOrEmpty(searchText))
+            if (!string.IsNullOrEmpty(filterText))
             {
-                query = query.Where(e => e.Code.Contains(searchText) || e.Title.Contains(searchText));
+                query = query.Where(e => e.Code.Contains(filterText) || e.Title.Contains(filterText));
             }
 
             if (sortValue == "Descending")

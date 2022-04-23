@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
-<body class="bg-1">
+<body class="d-flex flex-column h-100 bg-1">
 
     <!-- Header -->
     <header class="sticky-top shadow-sm">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </nav>
-        <nav class="bg-3 px-3 d-none d-sm-flex small" style="height:20px; --bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <nav class="bg-2 px-3 d-none d-sm-flex small" style="height:20px; --bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Index</li>
@@ -51,16 +51,18 @@
     </header>
 
     <!-- Main -->
-    <main class="container-fluid" role="main">
-        @RenderBody()
+    <main class="flex-shrink-0" role="main">
+        <div class="container-fluid">@RenderBody()</div>
     </main>
 
     <!-- Footer -->
-    <footer class="container-fluid border-top bg-11 fs-6 fw-light text-muted" style="height: auto;">
-        <div class="row">
-            <div class="col d-flex justify-content-between small">
-                <span>&copy; @DateTime.Today.Year - College of Technology</span>
-                <span>Site created by <a title="Contact Developer" class="text-muted" href="mailto:nifraz@live.com">Nifraz Navahz</a></span>
+    <footer class="footer border-top bg-11 mt-auto py-2" style="height: auto;">
+        <div class="container-fluid fs-6 fw-light text-muted">
+            <div class="row">
+                <div class="col d-flex justify-content-between small">
+                    <span>&copy; @DateTime.Today.Year - College of Technology</span>
+                    <span>Site created by <a title="Contact Developer" class="text-muted" href="mailto:nifraz@live.com">Nifraz Navahz</a></span>
+                </div>
             </div>
         </div>
     </footer>

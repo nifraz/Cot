@@ -8,70 +8,63 @@
 }
 
 <!-- Header -->
-<div class="row my-2 p-0">
+<div class="m-0 p-0 row g-2">
     <div class="col-sm-auto">
-        <h2 class="m-0">Manage <b>Courses</b></h2>
+        <div class="d-flex align-items-center">
+            <h2 class="m-0">Manage <b>Courses</b></h2>
+        </div>
     </div>
-    <div class="col-sm-auto ms-auto">
+    <div class="ms-auto col-sm-auto">
         <form method="get">
             <div class="row g-2">
                 <div class="col-sm-auto">
                     <input type="hidden" asp-for="PageNumber" />
                     <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-eye"></i>&nbsp;Items</span>
-                        <input type="number" class="form-control" name="PageSize" placeholder="10" min="1" max="100" value="@Model.PageSize">
+                        <label class="input-group-text" for="pageSize"><i class="bi bi-eye"></i>&nbsp;Items</label>
+                        <input type="number" class="form-control" id="pageSize" name="PageSize" placeholder="10" min="1" max="100" value="@Model.PageSize">
                     </div>
                 </div>
-                <div class="col-sm-auto">
-                    <input type="hidden" asp-for="SortField" />
-                    <input type="hidden" asp-for="SortOrder" />
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-filter"></i>&nbsp;Filter</span>
-                        @*<select class="form-select" name="FilterField">
-                            <option selected>All</option>
-                            <option value="Code">Code</option>
-                            <option value="Title">Title</option>
-                        </select>*@
-                        <input type="search" class="form-control" id="filter" name="FilterText" placeholder="Text" value="@Model.FilterText">
+                <div class="col-sm-auto d-flex gap-2">
+                    <div class="w-100">
+                        <input type="hidden" asp-for="SortField" />
+                        <input type="hidden" asp-for="SortOrder" />
+                        <div class="input-group">
+                            <label class="input-group-text" for="filter"><i class="bi bi-filter"></i>&nbsp;Filter</label>
+                            @*<select class="form-select" name="FilterField">
+                    <option selected>All</option>
+                    <option value="Code">Code</option>
+                    <option value="Title">Title</option>
+                </select>*@
+                            <input type="search" class="form-control" id="filter" name="FilterText" placeholder="Text" value="@Model.FilterText">
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-auto">
                     <button class="btn btn btn-primary" type="submit" title="Go"><i class="bi bi-arrow-right-circle"></i></button>
                 </div>
             </div>
         </form>
     </div>
+    <div class="ms-auto col-sm-auto">
+        <a class="ms-auto btn btn-success" title="Create New Record" asp-action="Create"><i class="bi bi-plus-circle"></i> ADD NEW</a>
+    </div>
 </div>
 
-<div class="row my-2 p-0 align-items-center">
-    <div class="col-sm-auto">
-        <div class="">
-            <a class="btn btn-success" title="Create New Record" asp-action="Create"><i class="bi bi-plus-circle"></i> ADD NEW</a>
-        </div>
+<div class="m-0 p-0 pb-2 row g-2">
+    <div class="col-sm-auto d-flex align-items-center">
+        <div>Showing @Model.PagedList.FirstItemOnPage - @Model.PagedList.LastItemOnPage of @Model.PagedList.TotalItemCount item(s) on Page @Model.PagedList.PageNumber of @Model.PagedList.PageCount</div>
     </div>
-    <div class="col-sm-auto ms-auto">
-        <div class="row align-items-center">
-            <div class="col-sm-auto">
-                <div>Showing @Model.PagedList.FirstItemOnPage - @Model.PagedList.LastItemOnPage of @Model.PagedList.TotalItemCount item(s)</div>
-            </div>
-            <div class="col-sm-auto">
-                <div>Page @Model.PagedList.PageNumber of @Model.PagedList.PageCount</div>
-            </div>
-            <div class="col-sm-auto">
-                @Html.PagedListPager(Model.PagedList,
-        p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.FilterText }),
-        new PagedListRenderOptions
-        {
-            ContainerDivClasses = new string[] { "overflow-auto" },
-            UlElementClasses = new string[] { "pagination m-0" },
-            LiElementClasses = new string[] { "page-item" },
-            PageClasses = new string[] { "page-link" },
-            DisplayLinkToFirstPage = PagedListDisplayMode.Always,
-            DisplayLinkToLastPage = PagedListDisplayMode.Always,
-            MaximumPageNumbersToDisplay = 7,
-        })
-            </div>
-        </div>
+    <div class="ms-auto col-sm-auto d-flex">
+        @Html.PagedListPager(Model.PagedList,
+p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.FilterText }),
+new PagedListRenderOptions
+{
+    ContainerDivClasses = new string[] { "ms-auto overflow-auto" },
+    UlElementClasses = new string[] { "pagination m-0" },
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" },
+    DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+    DisplayLinkToLastPage = PagedListDisplayMode.Always,
+    MaximumPageNumbersToDisplay = 7,
+})
     </div>
 </div>
 

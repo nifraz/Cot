@@ -49,11 +49,11 @@ body {
 }
 
 .navbar-toggler.collapsed {
-    background-color: var(--color-9);
+    background-color: var(--color-11);
 }
 
 .navbar-toggler:not(.collapsed) {
-    background-color: var(--color-11);
+    background-color: var(--color-9);
 }
 
 .page-item.active .page-link {

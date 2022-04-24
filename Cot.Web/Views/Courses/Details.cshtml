@@ -1,4 +1,4 @@
-﻿@model Cot.Web.Core.Domain.Course
+﻿@model CourseViewModel
 
 @{
     ViewData["Title"] = "Course Details";
@@ -7,18 +7,18 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Course</h4>
+    <h3>Course</h3>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-    </dl>
+    <div class="row">
+        <div class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AddedDateTime)
+        </div>
+        <div class = "col-sm-10">
+            @Html.DisplayFor(model => model.AddedDateTime)
+        </div>
+    </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Code">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

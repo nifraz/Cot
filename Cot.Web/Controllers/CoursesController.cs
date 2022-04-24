@@ -45,7 +45,17 @@ namespace Cot.Web.Controllers
                 return NotFound();
             }
 
-            return View(course);
+            var model = new CourseViewModel()
+            {
+                Id = course.Id.ToString(),
+                Code = course.Code,
+                Title = course.Title,
+                Type = course.Type.ToString(),
+                AddedDateTime = course.AddedDateTime?.ToString() ?? "Not Available",
+                ModifiedDateTime = course.ModifiedDateTime?.ToString() ?? "Not Available",
+            };
+
+            return View(model);
         }
 
         // GET: Courses/Create

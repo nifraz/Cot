@@ -39,7 +39,7 @@ namespace Cot.Web.Controllers
                 return NotFound();
             }
             var course = await unitOfWork.Courses
-                .FindAsync(m => m.Code == id);
+                .FindAsync(m => m.Id.ToString() == id);
             if (course == null)
             {
                 return NotFound();
@@ -132,7 +132,7 @@ namespace Cot.Web.Controllers
             }
 
             var course = await unitOfWork.Courses
-                .FindAsync(m => m.Code == id);
+                .FindAsync(m => m.Id.ToString() == id);
             if (course == null)
             {
                 return NotFound();
@@ -156,7 +156,7 @@ namespace Cot.Web.Controllers
         private async Task<bool> CourseExistsAsync(string id)
         {
             //return context.Courses.Any(e => e.Code == id);
-            return await unitOfWork.Courses.FindAsync(e => e.Code == id) != null;
+            return await unitOfWork.Courses.FindAsync(e => e.Id.ToString() == id) != null;
         }
     }
 }

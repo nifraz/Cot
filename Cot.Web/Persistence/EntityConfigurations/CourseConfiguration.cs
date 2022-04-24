@@ -12,7 +12,14 @@ namespace Cot.Web.Persistence.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Course> builder)
         {
-            builder.HasKey(e => e.Code);
+            builder.Property(e => e.Id)
+                .ValueGeneratedOnAdd();
+
+            builder.Property(e => e.Code)
+                .IsRequired();
+
+            builder.HasIndex(e => e.Code)
+                .IsUnique();
         }
     }
 }

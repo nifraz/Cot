@@ -32,14 +32,14 @@ namespace Cot.Web.Controllers
         }
 
         // GET: Courses/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
             var course = await unitOfWork.Courses
-                .FindAsync(m => m.Id.ToString() == id);
+                .FindAsync(m => m.Id == id);
             if (course == null)
             {
                 return NotFound();
@@ -59,11 +59,11 @@ namespace Cot.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Code,Title")] Course course)
+        public async Task<IActionResult> Create([Bind("Id,Code,Title,Type,AddedDateTime,ModifiedDateTime")] Course course)
         {
             if (ModelState.IsValid)
             {
-                //_context.Add(course);
+                //course.Id = Guid.NewGuid();
                 unitOfWork.Courses.Add(course);
                 await unitOfWork.CompleteAsync();
                 return RedirectToAction(nameof(Index));
@@ -72,7 +72,7 @@ namespace Cot.Web.Controllers
         }
 
         // GET: Courses/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
@@ -92,9 +92,9 @@ namespace Cot.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Code,Title")] Course course)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Code,Title,Type,AddedDateTime,ModifiedDateTime")] Course course)
         {
-            if (id != course.Code)
+            if (id != course.Id)
             {
                 return NotFound();
             }
@@ -103,13 +103,12 @@ namespace Cot.Web.Controllers
             {
                 try
                 {
-                    //unitOfWork.Update(course);
                     unitOfWork.Courses.Update(course);
                     await unitOfWork.CompleteAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!await CourseExistsAsync(course.Code))
+                    if (!await CourseExistsAsync(course.Id))
                     {
                         return NotFound();
                     }
@@ -124,7 +123,7 @@ namespace Cot.Web.Controllers
         }
 
         // GET: Courses/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
@@ -132,7 +131,7 @@ namespace Cot.Web.Controllers
             }
 
             var course = await unitOfWork.Courses
-                .FindAsync(m => m.Id.ToString() == id);
+                .FindAsync(m => m.Id == id);
             if (course == null)
             {
                 return NotFound();
@@ -144,19 +143,18 @@ namespace Cot.Web.Controllers
         // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var course = await unitOfWork.Courses.GetAsync(id);
-            //context.Courses.Remove(course);
             unitOfWork.Courses.Remove(course);
             await unitOfWork.CompleteAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private async Task<bool> CourseExistsAsync(string id)
+        private async Task<bool> CourseExistsAsync(Guid id)
         {
             //return context.Courses.Any(e => e.Code == id);
-            return await unitOfWork.Courses.FindAsync(e => e.Id.ToString() == id) != null;
+            return await unitOfWork.Courses.FindAsync(e => e.Id == id) != null;
         }
     }
 }

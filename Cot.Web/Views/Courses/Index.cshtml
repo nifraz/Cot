@@ -62,7 +62,7 @@
         p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.FilterText }),
         new PagedListRenderOptions
         {
-            ContainerDivClasses = new string[] { "" },
+            ContainerDivClasses = new string[] { "overflow-scroll" },
             UlElementClasses = new string[] { "pagination m-0" },
             LiElementClasses = new string[] { "page-item" },
             PageClasses = new string[] { "page-link" },

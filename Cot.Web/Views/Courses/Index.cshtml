@@ -62,7 +62,7 @@
         p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.FilterText }),
         new PagedListRenderOptions
         {
-            ContainerDivClasses = new string[] { "overflow-scroll" },
+            ContainerDivClasses = new string[] { "overflow-auto" },
             UlElementClasses = new string[] { "pagination m-0" },
             LiElementClasses = new string[] { "page-item" },
             PageClasses = new string[] { "page-link" },
@@ -122,7 +122,7 @@
             <tbody>
                 @foreach (var item in Model.PagedList)
                 {
-                    <tr class="">
+                    <tr class="align-middle">
                         <td>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="select_@item.Code" />

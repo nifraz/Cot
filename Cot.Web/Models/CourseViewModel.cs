@@ -11,7 +11,7 @@ namespace Cot.Web.Models
         public string Id { get; set; }
         public string Code { get; set; }
         public string Title { get; set; }
-        public string Type { get; set; }
+        public string Level { get; set; }
         public string AddedDateTime { get; set; }
         public string ModifiedDateTime { get; set; }
     }

@@ -50,9 +50,9 @@ namespace Cot.Web.Controllers
                 Id = course.Id.ToString(),
                 Code = course.Code,
                 Title = course.Title,
-                Type = course.Type.ToString(),
-                AddedDateTime = course.AddedDateTime?.ToString() ?? "Not Available",
-                ModifiedDateTime = course.ModifiedDateTime?.ToString() ?? "Not Available",
+                Level = course.Level.ToString(),
+                AddedDateTime = course.AddedDateTime?.ToString() ?? "N/A",
+                ModifiedDateTime = course.ModifiedDateTime?.ToString() ?? "N/A",
             };
 
             return View(model);
@@ -69,16 +69,25 @@ namespace Cot.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Code,Title,Type,AddedDateTime,ModifiedDateTime")] Course course)
+        public async Task<IActionResult> Create(CourseCreateModel model)
         {
+            //string houseNo = Request.Form["HomeAddress.HouseNumber"];   //request value from input name="HomeAddress.HouseNumber"
             if (ModelState.IsValid)
             {
-                //course.Id = Guid.NewGuid();
+                var course = new Course()
+                {
+                    Id = Guid.NewGuid(),
+                    Code = model.Code,
+                    Title = model.Title,
+                    Level = model.Level,
+                    AddedDateTime = DateTime.Now
+                };
+
                 unitOfWork.Courses.Add(course);
                 await unitOfWork.CompleteAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(course);
+            return View(model);
         }
 
         // GET: Courses/Edit/5

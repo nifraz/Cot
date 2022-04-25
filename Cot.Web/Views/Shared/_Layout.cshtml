@@ -16,8 +16,8 @@
 <body class="d-flex flex-column bg-1 min-vh-100">
 
     <!-- Header -->
-    <header class="sticky-top shadow-sm">
-        <nav class="p-0 bg-11 navbar navbar-expand-sm navbar-dark border-bottom">
+    <header class="sticky-top border-bottom">
+        <nav class="p-0 bg-11 navbar navbar-expand-sm navbar-dark shadow">
             <div class="px-1 py-2 container-fluid">
                 <a title="Home" class="px-2 py-0 navbar-brand d-flex align-items-center gap-1" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="~/images/cot-logo-white.svg" alt="COT Logo" style="height: 32px; display: block; vertical-align: middle;" />
@@ -44,12 +44,17 @@
                 </div>
             </div>
         </nav>
-        <nav class="bg-2 px-3 d-none d-sm-flex small" style="height:20px; --bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Index</li>
-            </ol>
-        </nav>
+        <div class="bg-1 px-3 d-flex small justify-content-between">
+            <nav class="" style="height:20px; --bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Index</li>
+                </ol>
+            </nav>
+            <div>
+                Page retrieved on @DateTime.Now
+            </div>
+        </div>
     </header>
 
     <!-- Main -->

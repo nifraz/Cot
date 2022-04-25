@@ -10,12 +10,12 @@ namespace Cot.Web.Core.Domain
         public Guid Id { get; set; }
         public string Code { get; set; }
         public string Title { get; set; }
-        public CourseType Type { get; set; }
+        public CourseLevel Level { get; set; }
         public DateTime? AddedDateTime { get; set; }
         public DateTime? ModifiedDateTime { get; set; }
     }
 
-    public enum CourseType : byte
+    public enum CourseLevel : byte
     {
         None = 0,
         NVQ1 = 1,

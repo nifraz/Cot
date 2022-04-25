@@ -14,14 +14,20 @@
             <h2 class="m-0">Manage <b>Courses</b></h2>
         </div>
     </div>
+    <div class="col-sm-auto">
+        <a class="btn btn-success" title="Create New Record" asp-action="Create"><i class="bi bi-plus-circle"></i> ADD NEW</a>
+    </div>
     <div class="ms-auto col-sm-auto">
         <form method="get">
             <div class="row g-2">
-                <div class="col-sm-auto">
-                    <input type="hidden" asp-for="PageNumber" />
+                <div class="col-sm-auto d-flex gap-2">
+                    <div class="input-group">
+                        <label class="input-group-text" for="pageNumber"><i class="bi bi-arrow-left-right"></i>&nbsp;Page</label>
+                        <input type="number" class="form-control" id="pageNumber" name="PageNumber" placeholder="@Model.PageNumber" min="1" value="@Model.PageNumber">
+                    </div>
                     <div class="input-group">
                         <label class="input-group-text" for="pageSize"><i class="bi bi-eye"></i>&nbsp;Items</label>
-                        <input type="number" class="form-control" id="pageSize" name="PageSize" placeholder="10" min="1" max="100" value="@Model.PageSize">
+                        <input type="number" class="form-control" id="pageSize" name="PageSize" placeholder="@Model.PageSize" min="1" max="100" value="@Model.PageSize">
                     </div>
                 </div>
                 <div class="col-sm-auto d-flex gap-2">
@@ -31,10 +37,10 @@
                         <div class="input-group">
                             <label class="input-group-text" for="filter"><i class="bi bi-filter"></i>&nbsp;Filter</label>
                             @*<select class="form-select" name="FilterField">
-                    <option selected>All</option>
-                    <option value="Code">Code</option>
-                    <option value="Title">Title</option>
-                </select>*@
+                                    <option selected>All</option>
+                                    <option value="Code">Code</option>
+                                    <option value="Title">Title</option>
+                                </select>*@
                             <input type="search" class="form-control" id="filter" name="FilterText" placeholder="Text" value="@Model.FilterText">
                         </div>
                     </div>
@@ -43,14 +49,12 @@
             </div>
         </form>
     </div>
-    <div class="ms-auto col-sm-auto">
-        <a class="ms-auto btn btn-success" title="Create New Record" asp-action="Create"><i class="bi bi-plus-circle"></i> ADD NEW</a>
-    </div>
 </div>
 
+<!-- Page Indicator -->
 <div class="m-0 p-0 pb-2 row g-2">
     <div class="col-sm-auto d-flex align-items-center">
-        <div>Showing @Model.PagedList.FirstItemOnPage - @Model.PagedList.LastItemOnPage of @Model.PagedList.TotalItemCount item(s) on Page @Model.PagedList.PageNumber of @Model.PagedList.PageCount</div>
+        <div>Showing @Model.PagedList.FirstItemOnPage - @Model.PagedList.LastItemOnPage of @Model.PagedList.TotalItemCount item(s) on page @Model.PagedList.PageNumber of @Model.PagedList.PageCount @(string.IsNullOrEmpty(Model.FilterText) ? "" : $" [Filter : \"{Model.FilterText}\"]")</div>
     </div>
     <div class="ms-auto col-sm-auto d-flex">
         @Html.PagedListPager(Model.PagedList,
@@ -69,9 +73,9 @@ new PagedListRenderOptions
 </div>
 
 <!-- Table -->
-<div class="row table-responsive border-top">
-    <div class="col">
-        <table class="table table-sm my-2 table-hover">
+<div class="m-0 p-0 row g-2 table-responsive border-top">
+    <div class="p-0 col">
+        <table class="m-0 table table-sm table-hover">
             <thead>
                 <tr class="align-items-center">
                     <th>
@@ -111,11 +115,11 @@ new PagedListRenderOptions
                         <a asp-action="Index"
                            asp-route-PageNumber="@Model.PageNumber"
                            asp-route-PageSize="@Model.PageSize"
-                           asp-route-SortField="Type"
+                           asp-route-SortField="Level"
                            asp-route-SortOrder="@newSortOrder"
                            asp-route-SearchText="@Model.FilterText">
-                            Type
-                            @if (Model.SortField == "Type")
+                            Level
+                            @if (Model.SortField == "Level")
                             {
                                 <i class="bi @sortIconClass"></i>
                             }
@@ -128,7 +132,7 @@ new PagedListRenderOptions
                            asp-route-SortField="AddedDateTime"
                            asp-route-SortOrder="@newSortOrder"
                            asp-route-SearchText="@Model.FilterText">
-                            Added Date Time
+                            Added Date
                             @if (Model.SortField == "AddedDateTime")
                             {
                                 <i class="bi @sortIconClass"></i>
@@ -142,7 +146,7 @@ new PagedListRenderOptions
                            asp-route-SortField="ModifiedDateTime"
                            asp-route-SortOrder="@newSortOrder"
                            asp-route-SearchText="@Model.FilterText">
-                            Modified Date Time
+                            Modified Date
                             @if (Model.SortField == "ModifiedDateTime")
                             {
                                 <i class="bi @sortIconClass"></i>
@@ -150,45 +154,66 @@ new PagedListRenderOptions
                         </a>
                     </th>
                     <th>
-                        
+
                     </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model.PagedList)
                 {
-                <tr class="align-middle">
-                    <td>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="select_@item.Id" />
-                        </div>
-                    </td>
-                    @*@Html.Raw(Regex.Replace(item.Code, Model.FilterText, "<mark>" + Model.FilterText + "</mark>", RegexOptions.IgnoreCase))*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Code)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Type)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AddedDateTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModifiedDateTime)
-                    </td>
-                    <td>
-                        <div class="d-flex justify-content-end gap-1">
-                            <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-info-circle"></i></a>
-                            <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi bi-trash3"></i></a>
-                        </div>
-                    </td>
-                </tr>
+                    <tr class="align-middle">
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="select_@item.Id" />
+                            </div>
+                        </td>
+                        @*@Html.Raw(Regex.Replace(item.Code, Model.FilterText, "<mark>" + Model.FilterText + "</mark>", RegexOptions.IgnoreCase))*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Level)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AddedDateTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModifiedDateTime)
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-end gap-1">
+                                <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-info-circle"></i></a>
+                                <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                                <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi bi-trash3"></i></a>
+                            </div>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
+    </div>
+</div>
+
+<!-- Page Indicator -->
+<div class="m-0 p-0 pb-2 row g-2">
+    <div class="col-sm-auto d-flex align-items-center">
+        <div>Showing @Model.PagedList.FirstItemOnPage - @Model.PagedList.LastItemOnPage of @Model.PagedList.TotalItemCount item(s) on page @Model.PagedList.PageNumber of @Model.PagedList.PageCount @(string.IsNullOrEmpty(Model.FilterText) ? "" : $" [Filter : \"{Model.FilterText}\"]")</div>
+    </div>
+    <div class="ms-auto col-sm-auto d-flex">
+        @Html.PagedListPager(Model.PagedList,
+p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.FilterText }),
+new PagedListRenderOptions
+{
+    ContainerDivClasses = new string[] { "ms-auto overflow-auto" },
+    UlElementClasses = new string[] { "pagination m-0" },
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" },
+    DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+    DisplayLinkToLastPage = PagedListDisplayMode.Always,
+    MaximumPageNumbersToDisplay = 7,
+})
     </div>
 </div>

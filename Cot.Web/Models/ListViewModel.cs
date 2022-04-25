@@ -7,12 +7,13 @@ using X.PagedList;
 
 namespace Cot.Web.Models
 {
-    public class ListViewModel<TEntity>
+    public class ListViewModel<TEntity> where TEntity : IEntity
     {
         public int? PageNumber { get; set; }
         public int? PageSize { get; set; }
         public string SortField { get; set; }
         public string SortOrder { get; set; }
+        public string FilterField { get; set; }
         public string FilterText { get; set; }
         public IPagedList<TEntity> PagedList { get; set; }
     }

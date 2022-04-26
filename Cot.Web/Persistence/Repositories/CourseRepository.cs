@@ -15,13 +15,18 @@ namespace Cot.Web.Persistence.Repositories
 
         }
 
-        public Task<IPagedList<Course>> GetAllPagedListAsync(int? pageNumber, int? pageSize, string sortField, string sortValue, string filterText)
+        public Task<IPagedList<Course>> GetPageAsync(int pageNumber, int pageSize, string sortField, string sortValue, string filterField, string filterText)
         {
             var query = GetQueryable();
 
             if (!string.IsNullOrEmpty(filterText))
             {
-                query = query.Where(e => e.Code.Contains(filterText) || e.Title.Contains(filterText));
+                query = filterField switch
+                {
+                    "Code" => query.Where(e => e.Code.Contains(filterText)),
+                    "Title" => query.Where(e => e.Title.Contains(filterText)),
+                    _ => query.Where(e => e.Code.Contains(filterText) || e.Title.Contains(filterText)),
+                };
             }
 
             if (sortValue == "Descending")
@@ -29,6 +34,9 @@ namespace Cot.Web.Persistence.Repositories
                 query = sortField switch
                 {
                     "Title" => query.OrderByDescending(e => e.Title),
+                    "Level" => query.OrderByDescending(e => e.Level),
+                    "AddedDate" => query.OrderByDescending(e => e.AddedDate),
+                    "ModifiedDate" => query.OrderByDescending(e => e.ModifiedDate),
                     _ => query.OrderByDescending(e => e.Code),
                 };
             }
@@ -37,21 +45,14 @@ namespace Cot.Web.Persistence.Repositories
                 query = sortField switch
                 {
                     "Title" => query.OrderBy(e => e.Title),
+                    "Level" => query.OrderBy(e => e.Level),
+                    "AddedDate" => query.OrderBy(e => e.AddedDate),
+                    "ModifiedDate" => query.OrderBy(e => e.ModifiedDate),
                     _ => query.OrderBy(e => e.Code),
                 };
             }
 
-            if (pageNumber == null || pageNumber < 1)
-            {
-                pageNumber = 1;
-            }
-
-            if (pageSize == null || pageSize < 1)
-            {
-                pageSize = 10;
-            }
-
-            return query.ToPagedListAsync(pageNumber.Value, pageSize.Value);
+            return query.ToPagedListAsync(pageNumber, pageSize);
         }
 
     }

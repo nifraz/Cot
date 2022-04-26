@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Cot.Web.Models
 {
-    public class CourseViewModel
+    public class CourseViewModel : IViewModel
     {
         public string Id { get; set; }
         public string Code { get; set; }
         public string Title { get; set; }
         public string Level { get; set; }
-        public string AddedDateTime { get; set; }
-        public string ModifiedDateTime { get; set; }
+        public string AddedDate { get; set; }
+        public string ModifiedDate { get; set; }
+
+        public bool IsSelected { get; set; }
     }
 }

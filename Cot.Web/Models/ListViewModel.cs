@@ -11,10 +11,14 @@ namespace Cot.Web.Models
     {
         public int? PageNumber { get; set; }
         public int? PageSize { get; set; }
+        public int? PagesCount { get; set; }
+        public int? FirstItemOnPage { get; set; }
+        public int? LastItemOnPage { get; set; }
+        public int? TotalItemsCount { get; set; }
         public string SortField { get; set; }
         public string SortOrder { get; set; }
         public string FilterField { get; set; }
         public string FilterText { get; set; }
-        public IPagedList<TEntity> PagedList { get; set; }
+        public IPagedList<TEntity> Items { get; set; }
     }
 }

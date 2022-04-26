@@ -7,7 +7,7 @@
     var sortIconClass = Model.SortOrder == "Descending" ? "bi-sort-down" : "bi-sort-up";
 }
 
-<!-- Header -->
+<!-- Top -->
 <div class="m-0 p-0 row g-2">
     <div class="col-sm-auto">
         <div class="d-flex align-items-center">
@@ -54,10 +54,10 @@
 <!-- Page Indicator -->
 <div class="m-0 p-0 pb-2 row g-2">
     <div class="col-sm-auto d-flex align-items-center">
-        <div>Showing @Model.PagedList.FirstItemOnPage - @Model.PagedList.LastItemOnPage of @Model.PagedList.TotalItemCount item(s) on page @Model.PagedList.PageNumber of @Model.PagedList.PageCount @(string.IsNullOrEmpty(Model.FilterText) ? "" : $" [Filter : \"{Model.FilterText}\"]")</div>
+        <div>Showing @Model.FirstItemOnPage - @Model.LastItemOnPage of @Model.TotalItemsCount item(s) on page @Model.PageNumber of @Model.PagesCount @(string.IsNullOrEmpty(Model.FilterText) ? "" : $" [Filter : \"{Model.FilterText}\"]")</div>
     </div>
     <div class="ms-auto col-sm-auto d-flex">
-        @Html.PagedListPager(Model.PagedList,
+        @Html.PagedListPager(Model.Items,
 p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.FilterText }),
 new PagedListRenderOptions
 {
@@ -75,21 +75,16 @@ new PagedListRenderOptions
 <!-- Table -->
 <div class="m-0 p-0 row g-2 table-responsive border-top">
     <div class="p-0 col">
-        <table class="m-0 table table-sm table-hover">
+        <table class="m-0 table table-sm table-hover" id="listTable">
             <thead>
                 <tr class="align-items-center">
-                    <th>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="selectAll" />
-                        </div>
-                    </th>
                     <th>
                         <a asp-action="Index"
                            asp-route-PageNumber="@Model.PageNumber"
                            asp-route-PageSize="@Model.PageSize"
                            asp-route-SortField="Code"
                            asp-route-SortOrder="@newSortOrder"
-                           asp-route-SearchText="@Model.FilterText">
+                           asp-route-FilterText="@Model.FilterText">
                             Code
                             @if (Model.SortField == "Code")
                             {
@@ -103,7 +98,7 @@ new PagedListRenderOptions
                            asp-route-PageSize="@Model.PageSize"
                            asp-route-SortField="Title"
                            asp-route-SortOrder="@newSortOrder"
-                           asp-route-SearchText="@Model.FilterText">
+                           asp-route-FilterText="@Model.FilterText">
                             Title
                             @if (Model.SortField == "Title")
                             {
@@ -117,7 +112,7 @@ new PagedListRenderOptions
                            asp-route-PageSize="@Model.PageSize"
                            asp-route-SortField="Level"
                            asp-route-SortOrder="@newSortOrder"
-                           asp-route-SearchText="@Model.FilterText">
+                           asp-route-FilterText="@Model.FilterText">
                             Level
                             @if (Model.SortField == "Level")
                             {
@@ -129,11 +124,11 @@ new PagedListRenderOptions
                         <a asp-action="Index"
                            asp-route-PageNumber="@Model.PageNumber"
                            asp-route-PageSize="@Model.PageSize"
-                           asp-route-SortField="AddedDateTime"
+                           asp-route-SortField="AddedDate"
                            asp-route-SortOrder="@newSortOrder"
-                           asp-route-SearchText="@Model.FilterText">
+                           asp-route-FilterText="@Model.FilterText">
                             Added Date
-                            @if (Model.SortField == "AddedDateTime")
+                            @if (Model.SortField == "AddedDate")
                             {
                                 <i class="bi @sortIconClass"></i>
                             }
@@ -143,30 +138,49 @@ new PagedListRenderOptions
                         <a asp-action="Index"
                            asp-route-PageNumber="@Model.PageNumber"
                            asp-route-PageSize="@Model.PageSize"
-                           asp-route-SortField="ModifiedDateTime"
+                           asp-route-SortField="ModifiedDate"
                            asp-route-SortOrder="@newSortOrder"
-                           asp-route-SearchText="@Model.FilterText">
+                           asp-route-FilterText="@Model.FilterText">
                             Modified Date
-                            @if (Model.SortField == "ModifiedDateTime")
+                            @if (Model.SortField == "ModifiedDate")
                             {
                                 <i class="bi @sortIconClass"></i>
                             }
                         </a>
                     </th>
-                    <th>
+                    <th class="d-flex align-middle justify-content-end gap-1">
+                        <!-- Button trigger modal -->
+                        <button class="btn btn-sm btn-outline-danger" type="button" id="deleteButton" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                            <i class="bi bi-trash3">&nbsp;</i>DELETE
+                        </button>
 
+                        <!-- Modal -->
+                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h4>Do you want to delete the selected<span id="selectedItemsCountSpan"></span> item(s)?</h4>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form asp-action="Delete" method="post">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                                            <button type="submit" class="btn btn-danger"><i class="bi bi-trash3">&nbsp;</i>DELETE</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.PagedList)
+                @foreach (var item in Model.Items)
                 {
                     <tr class="align-middle">
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="select_@item.Id" />
-                            </div>
-                        </td>
                         @*@Html.Raw(Regex.Replace(item.Code, Model.FilterText, "<mark>" + Model.FilterText + "</mark>", RegexOptions.IgnoreCase))*@
                         <td>
                             @Html.DisplayFor(modelItem => item.Code)
@@ -178,13 +192,13 @@ new PagedListRenderOptions
                             @Html.DisplayFor(modelItem => item.Level)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.AddedDateTime)
+                            @Html.DisplayFor(modelItem => item.AddedDate)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ModifiedDateTime)
+                            @Html.DisplayFor(modelItem => item.ModifiedDate)
                         </td>
                         <td>
-                            <div class="d-flex justify-content-end gap-1">
+                            <div class="d-flex align-items-center justify-content-end gap-1">
                                 <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-info-circle"></i></a>
                                 <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi bi-pencil-square"></i></a>
                                 <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi bi-trash3"></i></a>
@@ -200,10 +214,10 @@ new PagedListRenderOptions
 <!-- Page Indicator -->
 <div class="m-0 p-0 pb-2 row g-2">
     <div class="col-sm-auto d-flex align-items-center">
-        <div>Showing @Model.PagedList.FirstItemOnPage - @Model.PagedList.LastItemOnPage of @Model.PagedList.TotalItemCount item(s) on page @Model.PagedList.PageNumber of @Model.PagedList.PageCount @(string.IsNullOrEmpty(Model.FilterText) ? "" : $" [Filter : \"{Model.FilterText}\"]")</div>
+        <div>Showing @Model.FirstItemOnPage - @Model.LastItemOnPage of @Model.TotalItemsCount item(s) on page @Model.PageNumber of @Model.PagesCount @(string.IsNullOrEmpty(Model.FilterText) ? "" : $" [Filter : \"{Model.FilterText}\"]")</div>
     </div>
     <div class="ms-auto col-sm-auto d-flex">
-        @Html.PagedListPager(Model.PagedList,
+        @Html.PagedListPager(Model.Items,
 p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.FilterText }),
 new PagedListRenderOptions
 {
@@ -217,3 +231,7 @@ new PagedListRenderOptions
 })
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ListPartial");}
+}

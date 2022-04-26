@@ -25,9 +25,24 @@ namespace Cot.Web.Controllers
         // GET: Courses
         public async Task<IActionResult> Index(ListViewModel<Course> model)
         {
-            model.PagedList = await unitOfWork.Courses.GetAllPagedListAsync(model.PageNumber, model.PageSize, model.SortField, model.SortOrder, model.FilterText);
-            model.PageNumber = model.PagedList.PageNumber;
-            model.PageSize = model.PagedList.PageSize;
+            if (model.PageNumber == null || model.PageNumber < 1)
+            {
+                model.PageNumber = 1;
+            }
+            if (model.PageSize == null || model.PageSize < 1)
+            {
+                model.PageSize = 25;
+            }
+
+            model.SortField ??= "Code";
+            model.SortOrder ??= "Ascending";
+            model.FilterField ??= "All";
+            model.Items = await unitOfWork.Courses.GetPageAsync(model.PageNumber.Value, model.PageSize.Value, model.SortField, model.SortOrder, model.FilterField, model.FilterText);
+            model.PagesCount = model.Items.PageCount;
+            model.FirstItemOnPage = model.Items.FirstItemOnPage;
+            model.LastItemOnPage = model.Items.LastItemOnPage;
+            model.TotalItemsCount = model.Items.TotalItemCount;
+
             return View(model);
         }
 
@@ -51,8 +66,8 @@ namespace Cot.Web.Controllers
                 Code = course.Code,
                 Title = course.Title,
                 Level = course.Level.ToString(),
-                AddedDateTime = course.AddedDateTime?.ToString() ?? "N/A",
-                ModifiedDateTime = course.ModifiedDateTime?.ToString() ?? "N/A",
+                AddedDate = course.AddedDate?.ToString() ?? "N/A",
+                ModifiedDate = course.ModifiedDate?.ToString() ?? "N/A",
             };
 
             return View(model);
@@ -80,7 +95,7 @@ namespace Cot.Web.Controllers
                     Code = model.Code,
                     Title = model.Title,
                     Level = model.Level,
-                    AddedDateTime = DateTime.Now
+                    AddedDate = DateTime.Now
                 };
 
                 unitOfWork.Courses.Add(course);

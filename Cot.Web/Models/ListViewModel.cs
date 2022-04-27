@@ -1,4 +1,5 @@
 ﻿using Cot.Web.Core.Domain;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace Cot.Web.Models
         public int? TotalItemsCount { get; set; }
         public string SortField { get; set; }
         public string SortOrder { get; set; }
-        public string FilterField { get; set; }
+        public IList<SelectListItem> FilterFields { get; set; }
+        public SelectListItem FilterField { get; set; }
         public string FilterText { get; set; }
         public IPagedList<TEntity> Items { get; set; }
     }

@@ -11,6 +11,7 @@ namespace Cot.Web.Core.Domain
         public string Code { get; set; }
         public string Title { get; set; }
         public CourseLevel Level { get; set; }
+        public CourseType Type { get; set; }
         public DateTime? AddedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
     }
@@ -25,5 +26,12 @@ namespace Cot.Web.Core.Domain
         NVQ5 = 5,
         NVQ6 = 6,
         NVQ7 = 7
+    }
+
+    public enum CourseType : byte
+    {
+        Open = 0,
+        Weekday = 1,
+        Weekend = 2
     }
 }

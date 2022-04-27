@@ -36,8 +36,14 @@ namespace Cot.Web.Controllers
 
             model.SortField ??= "Code";
             model.SortOrder ??= "Ascending";
-            model.FilterField ??= "All";
-            model.Items = await unitOfWork.Courses.GetPageAsync(model.PageNumber.Value, model.PageSize.Value, model.SortField, model.SortOrder, model.FilterField, model.FilterText);
+            model.FilterFields = new List<SelectListItem>
+            {
+                new SelectListItem {Text = "(All Fields)", Value = null},
+                new SelectListItem {Text = "Code", Value = "Code"},
+                new SelectListItem {Text = "Title", Value = "Title"},
+            };
+            //model.FilterField ??= "All";
+            model.Items = await unitOfWork.Courses.GetPageAsync(model.PageNumber.Value, model.PageSize.Value, model.SortField, model.SortOrder, model.FilterField?.Value, model.FilterText);
             model.PagesCount = model.Items.PageCount;
             model.FirstItemOnPage = model.Items.FirstItemOnPage;
             model.LastItemOnPage = model.Items.LastItemOnPage;
@@ -66,6 +72,7 @@ namespace Cot.Web.Controllers
                 Code = course.Code,
                 Title = course.Title,
                 Level = course.Level.ToString(),
+                Type = course.Type.ToString(),
                 AddedDate = course.AddedDate?.ToString() ?? "N/A",
                 ModifiedDate = course.ModifiedDate?.ToString() ?? "N/A",
             };

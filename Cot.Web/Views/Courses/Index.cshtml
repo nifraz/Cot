@@ -32,12 +32,12 @@
         </div>
         <div class="ms-auto gap-2 col col-auto d-flex">
             <div class="input-group">
-                <label class="input-group-text" for="pageNumber"><i class="bi bi-arrow-left-right"></i>&nbsp;Page</label>
-                <input type="number" class="form-control" id="pageNumber" name="PageNumber" placeholder="@Model.PageNumber" min="1" value="@Model.PageNumber">
+                <label class="input-group-text" asp-for="PageNumber"><i class="bi bi-arrow-left-right"></i>&nbsp;Page</label>
+                <input class="form-control" asp-for="PageNumber" placeholder="@Model.PageNumber" min="1">
             </div>
             <div class="input-group">
-                <label class="input-group-text" for="pageSize"><i class="bi bi-eye"></i>&nbsp;Items</label>
-                <input type="number" class="form-control" id="pageSize" name="PageSize" placeholder="@Model.PageSize" min="1" max="100" value="@Model.PageSize">
+                <label class="input-group-text" asp-for="PageSize"><i class="bi bi-eye"></i>&nbsp;Items</label>
+                <input class="form-control" asp-for="PageSize" placeholder="@Model.PageSize" min="1" max="100">
             </div>
         </div>
         <!--Filter-->
@@ -46,11 +46,12 @@
             <input type="hidden" asp-for="SortOrder" />
             <div class="input-group">
                 <label class="input-group-text" for="filter"><i class="bi bi-filter"></i>&nbsp;Filter</label>
-                <select class="form-select" name="FilterField">
-                    <option selected>All</option>
-                    <option value="Code">Code</option>
-                    <option value="Title">Title</option>
-                </select>
+                @*<select name="FilterField">
+            <option selected>(All Fields)</option>
+            <option value="Code">Code</option>
+            <option value="Title">Title</option>
+        </select>*@
+                <select class="form-select" asp-for="FilterField" asp-items="@Model.FilterFields" />
                 <input type="search" class="form-control" id="filter" name="FilterText" placeholder="Text" value="@Model.FilterText">
             </div>
         </div>
@@ -79,7 +80,7 @@
     <div class="m-0 p-0  col-12">
         <table class="m-0 p-0 table table-sm table-hover" id="listTable">
             <thead>
-                <tr class="align-items-center">
+                <tr class="align-middle">
                     <th>
                         <a asp-action="Index"
                            asp-route-PageNumber="@Model.PageNumber"
@@ -117,6 +118,20 @@
                            asp-route-FilterText="@Model.FilterText">
                             Level
                             @if (Model.SortField == "Level")
+                            {
+                                <i class="bi @sortIconClass"></i>
+                            }
+                        </a>
+                    </th>
+                    <th>
+                        <a asp-action="Index"
+                           asp-route-PageNumber="@Model.PageNumber"
+                           asp-route-PageSize="@Model.PageSize"
+                           asp-route-SortField="Type"
+                           asp-route-SortOrder="@newSortOrder"
+                           asp-route-FilterText="@Model.FilterText">
+                            Type
+                            @if (Model.SortField == "Type")
                             {
                                 <i class="bi @sortIconClass"></i>
                             }
@@ -182,31 +197,34 @@
             <tbody>
                 @foreach (var item in Model.Items)
                 {
-                    <tr class="align-middle">
-                        @*@Html.Raw(Regex.Replace(item.Code, Model.FilterText, "<mark>" + Model.FilterText + "</mark>", RegexOptions.IgnoreCase))*@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Code)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Title)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Level)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AddedDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ModifiedDate)
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-end align-items-center gap-1">
-                                <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-info-circle"></i></a>
-                                <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                                <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi bi-trash3"></i></a>
-                            </div>
-                        </td>
-                    </tr>
+                <tr class="align-middle">
+                    @*@Html.Raw(Regex.Replace(item.Code, Model.FilterText, "<mark>" + Model.FilterText + "</mark>", RegexOptions.IgnoreCase))*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Level)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AddedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedDate)
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-end align-items-center gap-1">
+                            <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-info-circle"></i></a>
+                            <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi bi-trash3"></i></a>
+                        </div>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

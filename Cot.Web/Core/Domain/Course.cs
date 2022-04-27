@@ -14,6 +14,7 @@ namespace Cot.Web.Core.Domain
         public CourseType Type { get; set; }
         public DateTime? AddedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
+        public string Notes { get; set; }
     }
 
     public enum CourseLevel : byte

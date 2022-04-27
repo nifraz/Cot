@@ -39,6 +39,9 @@
                 <li class="mt-1 m-sm-0 nav-item">
                     <a title="Privacy" class="px-3 py-1 nav-link text-light rounded-pill d-flex justify-content-between @(controller == "Home" && action == "Privacy" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Privacy"><span>PRIVACY</span><i class="bi bi-shield d-sm-none me-1"></i></a>
                 </li>
+                <li class="mt-1 m-sm-0 nav-item">
+                    <a title="About" class="px-3 py-1 nav-link text-light rounded-pill d-flex justify-content-between @(controller == "Home" && action == "About" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="About"><span>ABOUT</span><i class="bi bi-shield d-sm-none me-1"></i></a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -65,7 +68,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="border-top bg-11 mt-auto py-2" style="height: auto;">
+    <footer class="py-2 mt-auto bg-11" style="height: auto; box-shadow: rgba(0,0,0, 3) 20px">
         <div class="container-fluid fs-6 fw-light text-muted">
             <div class="row">
                 <div class="col d-flex justify-content-between small">

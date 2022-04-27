@@ -14,5 +14,7 @@ namespace Cot.Web.Models
         public string Code { get; set; }
         public string Title { get; set; }
         public CourseLevel Level { get; set; }
+        public CourseType Type { get; set; }
+        public string Notes { get; set; }
     }
 }

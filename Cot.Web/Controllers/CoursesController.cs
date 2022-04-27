@@ -102,6 +102,7 @@ namespace Cot.Web.Controllers
                     Code = model.Code,
                     Title = model.Title,
                     Level = model.Level,
+                    Type = model.Type,
                     AddedDate = DateTime.Now
                 };
 

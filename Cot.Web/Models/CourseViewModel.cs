@@ -15,7 +15,6 @@ namespace Cot.Web.Models
         public string Type { get; set; }
         public string AddedDate { get; set; }
         public string ModifiedDate { get; set; }
-
-        public bool IsSelected { get; set; }
+        public string Notes { get; set; }
     }
 }

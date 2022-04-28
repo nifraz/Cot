@@ -81,13 +81,13 @@
                        asp-route-PageNumber="@Model.PageNumber"
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Code"
-                       asp-route-SortOrder="@newSortOrder"
+                       asp-route-SortOrder="@(Model.SortField == "Code" ? newSortOrder : Model.SortOrder)"
                        asp-route-FilterText="@Model.SearchText">
-                        Code
                         @if (Model.SortField == "Code")
                         {
                             <i class="bi @sortIconClass"></i>
                         }
+                        Code
                     </a>
                 </th>
                 <th>
@@ -95,13 +95,13 @@
                        asp-route-PageNumber="@Model.PageNumber"
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Title"
-                       asp-route-SortOrder="@newSortOrder"
+                       asp-route-SortOrder="@(Model.SortField == "Title" ? newSortOrder : Model.SortOrder)"
                        asp-route-FilterText="@Model.SearchText">
-                        Title
                         @if (Model.SortField == "Title")
                         {
                             <i class="bi @sortIconClass"></i>
                         }
+                        Title
                     </a>
                 </th>
                 <th>
@@ -109,13 +109,13 @@
                        asp-route-PageNumber="@Model.PageNumber"
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Level"
-                       asp-route-SortOrder="@newSortOrder"
+                       asp-route-SortOrder="@(Model.SortField == "Level" ? newSortOrder : Model.SortOrder)"
                        asp-route-FilterText="@Model.SearchText">
-                        Level
                         @if (Model.SortField == "Level")
                         {
                             <i class="bi @sortIconClass"></i>
                         }
+                        Level
                     </a>
                 </th>
                 <th>
@@ -123,13 +123,13 @@
                        asp-route-PageNumber="@Model.PageNumber"
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Type"
-                       asp-route-SortOrder="@newSortOrder"
+                       asp-route-SortOrder="@(Model.SortField == "Type" ? newSortOrder : Model.SortOrder)"
                        asp-route-FilterText="@Model.SearchText">
-                        Type
                         @if (Model.SortField == "Type")
                         {
                             <i class="bi @sortIconClass"></i>
                         }
+                        Type
                     </a>
                 </th>
                 <th>
@@ -137,13 +137,13 @@
                        asp-route-PageNumber="@Model.PageNumber"
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="AddedDate"
-                       asp-route-SortOrder="@newSortOrder"
+                       asp-route-SortOrder="@(Model.SortField == "AddedDate" ? newSortOrder : Model.SortOrder)"
                        asp-route-FilterText="@Model.SearchText">
-                        Added Date
                         @if (Model.SortField == "AddedDate")
                         {
                             <i class="bi @sortIconClass"></i>
                         }
+                        Added Date
                     </a>
                 </th>
                 <th>
@@ -151,17 +151,16 @@
                        asp-route-PageNumber="@Model.PageNumber"
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="ModifiedDate"
-                       asp-route-SortOrder="@newSortOrder"
+                       asp-route-SortOrder="@(Model.SortField == "ModifiedDate" ? newSortOrder : Model.SortOrder)"
                        asp-route-FilterText="@Model.SearchText">
-                        Modified Date
                         @if (Model.SortField == "ModifiedDate")
                         {
                             <i class="bi @sortIconClass"></i>
                         }
+                        Modified Date
                     </a>
                 </th>
                 <th>
-                    <div class="d-flex justify-content-end gap-1">ACTIONS</div>
                 </th>
             </tr>
         </thead>
@@ -170,24 +169,12 @@
             {
                 <tr class="align-middle">
                     @*@Html.Raw(Regex.Replace(item.Code, Model.FilterText, "<mark>" + Model.FilterText + "</mark>", RegexOptions.IgnoreCase))*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Code)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Level)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Type)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AddedDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModifiedDate)
-                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Code)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Level)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Type)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AddedDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ModifiedDate)</td>
                     <td>
                         <div class="d-flex justify-content-end gap-1">
                             <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-info-circle"></i></a>

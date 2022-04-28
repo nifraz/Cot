@@ -37,7 +37,7 @@ namespace Cot.Web.Controllers
             model.SortField ??= "Code";
             model.SortOrder ??= "Ascending";
 
-            model.Items = await unitOfWork.Courses.GetPageAsync(model.PageNumber.Value, model.PageSize.Value, model.SortField, model.SortOrder, model.FilterField?.Value, model.FilterText);
+            model.Items = await unitOfWork.Courses.GetPageAsync(model.PageNumber.Value, model.PageSize.Value, model.SortField, model.SortOrder, model.SearchField?.Value, model.SearchText);
             model.PagesCount = model.Items.PageCount;
             model.FirstItemOnPage = model.Items.FirstItemOnPage;
             model.LastItemOnPage = model.Items.LastItemOnPage;

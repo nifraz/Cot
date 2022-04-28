@@ -34,8 +34,8 @@
         <!--Filter & Button-->
         <div class="gap-2 col-12 col-sm-6 d-flex">
             <div class="form-floating w-100">
-                <input type="search" class="form-control" id="filter" name="FilterText" placeholder="Text" value="@Model.FilterText">
-                <label for="filter"><i class="bi bi-filter"></i>&nbsp;Filter</label>
+                <input type="search" class="form-control" id="filter" name="SearchText" placeholder="Text" value="@Model.SearchText">
+                <label for="filter"><i class="bi bi-search"></i>&nbsp;Search</label>
             </div>
             <input type="hidden" asp-for="SortField" />
             <input type="hidden" asp-for="SortOrder" />
@@ -51,12 +51,12 @@
         </div>
         <!--Item Details-->
         <div class="ms-auto col-auto col-sm-3 order-2 order-sm-2 d-flex justify-content-end align-items-end">
-            <label class="small">Item(s): @Model.FirstItemOnPage - @Model.LastItemOnPage of @Model.TotalItemsCount @(string.IsNullOrEmpty(Model.FilterText) ? "" : $" [Filter : \"{Model.FilterText}\"]")</label>
+            <label class="small">Item(s): @Model.FirstItemOnPage - @Model.LastItemOnPage of @Model.TotalItemsCount @(string.IsNullOrEmpty(Model.SearchText) ? "" : $" [Search : \"{Model.SearchText}\"]")</label>
         </div>
         <!--Pagination-->
         <div class="col-12 col-sm-6 order-0 order-sm-1 d-flex justify-content-center align-items-center">
             @Html.PagedListPager(Model.Items,
-       p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.FilterField, Model.FilterText }),
+       p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.SearchField, Model.SearchText }),
        new PagedListRenderOptions
        {
            ContainerDivClasses = new string[] { "overflow-auto" },
@@ -82,7 +82,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Code"
                        asp-route-SortOrder="@newSortOrder"
-                       asp-route-FilterText="@Model.FilterText">
+                       asp-route-FilterText="@Model.SearchText">
                         Code
                         @if (Model.SortField == "Code")
                         {
@@ -96,7 +96,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Title"
                        asp-route-SortOrder="@newSortOrder"
-                       asp-route-FilterText="@Model.FilterText">
+                       asp-route-FilterText="@Model.SearchText">
                         Title
                         @if (Model.SortField == "Title")
                         {
@@ -110,7 +110,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Level"
                        asp-route-SortOrder="@newSortOrder"
-                       asp-route-FilterText="@Model.FilterText">
+                       asp-route-FilterText="@Model.SearchText">
                         Level
                         @if (Model.SortField == "Level")
                         {
@@ -124,7 +124,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Type"
                        asp-route-SortOrder="@newSortOrder"
-                       asp-route-FilterText="@Model.FilterText">
+                       asp-route-FilterText="@Model.SearchText">
                         Type
                         @if (Model.SortField == "Type")
                         {
@@ -138,7 +138,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="AddedDate"
                        asp-route-SortOrder="@newSortOrder"
-                       asp-route-FilterText="@Model.FilterText">
+                       asp-route-FilterText="@Model.SearchText">
                         Added Date
                         @if (Model.SortField == "AddedDate")
                         {
@@ -152,7 +152,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="ModifiedDate"
                        asp-route-SortOrder="@newSortOrder"
-                       asp-route-FilterText="@Model.FilterText">
+                       asp-route-FilterText="@Model.SearchText">
                         Modified Date
                         @if (Model.SortField == "ModifiedDate")
                         {

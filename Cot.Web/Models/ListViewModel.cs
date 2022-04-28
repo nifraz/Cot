@@ -18,9 +18,9 @@ namespace Cot.Web.Models
         public int? TotalItemsCount { get; set; }
         public string SortField { get; set; }
         public string SortOrder { get; set; }
-        public IList<SelectListItem> FilterFields { get; set; }
-        public SelectListItem FilterField { get; set; }
-        public string FilterText { get; set; }
+        public IList<SelectListItem> SearchFields { get; set; }
+        public SelectListItem SearchField { get; set; }
+        public string SearchText { get; set; }
         public IPagedList<TEntity> Items { get; set; }
     }
 }

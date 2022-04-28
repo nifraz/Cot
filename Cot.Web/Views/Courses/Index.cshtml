@@ -9,8 +9,8 @@
 <form class="p-1 pt-0 pb-2 container-fluid" method="get" style="background: url('@Url.Content("~/images/circuit-board.svg")');">
     <!--Title-->
     <div class="m-0 p-0 g-2 row">
-        <div class="gap-2 col col-sm-12 d-flex">
-            <h2 class="m-0 p-0 pt-1"><i class="bi bi-book"></i>&nbsp;Manage <b>Courses</b></h2>
+        <div class="gap-2 col-12 d-flex align-content-center">
+            <h3 class="m-0 p-0">Manage <b>Courses</b></h3>
             <a class="ms-auto btn btn-success" title="Create New" asp-action="Create"><i class="bi bi-plus-circle"></i>&nbsp;NEW</a>
         </div>
     </div>
@@ -47,7 +47,11 @@
     <div class="m-0 p-0 g-2 row">
         <!--Page Details-->
         <div class="col-auto col-sm-3 order-1 order-sm-0 d-flex align-items-end">
-            <label class="small">Page @Model.PageNumber of @Model.PagesCount</label>
+            <label class="small">Page: @Model.PageNumber of @Model.PagesCount</label>
+        </div>
+        <!--Item Details-->
+        <div class="ms-auto col-auto col-sm-3 order-2 order-sm-2 d-flex justify-content-end align-items-end">
+            <label class="small">Item(s): @Model.FirstItemOnPage - @Model.LastItemOnPage of @Model.TotalItemsCount @(string.IsNullOrEmpty(Model.FilterText) ? "" : $" [Filter : \"{Model.FilterText}\"]")</label>
         </div>
         <!--Pagination-->
         <div class="col-12 col-sm-6 order-0 order-sm-1 d-flex justify-content-center align-items-center">
@@ -63,10 +67,6 @@
            DisplayLinkToLastPage = PagedListDisplayMode.Always,
            MaximumPageNumbersToDisplay = 5,
        })
-        </div>
-        <!--Item Details-->
-        <div class="ms-auto col-auto col-sm-3 order-2 order-sm-2 d-flex justify-content-end align-items-end">
-            <label class="small">Item(s) @Model.FirstItemOnPage - @Model.LastItemOnPage of @Model.TotalItemsCount @(string.IsNullOrEmpty(Model.FilterText) ? "" : $" [Filter : \"{Model.FilterText}\"]")</label>
         </div>
     </div>
 </form>

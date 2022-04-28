@@ -32,12 +32,11 @@ a {
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .nav-link {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
 }
 
 .nav-link:hover {

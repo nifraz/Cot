@@ -73,7 +73,7 @@
 
 <!--Table-->
 <div class="p-1 table-responsive border-top">
-    <table class="m-0 p-0 table table-sm table-hover" id="listTable">
+    <table class="m-0 p-0 table table-sm table-hover">
         <thead>
             <tr class="align-middle">
                 <th>
@@ -143,7 +143,7 @@
                         {
                             <i class="bi @sortIconClass"></i>
                         }
-                        Added Date
+                        Added Date | Time
                     </a>
                 </th>
                 <th>
@@ -157,7 +157,7 @@
                         {
                             <i class="bi @sortIconClass"></i>
                         }
-                        Modified Date
+                        Modified Date | Time
                     </a>
                 </th>
                 <th>
@@ -169,12 +169,12 @@
             {
                 <tr class="align-middle">
                     @*@Html.Raw(Regex.Replace(item.Code, Model.FilterText, "<mark>" + Model.FilterText + "</mark>", RegexOptions.IgnoreCase))*@
-                    <td>@Html.DisplayFor(modelItem => item.Code)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Level)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Type)</td>
-                    <td>@Html.DisplayFor(modelItem => item.AddedDate)</td>
-                    <td>@Html.DisplayFor(modelItem => item.ModifiedDate)</td>
+                    <td>@item.Code</td>
+                    <td>@item.Title</td>
+                    <td>@item.Level</td>
+                    <td>@item.Type</td>
+                    <td>@item.AddedDate?.ToString("yyyy/MM/dd | hh:mm:ss tt")</td>
+                    <td>@item.ModifiedDate?.ToString("yyyy/MM/dd | hh:mm:ss tt")</td>
                     <td>
                         <div class="d-flex justify-content-end gap-1">
                             <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-info-circle"></i></a>

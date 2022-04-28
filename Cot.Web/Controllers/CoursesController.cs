@@ -36,13 +36,7 @@ namespace Cot.Web.Controllers
 
             model.SortField ??= "Code";
             model.SortOrder ??= "Ascending";
-            model.FilterFields = new List<SelectListItem>
-            {
-                new SelectListItem {Text = "(All Fields)", Value = null},
-                new SelectListItem {Text = "Code", Value = "Code"},
-                new SelectListItem {Text = "Title", Value = "Title"},
-            };
-            //model.FilterField ??= "All";
+
             model.Items = await unitOfWork.Courses.GetPageAsync(model.PageNumber.Value, model.PageSize.Value, model.SortField, model.SortOrder, model.FilterField?.Value, model.FilterText);
             model.PagesCount = model.Items.PageCount;
             model.FirstItemOnPage = model.Items.FirstItemOnPage;

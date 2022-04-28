@@ -15,59 +15,61 @@
 </head>
 <body class="d-flex flex-column bg-1 min-vh-100">
 
-    <!-- Sticky Top -->
-    <!-- Navigation -->
-    <nav class="m-0 px-2 py-1 d-flex align-items-center justify-content-between bg-11 navbar navbar-expand-sm navbar-dark shadow sticky-top">
-        <a title="Home" class="m-0 p-0 navbar-brand d-flex justify-content-between align-items-center gap-1" asp-area="" asp-controller="Home" asp-action="Index">
-            <img src="~/images/cot-logo-white.svg" alt="COT Logo" style="height: 32px; display: block; vertical-align: middle;" />
-            <span class="brand-name text-white" style="font: bold 16px Arial, sans-serif; line-height: 19px; letter-spacing: 1px; display: block; vertical-align: middle; ">COLLEGE OF<br />TECHNOLOGY</span>
-        </a>
-
-        <button class="px-3 py-1 navbar-toggler collapsed bg-9 rounded-pill border-0" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <i class="navbar-toggler-icon"></i>
-        </button>
-
-        <div class="navbar-collapse collapse">
-            <ul class="ms-auto navbar-nav">
-                <li class="mt-1 m-sm-0 nav-item">
-                    <a title="Home" class="px-3 py-1 nav-link text-light rounded-pill d-flex justify-content-between @(controller == "Home" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index"><span>HOME</span><i class="bi bi-house d-sm-none me-1"></i></a>
-                </li>
-                <li class="mt-1 m-sm-0 nav-item">
-                    <a title="Courses" class="px-3 py-1 nav-link text-light rounded-pill d-flex justify-content-between @(controller == "Courses" ? "active" : "")" asp-area="" asp-controller="Courses" asp-action="Index"><span>COURSES</span><i class="bi bi-book d-sm-none me-1"></i></a>
-                </li>
-                <li class="mt-1 m-sm-0 nav-item">
-                    <a title="Privacy" class="px-3 py-1 nav-link text-light rounded-pill d-flex justify-content-between @(controller == "Home" && action == "Privacy" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Privacy"><span>PRIVACY</span><i class="bi bi-shield d-sm-none me-1"></i></a>
-                </li>
-                <li class="mt-1 m-sm-0 nav-item">
-                    <a title="About" class="px-3 py-1 nav-link text-light rounded-pill d-flex justify-content-between @(controller == "Home" && action == "About" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="About"><span>ABOUT</span><i class="bi bi-shield d-sm-none me-1"></i></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Breadcrum & Info -->
-    <div class="px-2 d-flex bg-1 small justify-content-between border-bottom">
-        <nav class="" style="height:20px; --bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Index</li>
-            </ol>
+    <!--Header-->
+    <header class="sticky-top">
+        <!--Sticky Top-->
+        <nav class="m-0 p-0 px-2 py-1 d-flex align-items-center justify-content-between bg-11 navbar navbar-expand-sm navbar-dark shadow">
+            <!--Brand-->
+            <a title="Home" class="m-0 p-0 navbar-brand d-flex justify-content-between align-items-center gap-1" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/images/cot-logo-white.svg" alt="COT Logo" style="height: 32px; display: block; vertical-align: middle;" />
+                <span class="brand-name text-white" style="font: bold 16px Arial, sans-serif; line-height: 19px; letter-spacing: 1px; display: block; vertical-align: middle; ">COLLEGE OF<br />TECHNOLOGY</span>
+            </a>
+            <!--Navbar Toggler-->
+            <button class="px-3 py-1 navbar-toggler collapsed rounded-pill border-0" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <i class="navbar-toggler-icon"></i>
+            </button>
+            <!--Navbar-->
+            <div class="navbar-collapse collapse">
+                <ul class="ms-auto navbar-nav">
+                    <li class="mt-1 m-sm-0 nav-item">
+                        <a title="Home" class="px-3 py-1 nav-link text-light rounded-pill d-flex justify-content-between @(controller == "Home" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index"><span>HOME</span><i class="bi bi-house d-sm-none me-1"></i></a>
+                    </li>
+                    <li class="mt-1 m-sm-0 nav-item">
+                        <a title="Courses" class="px-3 py-1 nav-link text-light rounded-pill d-flex justify-content-between @(controller == "Courses" ? "active" : "")" asp-area="" asp-controller="Courses" asp-action="Index"><span>COURSES</span><i class="bi bi-book d-sm-none me-1"></i></a>
+                    </li>
+                    <li class="mt-1 m-sm-0 nav-item">
+                        <a title="Privacy" class="px-3 py-1 nav-link text-light rounded-pill d-flex justify-content-between @(controller == "Home" && action == "Privacy" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Privacy"><span>PRIVACY</span><i class="bi bi-shield d-sm-none me-1"></i></a>
+                    </li>
+                    <li class="mt-1 m-sm-0 nav-item">
+                        <a title="About" class="px-3 py-1 nav-link text-light rounded-pill d-flex justify-content-between @(controller == "Home" && action == "About" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="About"><span>ABOUT</span><i class="bi bi-shield d-sm-none me-1"></i></a>
+                    </li>
+                </ul>
+            </div>
         </nav>
-        <div>
-            Page retrieved - @DateTime.Now
+
+        <!--Strip-->
+        <div class="px-2 d-flex bg-1 small justify-content-between border-bottom">
+            <!--Breadcrum-->
+            <nav class="" style="height:20px; --bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Index</li>
+                </ol>
+            </nav>
+            <!--Info-->
+            <div>
+                Page retrieved - @DateTime.Now
+            </div>
         </div>
-    </div>
+    </header>
 
-    <!-- Grid Container -->
-    <div class="m-0 px-1 container-fluid">
-        <!-- View Area -->
-        <main>
-            @RenderBody()
-        </main>
-    </div>
+    <!--Main-->
+    <main>
+        @RenderBody()
+    </main>
 
-    <!-- Footer -->
+    <!--Footer-->
     <footer class="py-2 mt-auto bg-11" style="height: auto; box-shadow: rgba(0,0,0, 3) 20px">
         <div class="container-fluid fs-6 fw-light text-muted">
             <div class="row">
@@ -79,6 +81,7 @@
         </div>
     </footer>
 
+    <!--Scripts-->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

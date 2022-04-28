@@ -4,9 +4,23 @@
     ViewData["Title"] = "Create Course";
 }
 
-<h1>Create</h1>
+<h2 class="m-0 p-0"><i class="bi bi-book"></i>&nbsp;Create <b>Course</b></h2>
+<a class="btn btn-secondary" href="#">CANCEL</a>
 
-<h4>Course</h4>
+<div class="form-floating">
+    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+    <label for="floatingInput">Email address</label>
+</div>
+<div class="form-floating">
+    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+    <label for="floatingPassword">Password</label>
+</div>
+
+<div class="form-floating">
+    <textarea class="form-control" asp-for="Notes" placeholder="Enter your notes."></textarea>
+    <label asp-for="Notes">Notes</label>
+</div>
+
 <hr />
 <div class="row">
     <div class="col-md-4">

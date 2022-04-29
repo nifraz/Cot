@@ -62,13 +62,7 @@ namespace Cot.Web.Controllers
 
             var model = new CourseViewModel()
             {
-                Id = course.Id.ToString(),
-                Code = course.Code,
-                Title = course.Title,
-                Level = course.Level.ToString(),
-                Type = course.Type.ToString(),
-                AddedDate = course.AddedDate?.ToString() ?? "N/A",
-                ModifiedDate = course.ModifiedDate?.ToString() ?? "N/A",
+                Course = course,
             };
 
             return View(model);

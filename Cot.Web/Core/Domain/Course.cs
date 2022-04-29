@@ -20,13 +20,9 @@ namespace Cot.Web.Core.Domain
     public enum CourseLevel : byte
     {
         None = 0,
-        NVQ1 = 1,
-        NVQ2 = 2,
-        NVQ3 = 3,
         NVQ4 = 4,
         NVQ5 = 5,
-        NVQ6 = 6,
-        NVQ7 = 7
+        NVQ6 = 6
     }
 
     public enum CourseType : byte

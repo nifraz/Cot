@@ -2,77 +2,89 @@
 @{
     ViewData["Title"] = "Courses";
 
-    var newSortOrder = (string.IsNullOrEmpty(Model.SortOrder) || Model.SortOrder == "Descending") ? "Ascending" : "Descending";
+    var newSortOrder = (Model.SortOrder == "Ascending") ? "Descending" : "Ascending";
     var sortIconClass = Model.SortOrder == "Descending" ? "bi-sort-down" : "bi-sort-up";
 }
 
-<form class="p-1 pt-0 pb-2 container-fluid" method="get" style="background: url('@Url.Content("~/images/circuit-board.svg")');">
-    <!--Title-->
+<!--Container-->
+<div class="p-1 pt-0 pb-2 container-fluid border-bottom" style="background: url('@Url.Content("~/images/circuit-board.svg")');">
+    <!--Row-->
     <div class="m-0 p-0 g-2 row">
         <div class="gap-2 col-12 d-flex align-content-center">
-            <h3 class="m-0 p-0">Manage <b>Courses</b></h3>
+            <!--Title-->
+            <h3 class="m-0 p-0">Manage <strong>Courses</strong></h3>
+            <!--Main Buttons-->
             <a class="ms-auto btn btn-success" title="Create New" asp-action="Create"><i class="bi bi-plus-circle"></i>&nbsp;NEW</a>
         </div>
     </div>
 
-    <!--Row-->
-    <div class="m-0 p-0 g-2 row">
-        <!--PageNumber-->
-        <div class="col-6 col-sm-3 d-flex">
-            <div class="form-floating w-100">
-                <input class="form-control" placeholder="@Model.PageNumber" asp-for="PageNumber" min="1">
-                <label asp-for="PageNumber"><i class="bi bi-arrow-left-right"></i>&nbsp;Page</label>
+    <form method="get">
+        <!--Row-->
+        <div class="m-0 p-0 g-2 row">
+            <!--Col-->
+            <div class="col-6 col-sm-3 d-flex">
+                <!--PageNumber-->
+                <div class="form-floating w-100">
+                    <input class="form-control" placeholder="@Model.PageNumber" asp-for="PageNumber" min="1">
+                    <label asp-for="PageNumber"><i class="bi bi-arrow-left-right"></i>&nbsp;Page</label>
+                </div>
+            </div>
+            <!--Col-->
+            <div class="col-6 col-sm-3 d-flex">
+                <!--PageSize-->
+                <div class="form-floating w-100">
+                    <input class="form-control" placeholder="@Model.PageSize" asp-for="PageSize" min="1" max="100">
+                    <label asp-for="PageSize"><i class="bi bi-eye"></i>&nbsp;Items</label>
+                </div>
+            </div>
+            <!--Col-->
+            <div class="gap-2 col-12 col-sm-6 d-flex">
+                <!--Search-->
+                <div class="form-floating w-100">
+                    <input type="search" class="form-control" id="filter" name="SearchText" placeholder="Text" value="@Model.SearchText">
+                    <label for="filter"><i class="bi bi-search"></i>&nbsp;Search</label>
+                </div>
+                <input type="hidden" asp-for="SortField" />
+                <input type="hidden" asp-for="SortOrder" />
+                <!--Go-->
+                <button class="btn btn-lg btn-outline-primary" type="submit" title="Go"><i class="bi bi-arrow-right-circle"></i></button>
             </div>
         </div>
-        <!--PageSize-->
-        <div class="col-6 col-sm-3 d-flex">
-            <div class="form-floating w-100">
-                <input class="form-control" placeholder="@Model.PageSize" asp-for="PageSize" min="1" max="100">
-                <label asp-for="PageSize"><i class="bi bi-eye"></i>&nbsp;Items</label>
-            </div>
-        </div>
-        <!--Filter & Button-->
-        <div class="gap-2 col-12 col-sm-6 d-flex">
-            <div class="form-floating w-100">
-                <input type="search" class="form-control" id="filter" name="SearchText" placeholder="Text" value="@Model.SearchText">
-                <label for="filter"><i class="bi bi-search"></i>&nbsp;Search</label>
-            </div>
-            <input type="hidden" asp-for="SortField" />
-            <input type="hidden" asp-for="SortOrder" />
-            <button class="btn btn-lg btn-outline-primary" type="submit" title="Go"><i class="bi bi-arrow-right-circle"></i></button>
-        </div>
-    </div>
 
-    <!--Row-->
-    <div class="m-0 p-0 g-2 row">
-        <!--Page Details-->
-        <div class="col-auto col-sm-3 order-1 order-sm-0 d-flex align-items-end">
-            <label class="small">Page: @Model.PageNumber of @Model.PagesCount</label>
+        <!--Row-->
+        <div class="m-0 p-0 g-2 row">
+            <!--Col-->
+            <div class="col-auto col-sm-3 order-1 order-sm-0 d-flex align-items-end">
+                <!--Page Info-->
+                <label class="small">Page: @Model.PageNumber of @Model.PagesCount</label>
+            </div>
+            <!--Col-->
+            <div class="ms-auto col-auto col-sm-3 order-2 order-sm-2 d-flex justify-content-end align-items-end">
+                <!--Items Info-->
+                <label class="small">Item(s): @Model.FirstItemOnPage - @Model.LastItemOnPage of @Model.TotalItemsCount @(string.IsNullOrEmpty(Model.SearchText) ? "" : $" [Search : \"{Model.SearchText}\"]")</label>
+            </div>
+            <!--Col-->
+            <div class="col-12 col-sm-6 order-0 order-sm-1 d-flex justify-content-center align-items-center">
+                <!--Pagination-->
+                @Html.PagedListPager(Model.Items,
+           p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.SearchField, Model.SearchText }),
+           new PagedListRenderOptions
+           {
+               ContainerDivClasses = new string[] { "overflow-auto" },
+               UlElementClasses = new string[] { "pagination m-0" },
+               LiElementClasses = new string[] { "page-item" },
+               PageClasses = new string[] { "page-link" },
+               DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+               DisplayLinkToLastPage = PagedListDisplayMode.Always,
+               MaximumPageNumbersToDisplay = 5,
+           })
+            </div>
         </div>
-        <!--Item Details-->
-        <div class="ms-auto col-auto col-sm-3 order-2 order-sm-2 d-flex justify-content-end align-items-end">
-            <label class="small">Item(s): @Model.FirstItemOnPage - @Model.LastItemOnPage of @Model.TotalItemsCount @(string.IsNullOrEmpty(Model.SearchText) ? "" : $" [Search : \"{Model.SearchText}\"]")</label>
-        </div>
-        <!--Pagination-->
-        <div class="col-12 col-sm-6 order-0 order-sm-1 d-flex justify-content-center align-items-center">
-            @Html.PagedListPager(Model.Items,
-       p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.SearchField, Model.SearchText }),
-       new PagedListRenderOptions
-       {
-           ContainerDivClasses = new string[] { "overflow-auto" },
-           UlElementClasses = new string[] { "pagination m-0" },
-           LiElementClasses = new string[] { "page-item" },
-           PageClasses = new string[] { "page-link" },
-           DisplayLinkToFirstPage = PagedListDisplayMode.Always,
-           DisplayLinkToLastPage = PagedListDisplayMode.Always,
-           MaximumPageNumbersToDisplay = 5,
-       })
-        </div>
-    </div>
-</form>
+    </form>
+</div>
 
 <!--Table-->
-<div class="p-1 table-responsive border-top">
+<div class="p-1 table-responsive">
     <table class="m-0 p-0 table table-sm table-hover">
         <thead>
             <tr class="align-middle">

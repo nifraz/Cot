@@ -8,13 +8,9 @@ namespace Cot.Web.Models
 {
     public class CourseViewModel : IViewModel
     {
-        public string Id { get; set; }
-        public string Code { get; set; }
-        public string Title { get; set; }
-        public string Level { get; set; }
-        public string Type { get; set; }
-        public string AddedDate { get; set; }
-        public string ModifiedDate { get; set; }
-        public string Notes { get; set; }
+        public Course Course { get; set; }
+
+        public IList<string> Syllabuses { get; set; }
+        public IList<string> Classes { get; set; }
     }
 }

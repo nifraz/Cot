@@ -51,12 +51,13 @@
         <!--Strip-->
         <div class="px-2 d-flex bg-1 small justify-content-between border-bottom">
             <!--Breadcrum-->
-            <nav class="" style="height:20px; --bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Index</li>
-                </ol>
-            </nav>
+            <breadcrumb></breadcrumb>
+            @*<nav class="" style="height:20px; --bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Index</li>
+            </ol>
+        </nav>*@
             <!--Info-->
             <div>
                 Retrieved: @DateTime.Now.ToString("yyyy/MM/dd | hh:mm:ss tt")

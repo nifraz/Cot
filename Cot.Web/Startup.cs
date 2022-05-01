@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SmartBreadcrumbs.Extensions;
 
 namespace Cot.Web
 {
@@ -34,6 +35,16 @@ namespace Cot.Web
 
             //services.AddScoped<IRepository<Course>, Repository<Course>>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            
+            services.AddBreadcrumbs(GetType().Assembly, options =>
+            {
+                options.TagName = "nav";
+                options.TagClasses = "";
+                options.OlClasses = "m-0 breadcrumb";
+                options.LiClasses = "breadcrumb-item";
+                options.ActiveLiClasses = "breadcrumb-item active";
+                options.SeparatorElement = "<li class=\"separator\">&nbsp;/&nbsp;</li>";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

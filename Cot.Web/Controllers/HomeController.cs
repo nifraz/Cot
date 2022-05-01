@@ -1,6 +1,7 @@
 ﻿using Cot.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SmartBreadcrumbs.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,16 +19,20 @@ namespace Cot.Web.Controllers
             _logger = logger;
         }
 
+        [DefaultBreadcrumb("Home")] //<i class=\"bi bi-home\"></i>
         public IActionResult Index()
         {
             return View();
         }
 
+        [Breadcrumb("Privacy")]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        //[Breadcrumb("Contact us", FromAction = "Home.AboutUs")] //child
+        [Breadcrumb("About")]
         public IActionResult About()
         {
             return View();

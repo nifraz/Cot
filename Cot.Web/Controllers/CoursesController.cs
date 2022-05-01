@@ -11,6 +11,8 @@ using Cot.Web.Core;
 using X.PagedList;
 using Cot.Web.Models;
 using Microsoft.AspNetCore.Authorization;
+using SmartBreadcrumbs.Attributes;
+using SmartBreadcrumbs.Nodes;
 
 namespace Cot.Web.Controllers
 {
@@ -24,6 +26,7 @@ namespace Cot.Web.Controllers
         }
 
         // GET: Courses
+        [Breadcrumb("Courses")]
         public async Task<IActionResult> Index(ListViewModel<Course> model)
         {
             if (model.PageNumber == null || model.PageNumber < 1)
@@ -48,6 +51,7 @@ namespace Cot.Web.Controllers
         }
 
         // GET: Courses/Details/5
+        [Breadcrumb("Details", FromAction = "Index")]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -70,6 +74,7 @@ namespace Cot.Web.Controllers
         }
 
         // GET: Courses/Create
+        [Breadcrumb("Create", FromAction = "Index")]
         public IActionResult Create()
         {
             return View();

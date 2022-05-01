@@ -20,6 +20,12 @@ namespace Cot.Web.Persistence.EntityConfigurations
 
             builder.HasIndex(e => e.Code)
                 .IsUnique();
+
+            builder.Property(e => e.Title)
+                .IsRequired();
+
+            builder.HasIndex(e => e.Title)
+                .IsUnique();
         }
     }
 }

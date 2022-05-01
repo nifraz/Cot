@@ -187,10 +187,12 @@ namespace Cot.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        #region Validation
+
         [HttpGet]
         [HttpPost] //or use [AcceptVerbs("Get", "Post")] for handling multiple http methods
         [AllowAnonymous]
-        public async Task<IActionResult> IsCourseCodeAvailable(string code)
+        public async Task<IActionResult> ValidateCourseCode(string code)
         {
             var course = await unitOfWork.Courses.FindAsync(e => e.Code == code);
 
@@ -201,10 +203,26 @@ namespace Cot.Web.Controllers
             return Json($"Course code '{code}' already exists.");
         }
 
+        [HttpGet]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ValidateCourseTitle(string title)
+        {
+            var course = await unitOfWork.Courses.FindAsync(e => e.Title == title);
+
+            if (course == default)
+            {
+                return Json(true);
+            }
+            return Json($"Course title '{title}' has been already taken.");
+        }
+
         private async Task<bool> CourseExistsAsync(Guid id)
         {
             //return context.Courses.Any(e => e.Code == id);
             return await unitOfWork.Courses.FindAsync(e => e.Id == id) != null;
         }
+
+        #endregion
     }
 }

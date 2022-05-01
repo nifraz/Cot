@@ -11,9 +11,12 @@ namespace Cot.Web.Models
     public class CourseCreateModel
     {
         [Required]
-        [StringLength(32)]
-        [Remote(action: "IsCourseCodeAvailable", controller: "Courses")]    //calls the function using ajax to validate
+        [MaxLength(32)]
+        [Remote(action: "ValidateCourseCode", controller: "Courses")]    //calls the function using ajax to validate
         public string Code { get; set; }
+        [Required]
+        [MaxLength(256)]
+        [Remote(action: "ValidateCourseTitle", controller: "Courses")]
         public string Title { get; set; }
         public CourseLevel Level { get; set; }
         public CourseType Type { get; set; }

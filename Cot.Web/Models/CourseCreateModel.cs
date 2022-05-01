@@ -1,4 +1,5 @@
 ﻿using Cot.Web.Core.Domain;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,6 +12,7 @@ namespace Cot.Web.Models
     {
         [Required]
         [StringLength(32)]
+        [Remote(action: "IsCourseCodeAvailable", controller: "Courses")]    //calls the function using ajax to validate
         public string Code { get; set; }
         public string Title { get; set; }
         public CourseLevel Level { get; set; }

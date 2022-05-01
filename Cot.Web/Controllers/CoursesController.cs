@@ -10,6 +10,7 @@ using Cot.Web.Persistence;
 using Cot.Web.Core;
 using X.PagedList;
 using Cot.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cot.Web.Controllers
 {
@@ -179,6 +180,20 @@ namespace Cot.Web.Controllers
             unitOfWork.Courses.Remove(course);
             await unitOfWork.CompleteAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        [HttpPost] //or use [AcceptVerbs("Get", "Post")] for handling multiple http methods
+        [AllowAnonymous]
+        public async Task<IActionResult> IsCourseCodeAvailable(string code)
+        {
+            var course = await unitOfWork.Courses.FindAsync(e => e.Code == code);
+
+            if (course == default)
+            {
+                return Json(true);
+            }
+            return Json($"Course code '{code}' already exists.");
         }
 
         private async Task<bool> CourseExistsAsync(Guid id)

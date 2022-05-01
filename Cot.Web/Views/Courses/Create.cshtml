@@ -13,7 +13,7 @@
             <!--Title-->
             <h3 class="m-0 p-0">Create <strong>Course</strong></h3>
             <!--Main Buttons-->
-            <a class="ms-auto btn btn-secondary" title="Back to List" asp-action="Index"><i class="bi bi-list"></i>&nbsp;LIST</a>
+            <a class="ms-auto btn btn-secondary" title="Back to List" asp-action="Index"><i class="bi bi-arrow-left-circle"></i>&nbsp;LIST</a>
         </div>
     </div>
 </div>
@@ -21,11 +21,14 @@
 <!--Container-->
 <div class="p-1 pt-0 pb-2 container shadow">
     <form method="post">
+        <!--Row-->
         <div class="m-0 p-0 pb-2 g-2 row border-bottom">
             <!--Col-->
             <div class="col-12 d-flex align-content-center">
                 <!--Info-->
-                <h6 class="m-0 p-0">Please enter the required details.</h6>
+                <h6 class="m-0 p-0">Please enter the following details.</h6>
+                <!--Validation-->
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
             </div>
         </div>
         <!--Row-->
@@ -37,7 +40,7 @@
                     <input class="form-control" asp-for="Code" placeholder="Course Code">
                     <label asp-for="Code"></label>
                 </div>
-                <span asp-validation-for="Code" class="text-danger"></span>
+                <span class="text-danger small" asp-validation-for="Code"></span>
             </div>
             <!--Col-->
             <div class="col-12 col-sm-8">
@@ -46,7 +49,7 @@
                     <input class="form-control" asp-for="Title" placeholder="Course Title">
                     <label asp-for="Title"></label>
                 </div>
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <span class="text-danger small" asp-validation-for="Title"></span>
             </div>
             <!--Col-->
             <div class="col-12 col-sm-6">
@@ -55,7 +58,7 @@
                     <select class="form-select" asp-for="Level" asp-items="Html.GetEnumSelectList<CourseLevel>()"></select>
                     <label asp-for="Level"></label>
                 </div>
-                <span asp-validation-for="Level" class="text-danger"></span>
+                <span class="text-danger small" asp-validation-for="Level"></span>
             </div>
             <!--Col-->
             <div class="col-12 col-sm-6">
@@ -64,7 +67,7 @@
                     <select class="form-select" asp-for="Type" asp-items="Html.GetEnumSelectList<CourseType>()"></select>
                     <label asp-for="Type"></label>
                 </div>
-                <span asp-validation-for="Type" class="text-danger"></span>
+                <span class="text-danger small" asp-validation-for="Type"></span>
             </div>
             <!--Col-->
             <div class="col-12">
@@ -73,19 +76,14 @@
                     <textarea class="form-control" asp-for="Notes" placeholder="Notes..."></textarea>
                     <label asp-for="Notes"></label>
                 </div>
-                <span asp-validation-for="Notes" class="text-danger"></span>
+                <span class="text-danger small" asp-validation-for="Notes"></span>
             </div>
             <!--Col-->
-            <div class="col-12">
-                <!--Validation-->
-                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
-            </div>
-            <!--Col-->
-            <div class="col-12">
+            <div class="gap-2 col-12 d-flex">
                 <!--Submit-->
                 <button class="btn btn-success" type="submit"><i class="bi bi-save"></i>&nbsp;SAVE</button>
-                <!--Submit-->
-                <a class="ms-auto btn btn-secondary" title="Cancel" asp-action="Index"><i class="bi bi-x-circle"></i>&nbsp;CANCEL</a>
+                <!--Cancel-->
+                <a class="btn btn-secondary" title="Cancel" asp-action="Index"><i class="bi bi-x-circle"></i>&nbsp;CANCEL</a>
             </div>
         </div>
     </form>

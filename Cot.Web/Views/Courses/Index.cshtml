@@ -185,8 +185,8 @@
                     <td>@item.Title</td>
                     <td>@item.Level</td>
                     <td>@item.Type</td>
-                    <td>@item.AddedDate?.ToString("yyyy/MM/dd | hh:mm:ss tt")</td>
-                    <td>@item.ModifiedDate?.ToString("yyyy/MM/dd | hh:mm:ss tt")</td>
+                    <td>@item.AddedDate?.ToString(StringFormat.DateTime)</td>
+                    <td>@item.ModifiedDate?.ToString(StringFormat.DateTime)</td>
                     <td>
                         <div class="d-flex justify-content-end gap-1">
                             <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-info-circle"></i></a>

@@ -25,12 +25,6 @@ namespace Cot.Web.Controllers
             return View();
         }
 
-        [Breadcrumb("Privacy")]
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         //[Breadcrumb("Contact us", FromAction = "Home.AboutUs")] //child
         [Breadcrumb("About")]
         public IActionResult About()

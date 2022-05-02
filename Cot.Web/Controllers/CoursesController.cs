@@ -25,7 +25,8 @@ namespace Cot.Web.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        // GET: Courses
+        // GET: List
+        [HttpGet]
         [Breadcrumb("Courses")]
         public async Task<IActionResult> Index(ListViewModel<Course> model)
         {
@@ -51,6 +52,7 @@ namespace Cot.Web.Controllers
         }
 
         // GET: Courses/Details/5
+        [HttpGet]
         [Breadcrumb("Details", FromAction = "Index")]
         public async Task<IActionResult> Details(Guid? id)
         {
@@ -74,6 +76,7 @@ namespace Cot.Web.Controllers
         }
 
         // GET: Courses/Create
+        [HttpGet]
         [Breadcrumb("Create", FromAction = "Index")]
         public IActionResult Create()
         {
@@ -87,7 +90,21 @@ namespace Cot.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CourseCreateModel model)
         {
-            //string houseNo = Request.Form["HomeAddress.HouseNumber"];   //request value from input name="HomeAddress.HouseNumber"
+            //check if code already exists
+            var existingItem = await unitOfWork.Courses
+                .FindAsync(e => e.Code == model.Code);
+            if (existingItem != default)
+            {
+                ModelState.AddModelError("Code", $"Course Code '{model.Code}' already exists.");
+            }
+            //check if title already exists
+            existingItem = await unitOfWork.Courses
+                .FindAsync(e => e.Title == model.Title);
+            if (existingItem != default)
+            {
+                ModelState.AddModelError("Title", $"Course Title '{model.Title}' already exists.");
+            }
+
             if (ModelState.IsValid)
             {
                 var course = new Course()
@@ -108,6 +125,8 @@ namespace Cot.Web.Controllers
         }
 
         // GET: Courses/Edit/5
+        [HttpGet]
+        [Breadcrumb("Edit", FromAction = "Index")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -115,12 +134,23 @@ namespace Cot.Web.Controllers
                 return NotFound();
             }
 
-            var course = await unitOfWork.Courses.GetAsync(id);
+            var course = await unitOfWork.Courses
+                .GetAsync(id);
             if (course == null)
             {
                 return NotFound();
             }
-            return View(course);
+
+            var model = new CourseEditModel()
+            {
+                Id = course.Id,
+                Code = course.Code,
+                Title = course.Title,
+                Level = course.Level,
+                Type = course.Type,
+                Notes = course.Notes
+            };
+            return View(model);
         }
 
         // POST: Courses/Edit/5
@@ -128,23 +158,41 @@ namespace Cot.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Code,Title,Type,AddedDateTime,ModifiedDateTime")] Course course)
+        public async Task<IActionResult> Edit(Guid id, CourseEditModel model)
         {
-            if (id != course.Id)
+            if (id != model.Id)
             {
                 return NotFound();
             }
+
+            //check if row exists
+            var existingItem = await unitOfWork.Courses
+                .GetAsync(id);
+            if (existingItem == default)
+            {
+                return NotFound();
+            }
+
+            //TODO check code and title
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    unitOfWork.Courses.Update(course);
+                    existingItem.Id = model.Id;
+                    existingItem.Code = model.Code;
+                    existingItem.Title = model.Title;
+                    existingItem.Level = model.Level;
+                    existingItem.Type = model.Type;
+                    //existingItem.AddedDate = existingItem.AddedDate;
+                    existingItem.ModifiedDate = DateTime.Now;
+
+                    unitOfWork.Courses.Update(existingItem);
                     await unitOfWork.CompleteAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!await CourseExistsAsync(course.Id))
+                    if (!await CourseExistsAsync(model.Id))
                     {
                         return NotFound();
                     }
@@ -155,10 +203,12 @@ namespace Cot.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(course);
+            return View(model);
         }
 
         // GET: Courses/Delete/5
+        [HttpGet]
+        [Breadcrumb("Delete", FromAction = "Index")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -200,7 +250,7 @@ namespace Cot.Web.Controllers
             {
                 return Json(true);
             }
-            return Json($"Course code '{code}' already exists.");
+            return Json($"Course Code '{code}' already exists.");
         }
 
         [HttpGet]
@@ -214,7 +264,7 @@ namespace Cot.Web.Controllers
             {
                 return Json(true);
             }
-            return Json($"Course title '{title}' has been already taken.");
+            return Json($"Course Title '{title}' already exists.");
         }
 
         private async Task<bool> CourseExistsAsync(Guid id)

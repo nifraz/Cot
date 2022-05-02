@@ -55,10 +55,14 @@ body {
     background-color: var(--color-9);
 }
 
-.page-item.active .page-link {
-    background-color: var(--color-2);
+.page-item.active>.page-link {
+    background-color: var(--color-3);
     color: black;
     border-color: var(--color-3);
+}
+
+.form-floating>textarea.form-control {
+    height: 6rem;
 }
 
 mark{

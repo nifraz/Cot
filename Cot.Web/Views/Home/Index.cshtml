@@ -2,7 +2,16 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@section Header {
+    <!--Container-->
+    <div class="p-1 pt-0 pb-2 container-fluid border-bottom" style="background: url('@Url.Content("~/images/circuit-board.svg")');">
+        <!--Row-->
+        <div class="m-0 p-0 g-2 row">
+            <!--Col-->
+            <div class="gap-2 col-12 d-flex align-content-center">
+                <!--Title-->
+                <h3 class="m-0 p-0"><strong>College of Technology</strong> Online Portal</h3>
+            </div>
+        </div>
+    </div>
+}

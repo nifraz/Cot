@@ -151,10 +151,10 @@
                     <a asp-action="Index"
                        asp-route-PageNumber="@Model.PageNumber"
                        asp-route-PageSize="@Model.PageSize"
-                       asp-route-SortField="AddedDate"
-                       asp-route-SortOrder="@(Model.SortField == "AddedDate" ? newSortOrder : Model.SortOrder)"
+                       asp-route-SortField="AddedDateTime"
+                       asp-route-SortOrder="@(Model.SortField == "AddedDateTime" ? newSortOrder : Model.SortOrder)"
                        asp-route-FilterText="@Model.SearchText">
-                        @if (Model.SortField == "AddedDate")
+                        @if (Model.SortField == "AddedDateTime")
                         {
                             <i class="bi @sortIconClass"></i>
                         }
@@ -165,10 +165,10 @@
                     <a asp-action="Index"
                        asp-route-PageNumber="@Model.PageNumber"
                        asp-route-PageSize="@Model.PageSize"
-                       asp-route-SortField="ModifiedDate"
-                       asp-route-SortOrder="@(Model.SortField == "ModifiedDate" ? newSortOrder : Model.SortOrder)"
+                       asp-route-SortField="ModifiedDateTime"
+                       asp-route-SortOrder="@(Model.SortField == "ModifiedDateTime" ? newSortOrder : Model.SortOrder)"
                        asp-route-FilterText="@Model.SearchText">
-                        @if (Model.SortField == "ModifiedDate")
+                        @if (Model.SortField == "ModifiedDateTime")
                         {
                             <i class="bi @sortIconClass"></i>
                         }
@@ -188,8 +188,8 @@
                     <td>@item.Title</td>
                     <td>@item.Level</td>
                     <td>@item.Type</td>
-                    <td>@item.AddedDate?.ToString(StringFormat.DateTime)</td>
-                    <td>@item.ModifiedDate?.ToString(StringFormat.DateTime)</td>
+                    <td>@item.AddedDateTime?.ToString(StringFormat.DateTime)</td>
+                    <td>@item.ModifiedDateTime?.ToString(StringFormat.DateTime)</td>
                     <td>
                         <div class="d-flex justify-content-end gap-1">
                             <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-info-circle"></i></a>

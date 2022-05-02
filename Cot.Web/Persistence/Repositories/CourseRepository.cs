@@ -36,8 +36,8 @@ namespace Cot.Web.Persistence.Repositories
                     "Title" => query.OrderByDescending(e => e.Title),
                     "Level" => query.OrderByDescending(e => e.Level),
                     "Type" => query.OrderByDescending(e => e.Type),
-                    "AddedDate" => query.OrderByDescending(e => e.AddedDate),
-                    "ModifiedDate" => query.OrderByDescending(e => e.ModifiedDate),
+                    "AddedDateTime" => query.OrderByDescending(e => e.AddedDateTime),
+                    "ModifiedDateTime" => query.OrderByDescending(e => e.ModifiedDateTime),
                     _ => query.OrderByDescending(e => e.Code),
                 };
             }
@@ -48,8 +48,8 @@ namespace Cot.Web.Persistence.Repositories
                     "Title" => query.OrderBy(e => e.Title),
                     "Level" => query.OrderBy(e => e.Level),
                     "Type" => query.OrderBy(e => e.Type),
-                    "AddedDate" => query.OrderBy(e => e.AddedDate),
-                    "ModifiedDate" => query.OrderBy(e => e.ModifiedDate),
+                    "AddedDateTime" => query.OrderBy(e => e.AddedDateTime),
+                    "ModifiedDateTime" => query.OrderBy(e => e.ModifiedDateTime),
                     _ => query.OrderBy(e => e.Code),
                 };
             }

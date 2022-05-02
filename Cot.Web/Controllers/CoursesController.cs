@@ -114,7 +114,7 @@ namespace Cot.Web.Controllers
                     Title = model.Title,
                     Level = model.Level,
                     Type = model.Type,
-                    AddedDate = DateTime.Now
+                    AddedDateTime = DateTime.Now
                 };
 
                 unitOfWork.Courses.Add(course);
@@ -185,7 +185,7 @@ namespace Cot.Web.Controllers
                     existingItem.Level = model.Level;
                     existingItem.Type = model.Type;
                     //existingItem.AddedDate = existingItem.AddedDate;
-                    existingItem.ModifiedDate = DateTime.Now;
+                    existingItem.ModifiedDateTime = DateTime.Now;
 
                     unitOfWork.Courses.Update(existingItem);
                     await unitOfWork.CompleteAsync();

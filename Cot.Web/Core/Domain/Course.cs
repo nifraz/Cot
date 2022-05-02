@@ -12,8 +12,8 @@ namespace Cot.Web.Core.Domain
         public string Title { get; set; }
         public CourseLevel Level { get; set; }
         public CourseType Type { get; set; }
-        public DateTime? AddedDate { get; set; }
-        public DateTime? ModifiedDate { get; set; }
+        public DateTime? AddedDateTime { get; set; }
+        public DateTime? ModifiedDateTime { get; set; }
         public string Notes { get; set; }
     }
 

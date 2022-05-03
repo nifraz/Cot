@@ -161,28 +161,40 @@ namespace Cot.Web.Controllers
             }
 
             //check if row exists
-            var existingItem = await unitOfWork.Courses
+            var course = await unitOfWork.Courses
                 .GetAsync(id);
-            if (existingItem == default)
+            if (course == null)
             {
                 return NotFound();
             }
 
-            //TODO check code and title
+            //check if code exists for any other course
+            var existingCourse = await unitOfWork.Courses.FindAsync(e => e.Id != model.Id && e.Code == model.Code);
+            if (existingCourse != null)
+            {
+                ModelState.AddModelError(nameof(model.Code), $"Course Code '{model.Code}' already exists.");
+            }
+
+            //check if title exists for any other course
+            existingCourse = await unitOfWork.Courses.FindAsync(e => e.Id != model.Id && e.Title == model.Title);
+            if (existingCourse != null)
+            {
+                ModelState.AddModelError(nameof(model.Title), $"Course Title '{model.Title}' already exists.");
+            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    existingItem.Id = model.Id;
-                    existingItem.Code = model.Code;
-                    existingItem.Title = model.Title;
-                    existingItem.Level = model.Level;
-                    existingItem.Type = model.Type;
+                    course.Id = model.Id;
+                    course.Code = model.Code;
+                    course.Title = model.Title;
+                    course.Level = model.Level;
+                    course.Type = model.Type;
                     //existingItem.AddedDate = existingItem.AddedDate;
-                    existingItem.ModifiedDateTime = DateTime.Now;
+                    course.ModifiedDateTime = DateTime.Now;
 
-                    unitOfWork.Courses.Update(existingItem);
+                    unitOfWork.Courses.Update(course);
                     await unitOfWork.CompleteAsync();
                 }
                 catch (DbUpdateConcurrencyException)

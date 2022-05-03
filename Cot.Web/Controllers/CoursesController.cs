@@ -90,19 +90,14 @@ namespace Cot.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CourseCreateModel model)
         {
-            //check if code already exists
-            var existingItem = await unitOfWork.Courses
-                .FindAsync(e => e.Code == model.Code);
-            if (existingItem != default)
+            if (await unitOfWork.Courses.IsExistAsync(e => e.Code == model.Code))
             {
-                ModelState.AddModelError("Code", $"Course Code '{model.Code}' already exists.");
+                ModelState.AddModelError(nameof(model.Code), $"Course Code '{model.Code}' already exists.");
             }
-            //check if title already exists
-            existingItem = await unitOfWork.Courses
-                .FindAsync(e => e.Title == model.Title);
-            if (existingItem != default)
+
+            if (await unitOfWork.Courses.IsExistAsync(e => e.Title == model.Title))
             {
-                ModelState.AddModelError("Title", $"Course Title '{model.Title}' already exists.");
+                ModelState.AddModelError(nameof(model.Title), $"Course Title '{model.Title}' already exists.");
             }
 
             if (ModelState.IsValid)
@@ -192,7 +187,7 @@ namespace Cot.Web.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!await CourseExistsAsync(model.Id))
+                    if (!await unitOfWork.Courses.IsExistAsync(e => e.Id == model.Id))
                     {
                         return NotFound();
                     }
@@ -244,13 +239,11 @@ namespace Cot.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ValidateCourseCode(string code)
         {
-            var course = await unitOfWork.Courses.FindAsync(e => e.Code == code);
-
-            if (course == default)
+            if (await unitOfWork.Courses.IsExistAsync(e => e.Code == code))
             {
-                return Json(true);
+                return Json($"Course Code '{code}' already exists.");
             }
-            return Json($"Course Code '{code}' already exists.");
+            return Json(true);
         }
 
         [HttpGet]
@@ -258,19 +251,11 @@ namespace Cot.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ValidateCourseTitle(string title)
         {
-            var course = await unitOfWork.Courses.FindAsync(e => e.Title == title);
-
-            if (course == default)
+            if (await unitOfWork.Courses.IsExistAsync(e => e.Title == title))
             {
-                return Json(true);
+                return Json($"Course Title '{title}' already exists.");
             }
-            return Json($"Course Title '{title}' already exists.");
-        }
-
-        private async Task<bool> CourseExistsAsync(Guid id)
-        {
-            //return context.Courses.Any(e => e.Code == id);
-            return await unitOfWork.Courses.FindAsync(e => e.Id == id) != null;
+            return Json(true);
         }
 
         #endregion

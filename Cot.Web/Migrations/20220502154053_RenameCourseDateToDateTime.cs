@@ -7,7 +7,7 @@ namespace Cot.Web.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
- migrationBuilder.AddColumn<DateTime>(
+            migrationBuilder.AddColumn<DateTime>(
                 name: "AddedDateTime",
                 table: "Courses",
                 nullable: true);
@@ -27,7 +27,7 @@ namespace Cot.Web.Migrations
                 name: "ModifiedDate",
                 table: "Courses");
 
-           
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

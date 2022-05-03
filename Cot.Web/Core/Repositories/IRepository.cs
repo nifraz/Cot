@@ -10,6 +10,7 @@ namespace Cot.Web.Core.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class, IEntity, new()
     {
+        Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> predicate);
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<IPagedList<TEntity>> GetAllPagedListAsync(int? pageNumber, int? pageSize);
         Task<TEntity> GetAsync(params object[] keyValues);

@@ -27,6 +27,11 @@ namespace Cot.Web.Persistence.Repositories
                 .AsNoTracking();
         }
 
+        public async Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await FindAsync(predicate) != default;
+        }
+
         public async Task<TEntity> GetAsync(params object[] keyValues)
         {
             return await entities

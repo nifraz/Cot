@@ -15,6 +15,11 @@ namespace Cot.Web.Persistence.Repositories
 
         }
 
+        public async Task<bool> IsExistAsync(Course entity)
+        {
+            return await FindAsync(e => e.Id == entity.Id || e.Code == entity.Code || e.Title == entity.Title) != default;
+        }
+
         public Task<IPagedList<Course>> GetPageAsync(int pageNumber, int pageSize, string sortField, string sortValue, string searchField, string searchText)
         {
             var query = GetQueryable();

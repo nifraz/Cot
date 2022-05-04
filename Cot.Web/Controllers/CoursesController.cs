@@ -191,7 +191,6 @@ namespace Cot.Web.Controllers
                     course.Title = model.Title;
                     course.Level = model.Level;
                     course.Type = model.Type;
-                    //existingItem.AddedDate = existingItem.AddedDate;
                     course.ModifiedDateTime = DateTime.Now;
 
                     unitOfWork.Courses.Update(course);

@@ -18,32 +18,32 @@
     <!--Header-->
     <header class="sticky-top">
         <!--Navigation-->
-        <nav class="m-0 p-0 px-2 py-1 d-flex align-items-center justify-content-between bg-11 navbar navbar-expand-sm navbar-dark shadow">
-            <!--Brand-->
-            <a title="Home" class="m-0 p-0 navbar-brand d-flex justify-content-between align-items-center gap-1" asp-area="" asp-controller="Home" asp-action="Index">
-                <img src="~/images/cot-logo-white.svg" alt="COT Logo" style="height: 32px; display: block; vertical-align: middle;" />
-                <span class="brand-name text-white" style="font: 16px Arial, sans-serif; line-height: 19px; letter-spacing: 1px; display: block; vertical-align: middle; ">COLLEGE OF<br />TECHNOLOGY</span>
-            </a>
-            <!--Navbar Toggler-->
-            <button class="px-3 py-2 navbar-toggler collapsed rounded-pill border-0" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fs-6 navbar-toggler-icon"></i>
-            </button>
-            <!--Navbar-->
-            <div class="navbar-collapse collapse">
-                <ul class="ms-auto navbar-nav">
-                    <li class="mt-1 m-sm-0 nav-item">
-                        <a title="Home" class="px-3 py-1 nav-link text-light rounded-pill d-flex justify-content-between @(controller == "Home" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index"><span>HOME</span><i class="bi bi-house d-sm-none me-1"></i></a>
-                    </li>
-                    <li class="mt-1 m-sm-0 nav-item">
-                        <a title="Courses" class="px-3 py-1 nav-link text-light rounded-pill d-flex justify-content-between @(controller == "Courses" ? "active" : "")" asp-area="" asp-controller="Courses" asp-action="Index"><span>COURSES</span><i class="bi bi-book d-sm-none me-1"></i></a>
-                    </li>
-                    <li class="mt-1 m-sm-0 nav-item">
-                        <a title="About" class="px-3 py-1 nav-link text-light rounded-pill d-flex justify-content-between @(controller == "Home" && action == "About" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="About"><span>ABOUT</span><i class="bi bi-info-circle d-sm-none me-1"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+            <nav class="m-0 p-0 px-2 py-1 d-flex align-items-center justify-content-between bg-10 navbar navbar-expand-sm navbar-dark shadow">
+                <!--Brand-->
+                <a title="Home" class="m-0 p-0 navbar-brand d-flex justify-content-between align-items-center gap-1" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/cot-logo-white.svg" alt="COT Logo" style="height: 32px; display: block; vertical-align: middle;" />
+                    <span class="brand-name text-white" style="font: 16px Arial, sans-serif; line-height: 19px; letter-spacing: 1px; display: block; vertical-align: middle; ">COLLEGE OF<br />TECHNOLOGY</span>
+                </a>
+                <!--Navbar Toggler-->
+                <button class="px-3 py-1 navbar-toggler collapsed rounded-pill border-0" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fs-6 navbar-toggler-icon"></i>
+                </button>
+                <!--Navbar-->
+                <div class="navbar-collapse collapse">
+                    <ul class="ms-auto navbar-nav">
+                        <li class="mt-1 m-sm-0 nav-item">
+                            <a title="Home" class="px-3 py-1 nav-link text-light d-flex rounded-pill justify-content-between @(controller == "Home" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index"><span>HOME</span><i class="bi bi-house d-sm-none me-1"></i></a>
+                        </li>
+                        <li class="mt-1 m-sm-0 nav-item">
+                            <a title="Courses" class="px-3 py-1 nav-link text-light d-flex rounded-pill justify-content-between @(controller == "Courses" ? "active" : "")" asp-area="" asp-controller="Courses" asp-action="Index"><span>COURSES</span><i class="bi bi-book d-sm-none me-1"></i></a>
+                        </li>
+                        <li class="mt-1 m-sm-0 nav-item">
+                            <a title="About" class="px-3 py-1 nav-link text-light d-flex rounded-pill justify-content-between @(controller == "Home" && action == "About" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="About"><span>ABOUT</span><i class="bi bi-info-circle d-sm-none me-1"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
         <!--Strip-->
         <div class="px-2 d-flex bg-1 small justify-content-between border-bottom">
@@ -54,20 +54,22 @@
                 Retrieved: @DateTime.Now.ToString(StringFormat.DateTime)
             </div>
         </div>
+
+        <!--Alert-->
+        @if (ViewData["Alert"] != null)
+        {
+
+        }
+        <div class="m-0 alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </header>
 
     <!--View Header-->
     @RenderSection("Header", required: true)
 
-    <!--Alert-->
-    @if (ViewData["Alert"] != null)
-    {
-        
-    }
-<div class="m-0 alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+    
     <!--Main-->
     <main>
         <div class="p-1 pt-0 pb-2 container shadow">@RenderBody()</div>

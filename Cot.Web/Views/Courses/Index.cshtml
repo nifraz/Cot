@@ -176,6 +176,14 @@
                     </a>
                 </th>
                 <th>
+                    <div class="d-flex justify-content-end gap-1">
+                        <a class="btn btn-sm btn-outline-success rounded-pill"
+                           asp-route-SortField="@Model.SortField"
+                           asp-route-SortOrder="@Model.SortOrder"
+                           asp-route-FilterText="@Model.SearchText" title="Download">
+                            <i class="bi bi-download"></i>&nbsp;DOWNLOAD
+                        </a>
+                    </div>
                 </th>
             </tr>
         </thead>
@@ -192,9 +200,9 @@
                     <td>@item.ModifiedDateTime?.ToString(StringFormat.DateTime)</td>
                     <td>
                         <div class="d-flex justify-content-end gap-1">
-                            <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-info-circle"></i></a>
-                            <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi bi-pencil-square"></i></a>
-                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi bi-trash3"></i></a>
+                            <a class="btn btn-sm btn-outline-info rounded-circle" asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-info-circle"></i></a>
+                            <a class="btn btn-sm btn-outline-secondary rounded-circle" asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                            <a class="btn btn-sm btn-outline-danger rounded-circle" asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi bi-trash3"></i></a>
                         </div>
                     </td>
                 </tr>

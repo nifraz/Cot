@@ -31,16 +31,10 @@
 
 <div class="m-0 p-0 g-2 row">
     <div class="col-12">
-        <h4>Course</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Title)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Title)
-            </dd>
-        </dl>
+        @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="col-12">
+        @Html.DisplayFor(model => model.Title)
     </div>
 
     <form asp-action="Delete">

@@ -36,19 +36,25 @@ body {
 }
 
 .nav-link {
+    /*line-height: 18px;*/
     font-family: 'Roboto', sans-serif;
+    /*height: 32px;*/
 }
 
-.nav-link:hover {
-    text-decoration: underline;
+.nav-link, .btn, .page-link {
+    transition: all 0.5s ease 0s;
 }
 
 .nav-link.active {
     background-color: var(--color-9);
 }
 
+.nav-link:hover {
+    background-color: var(--color-8);
+}
+
 .navbar-toggler.collapsed {
-    background-color: var(--color-11);
+    background-color: var(--color-10);
 }
 
 .navbar-toggler:not(.collapsed) {

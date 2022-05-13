@@ -42,15 +42,15 @@ body {
 }
 
 .nav-link, .btn, .page-link {
-    transition: all 0.5s ease 0s;
+    transition: all 0.25s ease 0s;
 }
 
 .nav-link.active {
     background-color: var(--color-9);
 }
 
-.nav-link:hover {
-    background-color: var(--color-8);
+.nav-link:hover span {
+    text-decoration: underline;
 }
 
 .navbar-toggler.collapsed {

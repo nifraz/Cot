@@ -34,7 +34,7 @@
         <nav class="m-0 p-0 px-2 py-1 d-flex align-items-center justify-content-between bg-10 navbar navbar-expand-sm navbar-dark shadow">
             <!--Brand-->
             <a title="Home" class="m-0 p-0 navbar-brand d-flex justify-content-between align-items-center gap-1" asp-area="" asp-controller="Home" asp-action="Index">
-                <img src="~/images/cot-logo-white.svg" alt="COT Logo" style="height: 32px; display: block; vertical-align: middle;" />
+                <img class="my-1" src="~/images/cot-logo-white.svg" alt="COT Logo" style="height: 32px; display: block; vertical-align: middle;" />
                 <span class="brand-name text-white" style="font: 16px Arial, sans-serif; line-height: 19px; letter-spacing: 1px; display: block; vertical-align: middle; ">COLLEGE OF<br />TECHNOLOGY</span>
             </a>
             <!--Navbar Toggler-->
@@ -46,13 +46,13 @@
             <div class="navbar-collapse collapse">
                 <ul class="ms-auto navbar-nav">
                     <li class="mb-1 m-sm-0 nav-item">
-                        <a title="Home" class="px-3 py-1 nav-link text-light d-flex rounded-pill justify-content-between @(controller == "Home" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index"><span>HOME</span><i class="bi bi-house d-sm-none me-1"></i></a>
+                        <a title="Home" class="px-3 py-1 nav-link text-4 d-flex rounded-pill justify-content-between @(controller == "Home" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index"><span>HOME</span><i class="bi bi-house d-sm-none me-1"></i></a>
                     </li>
                     <li class="mb-1 m-sm-0 nav-item">
-                        <a title="Courses" class="px-3 py-1 nav-link text-light d-flex rounded-pill justify-content-between @(controller == "Courses" ? "active" : "")" asp-area="" asp-controller="Courses" asp-action="Index"><span>COURSES</span><i class="bi bi-book d-sm-none me-1"></i></a>
+                        <a title="Courses" class="px-3 py-1 nav-link text-4 d-flex rounded-pill justify-content-between @(controller == "Courses" ? "active" : "")" asp-area="" asp-controller="Courses" asp-action="Index"><span>COURSES</span><i class="bi bi-book d-sm-none me-1"></i></a>
                     </li>
                     <li class="mb-1 m-sm-0 nav-item">
-                        <a title="About" class="px-3 py-1 nav-link text-light d-flex rounded-pill justify-content-between @(controller == "Home" && action == "About" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="About"><span>ABOUT</span><i class="bi bi-info-circle d-sm-none me-1"></i></a>
+                        <a title="About" class="px-3 py-1 nav-link text-4 d-flex rounded-pill justify-content-between @(controller == "Home" && action == "About" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="About"><span>ABOUT</span><i class="bi bi-info-circle d-sm-none me-1"></i></a>
                     </li>
                 </ul>
             </div>
@@ -64,15 +64,9 @@
             <breadcrumb></breadcrumb>
             <!--Info-->
             <div>
-                Retrieved: @DateTime.Now.ToString(StringFormat.DateTime)
+                Page retrieved on @DateTime.Now.ToString(StringFormat.DateTime)
             </div>
         </div>
-
-        <!--Alert-->
-        @if (ViewData["Alert"] != null)
-        {
-            Html.Raw(ViewData["Alert"]);
-        }
     </header>
 
     <!--View Header-->
@@ -85,7 +79,7 @@
     </main>
 
     <!--Footer-->
-    <footer class="py-2 mt-auto bg-11" style="height: auto; box-shadow: rgba(0,0,0, 3) 20px">
+    <footer class="py-2 mt-auto bg-11">
         <div class="container-fluid fs-6 fw-light text-muted">
             <div class="row">
                 <div class="col d-flex justify-content-between small">

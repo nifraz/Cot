@@ -43,7 +43,7 @@ namespace Cot.Web
                 options.OlClasses = "m-0 breadcrumb";
                 options.LiClasses = "breadcrumb-item";
                 options.ActiveLiClasses = "breadcrumb-item active";
-                options.SeparatorElement = "&nbsp;<li class=\"bi bi-arrow-right\"></li>&nbsp;";
+                options.SeparatorElement = "<li class=\"separator\">&nbsp;/&nbsp;</li>";
             });
 
             services.AddNotyf(config =>

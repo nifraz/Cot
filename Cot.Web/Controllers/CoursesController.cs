@@ -90,6 +90,7 @@ namespace Cot.Web.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Breadcrumb("Create", FromAction = "Index")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CourseCreateModel model)
         {
@@ -157,6 +158,7 @@ namespace Cot.Web.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Breadcrumb("Edit", FromAction = "Index")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, CourseEditModel model)
         {
@@ -241,6 +243,7 @@ namespace Cot.Web.Controllers
 
         // POST: Courses/Delete/abcd-1234
         [HttpPost, ActionName("Delete")]
+        [Breadcrumb("Delete", FromAction = "Index")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {

@@ -47,10 +47,6 @@ body {
     background-color: var(--color-9);
 }
 
-.nav-link:hover span {
-    color: white;
-}
-
 .navbar-toggler.collapsed {
     background-color: var(--color-10);
 }

@@ -88,9 +88,11 @@
     </div>
 
     <!--View Header-->
-    <!--Container-->
-    <div class="p-1 pt-0 p-sm-2 pt-sm-0 container-fluid border-bottom" style="background: url('@Url.Content("~/images/circuit-board.svg")');">
-        @RenderSection("Header", required: true)
+    <div style="background: url('@Url.Content("~/images/circuit-board.svg")');">
+        <!--Container-->
+        <div class="p-1 pt-0 pb-2 p-sm-2 pt-sm-0 pb-sm-2 container-fluid border-bottom">
+            @RenderSection("Header", required: true)
+        </div>
     </div>
 
     <!--Main-->

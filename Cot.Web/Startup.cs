@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SmartBreadcrumbs.Extensions;
+using AspNetCoreHero.ToastNotification;
 
 namespace Cot.Web
 {
@@ -33,7 +34,6 @@ namespace Cot.Web
             services.AddDbContextPool<CotDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("CotDb")));
             services.AddControllersWithViews();
 
-            //services.AddScoped<IRepository<Course>, Repository<Course>>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             
             services.AddBreadcrumbs(GetType().Assembly, options =>
@@ -43,7 +43,14 @@ namespace Cot.Web
                 options.OlClasses = "m-0 breadcrumb";
                 options.LiClasses = "breadcrumb-item";
                 options.ActiveLiClasses = "breadcrumb-item active";
-                options.SeparatorElement = "<li class=\"separator\">&nbsp;/&nbsp;</li>";
+                options.SeparatorElement = "&nbsp;<li class=\"bi bi-arrow-right\"></li>&nbsp;";
+            });
+
+            services.AddNotyf(config =>
+            {
+                config.DurationInSeconds = 5;
+                config.IsDismissable = true;
+                config.Position = NotyfPosition.BottomRight;
             });
         }
 

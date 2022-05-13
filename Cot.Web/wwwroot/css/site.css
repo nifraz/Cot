@@ -36,9 +36,7 @@ body {
 }
 
 .nav-link {
-    /*line-height: 18px;*/
     font-family: 'Roboto', sans-serif;
-    /*height: 32px;*/
 }
 
 .nav-link, .btn, .page-link {
@@ -50,7 +48,7 @@ body {
 }
 
 .nav-link:hover span {
-    text-decoration: underline;
+    color: white;
 }
 
 .navbar-toggler.collapsed {

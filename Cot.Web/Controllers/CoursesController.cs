@@ -13,16 +13,19 @@ using Cot.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using SmartBreadcrumbs.Attributes;
 using SmartBreadcrumbs.Nodes;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace Cot.Web.Controllers
 {
     public class CoursesController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly INotyfService notifyService;
 
-        public CoursesController(IUnitOfWork unitOfWork)
+        public CoursesController(IUnitOfWork unitOfWork, INotyfService notifyService)
         {
             this.unitOfWork = unitOfWork;
+            this.notifyService = notifyService;
         }
 
         // GET: List
@@ -51,7 +54,7 @@ namespace Cot.Web.Controllers
             return View(model);
         }
 
-        // GET: Courses/Details/5
+        // GET: Courses/Details/abcd-1234
         [HttpGet]
         [Breadcrumb("Details", FromAction = "Index")]
         public async Task<IActionResult> Details(Guid? id)
@@ -114,12 +117,14 @@ namespace Cot.Web.Controllers
 
                 unitOfWork.Courses.Add(course);
                 await unitOfWork.CompleteAsync();
+                notifyService.Success("Course saved!");
                 return RedirectToAction(nameof(Index));
             }
+            notifyService.Error("Course cannot be saved!");
             return View(model);
         }
 
-        // GET: Courses/Edit/5
+        // GET: Courses/Edit/abcd-1234
         [HttpGet]
         [Breadcrumb("Edit", FromAction = "Index")]
         public async Task<IActionResult> Edit(Guid? id)
@@ -148,7 +153,7 @@ namespace Cot.Web.Controllers
             return View(model);
         }
 
-        // POST: Courses/Edit/5
+        // POST: Courses/Edit/abcd-1234
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -160,7 +165,7 @@ namespace Cot.Web.Controllers
                 return NotFound();
             }
 
-            //check if row exists
+            //check if course exists
             var course = await unitOfWork.Courses
                 .GetAsync(id);
             if (course == null)
@@ -207,12 +212,14 @@ namespace Cot.Web.Controllers
                         throw;
                     }
                 }
+                notifyService.Success("Course updated!");
                 return RedirectToAction(nameof(Index));
             }
+            notifyService.Error("Course cannot be updated!");
             return View(model);
         }
 
-        // GET: Courses/Delete/5
+        // GET: Courses/Delete/abcd-1234
         [HttpGet]
         [Breadcrumb("Delete", FromAction = "Index")]
         public async Task<IActionResult> Delete(Guid? id)
@@ -232,14 +239,23 @@ namespace Cot.Web.Controllers
             return View(course);
         }
 
-        // POST: Courses/Delete/5
+        // POST: Courses/Delete/abcd-1234
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var course = await unitOfWork.Courses.GetAsync(id);
+            //check if course exists
+            var course = await unitOfWork.Courses
+                .GetAsync(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
             unitOfWork.Courses.Remove(course);
             await unitOfWork.CompleteAsync();
+
+            notifyService.Success("Course deleted!");
             return RedirectToAction(nameof(Index));
         }
 

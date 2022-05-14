@@ -94,7 +94,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Code"
                        asp-route-SortOrder="@(Model.SortField == "Code" ? newSortOrder : Model.SortOrder)"
-                       asp-route-FilterText="@Model.SearchText">
+                       asp-route-SearchText="@Model.SearchText">
                         @if (Model.SortField == "Code")
                         {
                             <i class="bi @sortIconClass"></i>
@@ -108,7 +108,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Title"
                        asp-route-SortOrder="@(Model.SortField == "Title" ? newSortOrder : Model.SortOrder)"
-                       asp-route-FilterText="@Model.SearchText">
+                       asp-route-SearchText="@Model.SearchText">
                         @if (Model.SortField == "Title")
                         {
                             <i class="bi @sortIconClass"></i>
@@ -122,7 +122,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Level"
                        asp-route-SortOrder="@(Model.SortField == "Level" ? newSortOrder : Model.SortOrder)"
-                       asp-route-FilterText="@Model.SearchText">
+                       asp-route-SearchText="@Model.SearchText">
                         @if (Model.SortField == "Level")
                         {
                             <i class="bi @sortIconClass"></i>
@@ -136,7 +136,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Type"
                        asp-route-SortOrder="@(Model.SortField == "Type" ? newSortOrder : Model.SortOrder)"
-                       asp-route-FilterText="@Model.SearchText">
+                       asp-route-SearchText="@Model.SearchText">
                         @if (Model.SortField == "Type")
                         {
                             <i class="bi @sortIconClass"></i>
@@ -150,7 +150,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="AddedDateTime"
                        asp-route-SortOrder="@(Model.SortField == "AddedDateTime" ? newSortOrder : Model.SortOrder)"
-                       asp-route-FilterText="@Model.SearchText">
+                       asp-route-SearchText="@Model.SearchText">
                         @if (Model.SortField == "AddedDateTime")
                         {
                             <i class="bi @sortIconClass"></i>
@@ -164,7 +164,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="ModifiedDateTime"
                        asp-route-SortOrder="@(Model.SortField == "ModifiedDateTime" ? newSortOrder : Model.SortOrder)"
-                       asp-route-FilterText="@Model.SearchText">
+                       asp-route-SearchText="@Model.SearchText">
                         @if (Model.SortField == "ModifiedDateTime")
                         {
                             <i class="bi @sortIconClass"></i>
@@ -178,7 +178,7 @@
                            asp-action="Download"
                            asp-route-SortField="@Model.SortField"
                            asp-route-SortOrder="@Model.SortOrder"
-                           asp-route-FilterText="@Model.SearchText" title="Download">
+                           asp-route-SearchText="@Model.SearchText" title="Download">
                             <i class="bi bi-download"></i>&nbsp;DOWNLOAD
                         </a>
                     </div>
@@ -189,7 +189,7 @@
             @foreach (var item in Model.Items)
             {
                 <tr class="align-middle">
-                    @*@Html.Raw(Regex.Replace(item.Code, Model.FilterText, "<mark>" + Model.FilterText + "</mark>", RegexOptions.IgnoreCase))*@
+                    @*@Html.Raw(Regex.Replace(item.Code, Model.SearchText, "<mark>" + Model.SearchText + "</mark>", RegexOptions.IgnoreCase))*@
                     <td>@item.Code</td>
                     <td>@item.Title</td>
                     <td>@item.Level</td>

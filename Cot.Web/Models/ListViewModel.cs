@@ -19,7 +19,7 @@ namespace Cot.Web.Models
         public string SortField { get; set; }
         public string SortOrder { get; set; }
         public IList<SelectListItem> SearchFields { get; set; }
-        public SelectListItem SearchField { get; set; }
+        public string SearchField { get; set; }
         public string SearchText { get; set; }
         public IPagedList<TEntity> Items { get; set; }
     }

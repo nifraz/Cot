@@ -16,6 +16,7 @@ using SmartBreadcrumbs.Nodes;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using ClosedXML.Excel;
 using ClosedXML.Extensions;
+using Cot.Web.Extensions;
 
 namespace Cot.Web.Controllers
 {
@@ -30,7 +31,7 @@ namespace Cot.Web.Controllers
             this.notifyService = notifyService;
         }
 
-        // GET: List
+        // GET: List?...
         [HttpGet]
         [Breadcrumb("Courses")]
         public async Task<IActionResult> Index(ListViewModel<Course> model)
@@ -47,7 +48,7 @@ namespace Cot.Web.Controllers
             model.SortField ??= "Code";
             model.SortOrder ??= "Ascending";
 
-            model.Items = await unitOfWork.Courses.GetPageAsync(model.PageNumber.Value, model.PageSize.Value, model.SortField, model.SortOrder, model.SearchField?.Value, model.SearchText);
+            model.Items = await unitOfWork.Courses.GetPageAsync(model.PageNumber.Value, model.PageSize.Value, model.SortField, model.SortOrder, model.SearchField, model.SearchText);
             model.PagesCount = model.Items.PageCount;
             model.FirstItemOnPage = model.Items.FirstItemOnPage;
             model.LastItemOnPage = model.Items.LastItemOnPage;
@@ -262,6 +263,20 @@ namespace Cot.Web.Controllers
 
             notifyService.Success("Course deleted!");
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Download?...
+        [HttpGet]
+        [Breadcrumb("Download", FromAction = "Index")]
+        public async Task<IActionResult> Download(ListViewModel<Course> model)
+        {
+            var items = await unitOfWork.Courses.GetAllAsync(model.SortField, model.SortOrder, model.SearchField, model.SearchText);
+
+            using (var wb = new XLWorkbook())
+            {
+                var ws = wb.AddWorksheet(items.ToDataTable(), "List");
+                return wb.Deliver($"Courses_List_({DateTime.Now:yyyy_MM_dd_HH_mm_ss})_College_of_Technology.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            }
         }
 
         #region Validation

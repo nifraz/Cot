@@ -12,12 +12,10 @@ namespace Cot.Web.Persistence.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
     {
-        //private readonly CotDbContext context;
         private readonly DbSet<TEntity> entities;
 
-        public Repository(CotDbContext context)
+        protected Repository(CotDbContext context)
         {
-            //this.context = context;
             entities = context.Set<TEntity>();
         }
 

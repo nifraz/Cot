@@ -20,7 +20,19 @@ namespace Cot.Web.Persistence.Repositories
             return await FindAsync(e => e.Id == entity.Id || e.Code == entity.Code || e.Title == entity.Title) != default;
         }
 
-        public Task<IPagedList<Course>> GetPageAsync(int pageNumber, int pageSize, string sortField, string sortValue, string searchField, string searchText)
+        public async Task<IEnumerable<Course>> GetAllAsync(string sortField, string sortOrder, string searchField, string searchText)
+        {
+            return await GetQueryable(sortField, sortOrder, searchField, searchText)
+                .ToListAsync();
+        }
+
+        public async Task<IPagedList<Course>> GetPageAsync(int pageNumber, int pageSize, string sortField, string sortOrder, string searchField, string searchText)
+        {
+            return await GetQueryable(sortField, sortOrder, searchField, searchText)
+                .ToPagedListAsync(pageNumber, pageSize);
+        }
+
+        public IQueryable<Course> GetQueryable(string sortField, string sortOrder, string searchField, string searchText)
         {
             var query = GetQueryable();
 
@@ -34,7 +46,7 @@ namespace Cot.Web.Persistence.Repositories
                 };
             }
 
-            if (sortValue == "Descending")
+            if (sortOrder == "Descending")
             {
                 query = sortField switch
                 {
@@ -58,9 +70,7 @@ namespace Cot.Web.Persistence.Repositories
                     _ => query.OrderBy(e => e.Code),
                 };
             }
-
-            return query.ToPagedListAsync(pageNumber, pageSize);
+            return query;
         }
-
     }
 }

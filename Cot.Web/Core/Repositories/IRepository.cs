@@ -11,12 +11,16 @@ namespace Cot.Web.Core.Repositories
     public interface IRepository<TEntity> where TEntity : class, IEntity, new()
     {
         Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> predicate);
-        Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<IPagedList<TEntity>> GetAllPagedListAsync(int? pageNumber, int? pageSize);
-        Task<TEntity> GetAsync(params object[] keyValues);
+        Task<bool> IsExistAsync(TEntity entity);
 
-        Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity> GetAsync(params object[] keyValues);
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate);
+
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<IEnumerable<TEntity>> GetAllAsync(string sortField, string sortOrder, string searchField, string searchText);
+        Task<IPagedList<TEntity>> GetPageAsync(int pageNumber, int pageSize);
+        Task<IPagedList<TEntity>> GetPageAsync(int pageNumber, int pageSize, string sortField, string sortOrder, string searchField, string searchText);
+        Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate);
 
         void Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entities);

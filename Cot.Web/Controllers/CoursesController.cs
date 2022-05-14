@@ -116,6 +116,7 @@ namespace Cot.Web.Controllers
                     Title = model.Title,
                     Level = model.Level,
                     Type = model.Type,
+                    Notes = model.Notes,
                     AddedDateTime = DateTime.Now
                 };
 
@@ -201,6 +202,7 @@ namespace Cot.Web.Controllers
                     course.Title = model.Title;
                     course.Level = model.Level;
                     course.Type = model.Type;
+                    course.Notes = model.Notes;
                     course.ModifiedDateTime = DateTime.Now;
 
                     unitOfWork.Courses.Update(course);

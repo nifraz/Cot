@@ -15,24 +15,24 @@ namespace Cot.Web.Persistence.Repositories
 
         }
 
-        public async Task<bool> IsExistAsync(Course entity)
+        public override async Task<bool> IsExistAsync(Course entity)
         {
             return await FindAsync(e => e.Id == entity.Id || e.Code == entity.Code || e.Title == entity.Title) != default;
         }
 
-        public async Task<IEnumerable<Course>> GetAllAsync(string sortField, string sortOrder, string searchField, string searchText)
+        public override async Task<IEnumerable<Course>> GetAllAsync(string sortField, string sortOrder, string searchField, string searchText)
         {
             return await GetQueryable(sortField, sortOrder, searchField, searchText)
                 .ToListAsync();
         }
 
-        public async Task<IPagedList<Course>> GetPageAsync(int pageNumber, int pageSize, string sortField, string sortOrder, string searchField, string searchText)
+        public override async Task<IPagedList<Course>> GetPageAsync(int pageNumber, int pageSize, string sortField, string sortOrder, string searchField, string searchText)
         {
             return await GetQueryable(sortField, sortOrder, searchField, searchText)
                 .ToPagedListAsync(pageNumber, pageSize);
         }
 
-        public IQueryable<Course> GetQueryable(string sortField, string sortOrder, string searchField, string searchText)
+        protected override IQueryable<Course> GetQueryable(string sortField, string sortOrder, string searchField, string searchText)
         {
             var query = GetQueryable();
 

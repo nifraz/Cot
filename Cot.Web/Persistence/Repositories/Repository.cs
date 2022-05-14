@@ -10,7 +10,7 @@ using X.PagedList;
 
 namespace Cot.Web.Persistence.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
+    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
     {
         private readonly DbSet<TEntity> entities;
 
@@ -19,16 +19,13 @@ namespace Cot.Web.Persistence.Repositories
             entities = context.Set<TEntity>();
         }
 
-        protected IQueryable<TEntity> GetQueryable()
-        {
-            return entities
-                .AsNoTracking();
-        }
-
         public async Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> predicate)
         {
             return await FindAsync(predicate) != default;
         }
+
+        public abstract Task<bool> IsExistAsync(TEntity entity);
+
 
         public async Task<TEntity> GetAsync(params object[] keyValues)
         {
@@ -37,6 +34,14 @@ namespace Cot.Web.Persistence.Repositories
                 .AsTask();
         }
 
+        public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await entities
+                .Where(predicate)
+                .FirstOrDefaultAsync();
+        }
+
+
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             return await entities
@@ -44,19 +49,16 @@ namespace Cot.Web.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IPagedList<TEntity>> GetAllPagedListAsync(int? pageNumber, int? pageSize)
+        public abstract Task<IEnumerable<TEntity>> GetAllAsync(string sortField, string sortOrder, string searchField, string searchText);
+
+        public async Task<IPagedList<TEntity>> GetPageAsync(int pageNumber, int pageSize)
         {
             return await entities
                 .AsNoTracking()
-                .ToPagedListAsync(pageNumber ?? 1, pageSize ?? 10);
+                .ToPagedListAsync(pageNumber, pageSize);
         }
 
-        public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            return await entities
-                .Where(predicate)
-                .FirstOrDefaultAsync();
-        }
+        public abstract Task<IPagedList<TEntity>> GetPageAsync(int pageNumber, int pageSize, string sortField, string sortOrder, string searchField, string searchText);
 
         public async Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate)
         {
@@ -80,8 +82,6 @@ namespace Cot.Web.Persistence.Repositories
         public void Update(TEntity entity)
         {
             entities.Update(entity);
-            //entitySet.Attach(entity);
-            //context.Entry(entity).State = EntityState.Modified;
         }
 
         public void Remove(TEntity entity)
@@ -95,14 +95,12 @@ namespace Cot.Web.Persistence.Repositories
         }
 
 
-        //public Task<int> CountAll()
-        //{
-        //    return entitySet.CountAsync();
-        //}
+        protected IQueryable<TEntity> GetQueryable()
+        {
+            return entities
+                .AsNoTracking();
+        }
 
-        //public Task<int> CountWhere(Expression<Func<TEntity, bool>> predicate)
-        //{
-        //    return entitySet.CountAsync(predicate);
-        //}
+        protected abstract IQueryable<TEntity> GetQueryable(string sortField, string sortValue, string searchField, string searchText);
     }
 }

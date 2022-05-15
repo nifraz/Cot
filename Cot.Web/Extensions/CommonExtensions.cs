@@ -9,6 +9,11 @@ namespace Cot.Web.Extensions
 {
     public static class CommonExtensions
     {
+        public static string ToCleanString(this DateTime dateTime)
+        {
+            return dateTime.ToString("yyyy/MM/dd | hh:mm:ss tt");
+        }
+
         public static DataTable ToDataTable<T>(this IEnumerable<T> items)
         {
             var dataTable = new DataTable(typeof(T).Name);

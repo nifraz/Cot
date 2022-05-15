@@ -209,8 +209,8 @@
                     <td>@item.Title</td>
                     <td>@item.Level</td>
                     <td>@item.Type</td>
-                    <td>@item.AddedDateTime?.ToString(StringFormat.DateTime)</td>
-                    <td>@item.ModifiedDateTime?.ToString(StringFormat.DateTime)</td>
+                    <td>@item.AddedDateTime?.ToCleanString()</td>
+                    <td>@item.ModifiedDateTime?.ToCleanString()</td>
                     <td>
                         <div class="d-flex justify-content-end gap-1">
                             <a class="btn btn-sm btn-outline-info rounded-circle" asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-info-circle"></i></a>

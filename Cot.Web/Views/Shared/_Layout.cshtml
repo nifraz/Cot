@@ -93,7 +93,7 @@
                     <breadcrumb></breadcrumb>
                     <!--Info-->
                     <div>
-                        Page retrieved on @DateTime.Now.ToString(StringFormat.DateTime)
+                        Page retrieved on @DateTime.Now.ToCleanString()
                     </div>
                 </div>
             </div>
@@ -145,7 +145,7 @@
                 asp-suppress-fallback-integrity="true"></script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await Component.InvokeAsync("Notyf")
+    @await Component.InvokeAsync("Notyf") <!--Uses Fontawesome-->
     @RenderSection("Scripts", required: false)
 </body>
 </html>

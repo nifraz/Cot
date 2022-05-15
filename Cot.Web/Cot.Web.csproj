@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Utilities\" />
     <Folder Include="wwwroot\images\logos\" />
   </ItemGroup>
 

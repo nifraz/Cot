@@ -1,8 +1,5 @@
-﻿using Cot.Web.Core.Domain;
-using System;
+﻿using Cot.Data.Core.Domain;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Cot.Web.Models
 {

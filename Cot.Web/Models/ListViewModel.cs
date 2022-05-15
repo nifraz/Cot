@@ -1,9 +1,6 @@
-﻿using Cot.Web.Core.Domain;
+﻿using Cot.Data.Core.Domain;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using X.PagedList;
 
 namespace Cot.Web.Models

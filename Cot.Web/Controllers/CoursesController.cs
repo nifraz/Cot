@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Cot.Web.Core.Domain;
-using Cot.Web.Persistence;
-using Cot.Web.Core;
-using X.PagedList;
-using Cot.Web.Models;
-using Microsoft.AspNetCore.Authorization;
-using SmartBreadcrumbs.Attributes;
-using SmartBreadcrumbs.Nodes;
-using AspNetCoreHero.ToastNotification.Abstractions;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using ClosedXML.Excel;
 using ClosedXML.Extensions;
+using Cot.Data.Core;
+using Cot.Data.Core.Domain;
 using Cot.Web.Extensions;
+using Cot.Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SmartBreadcrumbs.Attributes;
+using System;
+using System.Threading.Tasks;
 
 namespace Cot.Web.Controllers
 {

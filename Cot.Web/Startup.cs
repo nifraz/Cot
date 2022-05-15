@@ -1,22 +1,14 @@
-using Cot.Web.Core;
-using Cot.Web.Core.Domain;
-using Cot.Web.Core.Repositories;
-using Cot.Web.Persistence;
-using Cot.Web.Persistence.Repositories;
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
+using Cot.Data.Core;
+using Cot.Data.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using SmartBreadcrumbs.Extensions;
-using AspNetCoreHero.ToastNotification;
-using AspNetCoreHero.ToastNotification.Extensions;
 
 namespace Cot.Web
 {
@@ -36,7 +28,7 @@ namespace Cot.Web
             services.AddControllersWithViews();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            
+
             services.AddBreadcrumbs(GetType().Assembly, options =>
             {
                 options.TagName = "nav";

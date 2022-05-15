@@ -1,5 +1,3 @@
-using System;
-
 namespace Cot.Web.Models
 {
     public class ErrorViewModel

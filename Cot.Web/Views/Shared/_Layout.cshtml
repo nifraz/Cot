@@ -12,22 +12,31 @@
 
     <!--Stylesheets-->
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+        <!--Bootstrap CSS-->
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <!--Bootstrap Icons CSS-->
         <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
+        <!--Font Awesome CSS-->
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha256-YvdLHPgkqJ8DVUxjjnGVlMMJtNimJ6dYkowFFvp4kKs=" crossorigin="anonymous"
-              asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
+        <!--Bootstrap CSS CDN-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only"
               asp-fallback-test-property="position"
               asp-fallback-test-value="absolute"
               asp-suppress-fallback-integrity="true">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" integrity="sha256-rzXMaro05QBd53CZ36ctTBp3FdKN3Ow0P0gDHcjLCLw=" crossorigin="anonymous">
+        <!--Bootstrap Icons CSS CDN-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.min.css">
+        <!--Font Awesome CSS CDN-->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     </environment>
+    <!--Site CSS-->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
-<body class="d-flex flex-column bg-1 min-vh-100">
 
+<body class="d-flex flex-column bg-1 min-vh-100">
     <!--Header-->
     <header class="sticky-top bg-10">
         <!--Container-->
@@ -131,21 +140,26 @@
 
     <!--Scripts-->
     <environment include="Development">
-        <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
+        <!--Bootstrap JS-->
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <!--jQuery JS-->
         <script src="~/lib/jquery/dist/jquery.js"></script>
     </environment>
     <environment exclude="Development">
+        <!--Bootstrap JS CDN-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha256-9SEPo+fwJFpMUet/KACSwO+Z/dKMReF9q4zFhU/fT9M=" crossorigin="anonymous"
-                asp-fallback-src="~/lib/bootstrap/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
                 asp-fallback-test="window.bootstrap"
                 asp-suppress-fallback-integrity="true"></script>
+        <!--jQuery JS CDN-->
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
                 asp-fallback-test="window.jQuery"
                 asp-suppress-fallback-integrity="true"></script>
     </environment>
+    <!--Site JS-->
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await Component.InvokeAsync("Notyf") <!--Uses Fontawesome-->
+    @await Component.InvokeAsync("Notyf")
     @RenderSection("Scripts", required: false)
 </body>
 </html>

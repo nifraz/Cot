@@ -16,6 +16,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SmartBreadcrumbs.Extensions;
 using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 
 namespace Cot.Web
 {
@@ -73,6 +74,8 @@ namespace Cot.Web
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseNotyf();
 
             app.UseEndpoints(endpoints =>
             {

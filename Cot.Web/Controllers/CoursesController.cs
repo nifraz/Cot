@@ -290,6 +290,7 @@ namespace Cot.Web.Controllers
         {
             if (await unitOfWork.Courses.IsExistAsync(e => e.Code == code))
             {
+                notifyService.Warning("Please choose a different Code!");
                 return Json($"Course Code '{code}' already exists.");
             }
             return Json(true);
@@ -302,6 +303,7 @@ namespace Cot.Web.Controllers
         {
             if (await unitOfWork.Courses.IsExistAsync(e => e.Title == title))
             {
+                notifyService.Warning("Please choose a different Title!");
                 return Json($"Course Title '{title}' already exists.");
             }
             return Json(true);

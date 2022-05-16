@@ -12,7 +12,7 @@
             <!--Title-->
             <h3 class="m-0 p-0">Delete <strong>Course</strong></h3>
             <!--Buttons-->
-            <a class="ms-auto btn btn-secondary" title="Back to List" asp-action="Index"><i class="bi bi-arrow-left-circle"></i>&nbsp;LIST</a>
+            <a class="ms-auto btn btn-secondary" asp-action="Index"><i class="bi bi-arrow-left-circle"></i>&nbsp;LIST</a>
         </div>
     </div>
 }
@@ -37,9 +37,9 @@
     <form asp-action="Delete">
         <div class="gap-2 col-12 d-flex">
             <input type="hidden" asp-for="Code" />
-            <button class="btn btn-danger" type="submit" title="Delete"><i class="bi bi-trash3"></i>&nbsp;DELETE</button>
+            <button class="btn btn-danger" type="submit"><i class="bi bi-trash3"></i>&nbsp;DELETE</button>
             <!--Cancel-->
-            <a class="btn btn-secondary" title="Cancel" asp-action="Index"><i class="bi bi-x-circle"></i>&nbsp;CANCEL</a>
+            <a class="btn btn-secondary" asp-action="Index"><i class="bi bi-x-circle"></i>&nbsp;CANCEL</a>
         </div>
     </form>
 </div>

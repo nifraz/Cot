@@ -47,19 +47,32 @@
                             </div>
                         </div>
 
+                        <!--Sort Field-->
+                        <input type="hidden" asp-for="SortField" />
+                        <!--Sort Order-->
+                        <input type="hidden" asp-for="SortOrder" />
+
                         <div class="mt-2 gap-2 d-flex">
-                            <!--Search-->
+                            <!--Search Field-->
                             <div class="form-floating w-100">
-                                <input type="search" class="form-control" id="filter" name="SearchText" placeholder="Text" value="@Model.SearchText">
-                                <label for="filter"><i class="bi bi-search"></i>&nbsp;Search</label>
+                                <select class="form-select" asp-for="SearchField" asp-items="Model.SearchFields">
+                                    <option value="All">All</option>
+                                </select>
+                                <label asp-for="SearchField"><i class="bi bi-view-list"></i>&nbsp;Field</label>
                             </div>
-                            <input type="hidden" asp-for="SortField" />
-                            <input type="hidden" asp-for="SortOrder" />
+                        </div>
+
+                        <div class="mt-2 gap-2 d-flex">
+                            <!--Search Text-->
+                            <div class="form-floating w-100">
+                                <input type="search" class="form-control" id="SearchText" name="SearchText" placeholder="Text" value="@Model.SearchText">
+                                <label for="SearchText"><i class="bi bi-search"></i>&nbsp;Text</label>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <!--Go-->
-                        <button class="btn btn-primary" type="submit"><i class="bi bi-arrow-right-circle"></i>&nbsp;GO</button>
+                        <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i>&nbsp;SEARCH</button>
                     </div>
                 </form>
             </div>
@@ -109,6 +122,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Code"
                        asp-route-SortOrder="@(Model.SortField == "Code" ? newSortOrder : Model.SortOrder)"
+                       asp-route-SearchField="@Model.SearchField"
                        asp-route-SearchText="@Model.SearchText">
                         @if (Model.SortField == "Code")
                         {
@@ -123,6 +137,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Title"
                        asp-route-SortOrder="@(Model.SortField == "Title" ? newSortOrder : Model.SortOrder)"
+                       asp-route-SearchField="@Model.SearchField"
                        asp-route-SearchText="@Model.SearchText">
                         @if (Model.SortField == "Title")
                         {
@@ -137,6 +152,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Level"
                        asp-route-SortOrder="@(Model.SortField == "Level" ? newSortOrder : Model.SortOrder)"
+                       asp-route-SearchField="@Model.SearchField"
                        asp-route-SearchText="@Model.SearchText">
                         @if (Model.SortField == "Level")
                         {
@@ -151,6 +167,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="Type"
                        asp-route-SortOrder="@(Model.SortField == "Type" ? newSortOrder : Model.SortOrder)"
+                       asp-route-SearchField="@Model.SearchField"
                        asp-route-SearchText="@Model.SearchText">
                         @if (Model.SortField == "Type")
                         {
@@ -165,6 +182,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="AddedDateTime"
                        asp-route-SortOrder="@(Model.SortField == "AddedDateTime" ? newSortOrder : Model.SortOrder)"
+                       asp-route-SearchField="@Model.SearchField"
                        asp-route-SearchText="@Model.SearchText">
                         @if (Model.SortField == "AddedDateTime")
                         {
@@ -179,6 +197,7 @@
                        asp-route-PageSize="@Model.PageSize"
                        asp-route-SortField="ModifiedDateTime"
                        asp-route-SortOrder="@(Model.SortField == "ModifiedDateTime" ? newSortOrder : Model.SortOrder)"
+                       asp-route-SearchField="@Model.SearchField"
                        asp-route-SearchText="@Model.SearchText">
                         @if (Model.SortField == "ModifiedDateTime")
                         {
@@ -193,6 +212,7 @@
                            asp-action="Download"
                            asp-route-SortField="@Model.SortField"
                            asp-route-SortOrder="@Model.SortOrder"
+                           asp-route-SearchField="@Model.SearchField"
                            asp-route-SearchText="@Model.SearchText">
                             <i class="bi bi-download"></i>&nbsp;DOWNLOAD
                         </a>

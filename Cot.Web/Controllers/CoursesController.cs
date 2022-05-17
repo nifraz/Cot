@@ -7,9 +7,11 @@ using Cot.Web.Extensions;
 using Cot.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SmartBreadcrumbs.Attributes;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Cot.Web.Controllers
@@ -41,6 +43,12 @@ namespace Cot.Web.Controllers
 
             model.SortField ??= "Code";
             model.SortOrder ??= "Ascending";
+
+            model.SearchFields = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "Code", Text = "Code" },
+                new SelectListItem { Value = "Title", Text = "Title"  }
+            };
 
             model.Items = await unitOfWork.Courses.GetPageAsync(model.PageNumber.Value, model.PageSize.Value, model.SortField, model.SortOrder, model.SearchField, model.SearchText);
             model.PagesCount = model.Items.PageCount;

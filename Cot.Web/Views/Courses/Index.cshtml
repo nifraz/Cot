@@ -10,105 +10,75 @@
 @section Header {
     <!--Row-->
     <div class="m-0 p-0 g-2 row">
+        <!--Col-->
         <div class="gap-2 col-12 d-flex align-content-center">
             <!--Title-->
             <h3 class="m-0 p-0">Manage <strong>Courses</strong></h3>
             <!--Buttons-->
             <div class="ms-auto gap-2 d-flex">
-                <a class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#optionsModal">
-                    <i class="bi bi-sliders"></i>
-                </a>
+                <!--Search-->
                 <a class="btn btn-success" asp-action="Create"><i class="bi bi-plus-circle"></i>&nbsp;NEW</a>
-            </div>
-        </div>
-    </div>
-
-    <!--Modal-->
-    <div class="modal fade" id="optionsModal" tabindex="-1" aria-labelledby="optionsModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!--Form-->
-                <form method="get">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">List Options</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="gap-2 d-flex">
-                            <!--PageNumber-->
-                            <div class="form-floating w-50">
-                                <input class="form-control" placeholder="@Model.PageNumber" asp-for="PageNumber" min="1">
-                                <label asp-for="PageNumber"><i class="bi bi-arrow-left-right"></i>&nbsp;Page</label>
-                            </div>
-                            <!--PageSize-->
-                            <div class="form-floating w-50">
-                                <input class="form-control" placeholder="@Model.PageSize" asp-for="PageSize" min="1" max="100">
-                                <label asp-for="PageSize"><i class="bi bi-eye"></i>&nbsp;Items</label>
-                            </div>
-                        </div>
-
-                        <!--Sort Field-->
-                        <input type="hidden" asp-for="SortField" />
-                        <!--Sort Order-->
-                        <input type="hidden" asp-for="SortOrder" />
-
-                        <div class="mt-2 gap-2 d-flex">
-                            <!--Search Field-->
-                            <div class="form-floating w-100">
-                                <select class="form-select" asp-for="SearchField" asp-items="Model.SearchFields">
-                                    <option value="All">All</option>
-                                </select>
-                                <label asp-for="SearchField"><i class="bi bi-view-list"></i>&nbsp;Field</label>
-                            </div>
-                        </div>
-
-                        <div class="mt-2 gap-2 d-flex">
-                            <!--Search Text-->
-                            <div class="form-floating w-100">
-                                <input type="search" class="form-control" id="SearchText" name="SearchText" placeholder="Text" value="@Model.SearchText">
-                                <label for="SearchText"><i class="bi bi-search"></i>&nbsp;Text</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <!--Go-->
-                        <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i>&nbsp;SEARCH</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
 }
 
-<!--Row-->
-<div class="m-0 p-0 pb-2 g-2 row border-bottom">
-    <!--Col-->
-    <div class="col-auto col-sm-3 order-1 order-sm-0 d-flex align-items-center">
-        <!--Page Info-->
-        <label class="small">Page: @Model.PageNumber of @Model.PagesCount</label>
+<!--Form-->
+<form method="get">
+    <!--Row-->
+    <div class="m-0 p-0 pb-2 g-2 row border-bottom">
+        <!--Col-->
+        <div class="col-12 col-sm-4 col-md-3 col-lg-2 d-flex justify-content-start align-items-center">
+            <!--Page Number-->
+            <input type="hidden" asp-for="PageNumber" />
+            <!--Input Group-->
+            <div class="input-group w-100">
+                <!--PageSize-->
+                <label class="input-group-text" asp-for="PageSize"><i class="bi bi-eye"></i></label>
+                <input class="form-control" asp-for="PageSize" placeholder="@(Model.PageSize ?? 25)" min="1" max="100">
+                <!--Go Button-->
+                <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-arrow-right-circle"></i></button>
+            </div>
+            <!--Sort Field-->
+            <input type="hidden" asp-for="SortField" />
+            <!--Sort Order-->
+            <input type="hidden" asp-for="SortOrder" />
+        </div>
+
+        <!--Col-->
+        <div class="col-12 col-sm-8 col-md-5 col-lg-4 d-flex justify-content-center align-items-center">
+            <!--Input Group-->
+            <div class="input-group w-100">
+                <!--Search Field-->
+                <label class="input-group-text" asp-for="SearchText">Search</label>
+                <select class="form-select overflow-auto" asp-for="SearchField" asp-items="Model.SearchFields">
+                    <option value="All">All</option>
+                </select>
+                <!--Search Text-->
+                <input class="form-control" type="search" asp-for="SearchText" placeholder="@(Model.SearchText ?? "Text")">
+                <!--Search Button-->
+                <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+            </div>
+        </div>
+
+        <!--Col-->
+        <div class="ms-auto col-12 col-sm-12 col-md-4 col-lg-6 d-flex justify-content-end align-items-center">
+            <!--Pagination-->
+            @Html.PagedListPager(Model.Items,
+       p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.SearchField, Model.SearchText }),
+       new PagedListRenderOptions
+       {
+           ContainerDivClasses = new string[] { "overflow-auto" },
+           UlElementClasses = new string[] { "pagination m-0" },
+           LiElementClasses = new string[] { "page-item" },
+           PageClasses = new string[] { "page-link" },
+           DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+           DisplayLinkToLastPage = PagedListDisplayMode.Always,
+           MaximumPageNumbersToDisplay = 5,
+       })
+        </div>
     </div>
-    <!--Col-->
-    <div class="ms-auto col-auto col-sm-3 order-2 order-sm-2 d-flex justify-content-end align-items-center">
-        <!--Items Info-->
-        <label class="small">Item(s): @Model.FirstItemOnPage - @Model.LastItemOnPage of @Model.TotalItemsCount @(string.IsNullOrEmpty(Model.SearchText) ? "" : $" [Search : \"{Model.SearchText}\"]")</label>
-    </div>
-    <!--Col-->
-    <div class="col-12 col-sm-6 order-0 order-sm-1 d-flex justify-content-center align-items-center">
-        <!--Pagination-->
-        @Html.PagedListPager(Model.Items,
-   p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.SearchField, Model.SearchText }),
-   new PagedListRenderOptions
-   {
-       ContainerDivClasses = new string[] { "overflow-auto" },
-       UlElementClasses = new string[] { "pagination m-0" },
-       LiElementClasses = new string[] { "page-item" },
-       PageClasses = new string[] { "page-link" },
-       DisplayLinkToFirstPage = PagedListDisplayMode.Always,
-       DisplayLinkToLastPage = PagedListDisplayMode.Always,
-       MaximumPageNumbersToDisplay = 5,
-   })
-    </div>
-</div>
+</form>
 
 <!--Row-->
 <div class="m-0 p-0 g-2 row table-responsive">
@@ -242,6 +212,21 @@
             }
         </tbody>
     </table>
+</div>
+
+<!--Row-->
+<div class="m-0 p-0 g-2 row">
+    <!--Col-->
+    <div class="col-auto col-sm-7 d-flex justify-content-start align-items-center">
+        <!--Items Info-->
+        <label class="small">Showing item(s): @Model.FirstItemOnPage - @Model.LastItemOnPage of @Model.TotalItemsCount @(string.IsNullOrEmpty(Model.SearchText) ? "" : $" [Search : '{Model.SearchText}' in {Model.SearchField}]")</label>
+    </div>
+    <!--Col-->
+    <div class="ms-auto col-auto col-sm-5 d-flex justify-content-end align-items-center">
+        <!--Page Info-->
+        <label class="small">Page: @Model.PageNumber of @Model.PagesCount</label>
+    </div>
+
 </div>
 
 @section Scripts {

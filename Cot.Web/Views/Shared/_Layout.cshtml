@@ -43,7 +43,7 @@
     <!--Header-->
     <header class="sticky-top bg-10">
         <!--Container-->
-        <div class="p-1 p-sm-2 py-sm-1 container-fluid">
+        <div class="p-1 p-sm-2 container-fluid">
             <!--Row-->
             <div class="m-0 p-0 g-2 row">
                 <!--Col-->
@@ -112,18 +112,10 @@
         </div>
     </div>
 
-    <!--View Header-->
-    <div style="background: url('@Url.Content("~/images/circuit-board.svg")');">
-        <!--Container-->
-        <div class="p-1 pt-0 pb-2 p-sm-2 pt-sm-0 pb-sm-2 container-fluid border-bottom">
-            @RenderSection("Header", required: true)
-        </div>
-    </div>
-
     <!--Main-->
     <main>
         <!--Container-->
-        <div class="p-1 pt-0 pb-2 container shadow">@RenderBody()</div>
+        <div class="container">@RenderBody()</div>
     </main>
 
     <!--Footer-->

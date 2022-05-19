@@ -4,35 +4,46 @@
     ViewData["Title"] = "Course Details";
 }
 
-@section Header {
+<!--Title-->
+<div class="title bg-8 text-white shadow-sm">
     <!--Row-->
-    <div class="m-0 p-0 g-2 row">
+    <div class="g-2 row">
         <!--Col-->
         <div class="gap-2 col-12 d-flex align-content-center">
             <!--Title-->
-            <h3 class="m-0 p-0"><strong>Course</strong> Details</h3>
+            <h3 class="m-0 ms-2"><strong>Course</strong> Details</h3>
             <!--Buttons-->
-            <a class="ms-auto btn btn-secondary" asp-action="Index"><i class="bi bi-list"></i>&nbsp;COURSES</a>
+            <div class="ms-auto gap-2 d-flex">
+                <!--List-->
+                <a class="btn btn-outline-light" asp-action="Index"><i class="bi bi-arrow-left-circle"></i>&nbsp;LIST</a>
+            </div>
         </div>
     </div>
-}
+</div>
 
-<!--Form-->
-<form method="post">
-    <!--Row-->
-    <div class="m-0 p-0 pb-2 g-2 row border-bottom">
-        <!--Col-->
-        <div class="col-12 d-flex align-content-center">
-            <!--Info-->
-            <h6 class="m-0 p-0">@Model.Course.Code (UID: @Model.Course.Id)</h6>
+<!--Section-->
+<div class="section my-sm-2 border rounded shadow">
+    <!--Form-->
+    <form method="post">
+        <!--Section Header-->
+        <div class="section-header">
+            <!--Row-->
+            <div class="g-2 row border-bottom">
+                <!--Col-->
+                <div class="col-12 d-flex align-content-center">
+                    <!--Info-->
+                    <h6 class="m-0 ms-1">@Model.Course.Code (UID: @Model.Course.Id)</h6>
+                </div>
+            </div>
         </div>
-    </div>
-    <!--Row-->
-    <div class="m-0 p-0 g-2 row">
-        <!--Col-->
-        <div class="col-12">
-            <!--Id-->
-            <h4>@Model.Course.Title</h4>
+
+        <!--Row-->
+        <div class="g-2 row">
+            <!--Col-->
+            <div class="col-12">
+                <!--Id-->
+                <h4>@Model.Course.Title</h4>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>

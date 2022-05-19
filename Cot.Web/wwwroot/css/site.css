@@ -63,7 +63,7 @@ body {
 }
 
 .nav-link.active {
-    background-color: var(--color-9);
+    background-color: var(--color-8);
 }
 
 .navbar-toggler.collapsed {
@@ -71,7 +71,7 @@ body {
 }
 
 .navbar-toggler:not(.collapsed) {
-    background-color: var(--color-9);
+    background-color: var(--color-8);
 }
 
 .page-item.active>.page-link {

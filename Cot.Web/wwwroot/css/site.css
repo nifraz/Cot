@@ -47,6 +47,10 @@ body {
 .col {
 }
 
+.title {
+    background-color: var(--color-7);
+}
+
 .section-header {
     background-color: #F7F7F7;
     border-bottom: 1px solid #6C757D;
@@ -63,15 +67,15 @@ body {
 }
 
 .nav-link.active {
-    background-color: var(--color-8);
+    
 }
 
-.navbar-toggler.collapsed {
+.navbar-toggler.collapsed, .dropdown-toggle:not(.show) {
     background-color: var(--color-10);
 }
 
-.navbar-toggler:not(.collapsed) {
-    background-color: var(--color-8);
+.navbar-toggler:not(.collapsed), .dropdown-toggle.show {
+    background-color: var(--color-9);
 }
 
 .page-item.active>.page-link {

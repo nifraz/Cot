@@ -64,23 +64,23 @@
                         <div class="navbar-collapse collapse">
                             <ul class="ms-auto navbar-nav">
                                 <!--Home-->
-                                <li class="mb-1 m-sm-0 nav-item">
-                                    <a class="ps-2 py-1 nav-link text-4 d-flex rounded-pill justify-content-between @(controller == "Home" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index"><span class="mx-1">HOME</span><i class="pe-3 bi bi-house d-sm-none me-1"></i></a>
+                                <li class="nav-item">
+                                    <a class="p-1 nav-link d-flex justify-content-between @(controller == "Home" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Index"><span class="px-1">HOME</span><i class="pe-2 bi bi-house d-sm-none me-2"></i></a>
                                 </li>
                                 <!--Courses-->
-                                <li class="mb-1 m-sm-0 nav-item">
-                                    <a class="ps-2 py-1 nav-link text-4 d-flex rounded-pill justify-content-between @(controller == "Courses" ? "active" : "")" asp-area="" asp-controller="Courses" asp-action="Index"><span class="mx-1">COURSES</span><i class="pe-3 bi bi-book d-sm-none me-1"></i></a>
+                                <li class="nav-item">
+                                    <a class="p-1 nav-link d-flex justify-content-between @(controller == "Courses" ? "active" : "")" asp-area="" asp-controller="Courses" asp-action="Index"><span class="px-1">COURSES</span><i class="pe-2 bi bi-book d-sm-none me-2"></i></a>
                                 </li>
                                 <!--About-->
-                                <li class="mb-1 m-sm-0 nav-item">
-                                    <a class="ps-2 py-1 nav-link text-4 d-flex rounded-pill justify-content-between @(controller == "Home" && action == "About" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="About"><span class="mx-1">ABOUT</span><i class="pe-3 bi bi-info-circle d-sm-none me-1"></i></a>
+                                <li class="nav-item">
+                                    <a class="p-1 nav-link d-flex justify-content-between @(controller == "Home" && action == "About" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="About"><span class="px-1">ABOUT</span><i class="pe-2 bi bi-info-circle d-sm-none me-2"></i></a>
                                 </li>
                                 <!--User-->
-                                <li class="mb-1 m-sm-0 nav-item dropdown">
-                                    <a class="ps-2 py-1 pe-0 nav-link text-4 rounded-pill dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <li class="nav-item dropdown">
+                                    <a class="p-1 nav-link rounded-pill dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="ms-1 bi bi-person-circle"></i>
                                     </a>
-                                    <ul class="m-0 p-0 mt-1 pb-1 dropdown-menu dropdown-menu-dark dropdown-menu-end bg-9 rounded-0 rounded-bottom border-0" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <ul class="m-0 p-0 mt-1 pb-1 dropdown-menu dropdown-menu-dark dropdown-menu-end bg-9 rounded-0 border-0 shadow" aria-labelledby="navbarDarkDropdownMenuLink">
                                         <li><a class="ps-2 py-1 dropdown-item text-4" href="#"><span class="mx-1">PROFILE</span></a></li>
                                         <li><a class="ps-2 py-1 dropdown-item text-4" href="#"><span class="mx-1">LOGOUT</span></a></li>
                                     </ul>

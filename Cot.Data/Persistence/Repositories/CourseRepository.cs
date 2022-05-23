@@ -14,9 +14,9 @@ namespace Cot.Data.Persistence.Repositories
 
         }
 
-        public override async Task<bool> IsExistingAsync(Course entity)
+        public override Task<bool> IsExistingAsync(Course entity)
         {
-            return await IsExistingAsync(e => e.Id == entity.Id || e.Code == entity.Code || e.Title == entity.Title);
+            return IsExistingAsync(e => e.Id == entity.Id || e.Code == entity.Code || e.Title == entity.Title);
         }
 
         public override async Task<IEnumerable<Course>> GetAllAsync(string sortField, string sortOrder, string searchField, string searchText)
@@ -25,9 +25,9 @@ namespace Cot.Data.Persistence.Repositories
                 .ToListAsync();
         }
 
-        public override async Task<IPagedList<Course>> GetPageAsync(int pageNumber, int pageSize, string sortField, string sortOrder, string searchField, string searchText)
+        public override Task<IPagedList<Course>> GetPageAsync(int pageNumber, int pageSize, string sortField, string sortOrder, string searchField, string searchText)
         {
-            return await GetQueryable(sortField, sortOrder, searchField, searchText)
+            return GetQueryable(sortField, sortOrder, searchField, searchText)
                 .ToPagedListAsync(pageNumber, pageSize);
         }
 

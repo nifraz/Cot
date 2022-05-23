@@ -19,25 +19,25 @@ namespace Cot.Data.Persistence.Repositories
             entities = context.Set<TEntity>();
         }
 
-        public async Task<bool> IsExistingAsync(Expression<Func<TEntity, bool>> predicate)
+        public Task<bool> IsExistingAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await entities
+            return entities
                 .AnyAsync(predicate);
         }
 
         public abstract Task<bool> IsExistingAsync(TEntity entity);
 
 
-        public async Task<TEntity> GetAsync(params object[] keyValues)
+        public Task<TEntity> GetAsync(params object[] keyValues)
         {
-            return await entities
+            return entities
                 .FindAsync(keyValues)
                 .AsTask();
         }
 
-        public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
+        public Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await entities
+            return entities
                 .Where(predicate)
                 .FirstOrDefaultAsync();
         }
@@ -52,9 +52,9 @@ namespace Cot.Data.Persistence.Repositories
 
         public abstract Task<IEnumerable<TEntity>> GetAllAsync(string sortField, string sortOrder, string searchField, string searchText);
 
-        public async Task<IPagedList<TEntity>> GetPageAsync(int pageNumber, int pageSize)
+        public Task<IPagedList<TEntity>> GetPageAsync(int pageNumber, int pageSize)
         {
-            return await entities
+            return entities
                 .AsNoTracking()
                 .ToPagedListAsync(pageNumber, pageSize);
         }

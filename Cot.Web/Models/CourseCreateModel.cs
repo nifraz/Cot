@@ -11,11 +11,12 @@ namespace Cot.Web.Models
         [Remote(action: "ValidateCourseCode", controller: "Courses")]    //calls the function using ajax to validate
         public string Code { get; set; }
         [Required]
-        [MaxLength(256)]
+        [MaxLength(128)]
         [Remote(action: "ValidateCourseTitle", controller: "Courses")]
         public string Title { get; set; }
         public CourseLevel Level { get; set; }
         public CourseType Type { get; set; }
+        [MaxLength(512)]
         public string Notes { get; set; }
     }
 }

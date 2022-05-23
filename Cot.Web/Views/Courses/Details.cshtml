@@ -14,8 +14,10 @@
             <h4 class="m-0 ms-2 pt-1"><strong>Course</strong> Details</h4>
             <!--Buttons-->
             <div class="ms-auto gap-2 d-flex">
-                <!--List-->
-                <a class="btn btn-outline-light" asp-action="Index"><i class="bi bi-arrow-left-circle"></i>&nbsp;LIST</a>
+                <!--Manage-->
+                <a class="btn btn-outline-light" asp-action="Manage"><i class="bi bi-list-ul"></i></a>
+                <!--Create-->
+                <a class="btn btn-success" asp-action="Create"><i class="bi bi-plus-circle"></i>&nbsp;NEW</a>
             </div>
         </div>
     </div>
@@ -43,6 +45,13 @@
             <div class="col-12">
                 <!--Id-->
                 <h4>@Model.Course.Title</h4>
+            </div>
+            <!--Col-->
+            <div class="gap-2 col-12 d-flex">
+                <!--Edit-->
+                <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model.Course.Id"><i class="bi bi-pencil-square"></i>&nbsp;EDIT</a>
+                <!--Delete-->
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Course.Id"><i class="bi bi-trash3"></i>&nbsp;DELETE</a>
             </div>
         </div>
     </form>

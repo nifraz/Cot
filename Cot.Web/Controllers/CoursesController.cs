@@ -27,10 +27,18 @@ namespace Cot.Web.Controllers
             this.notifyService = notifyService;
         }
 
-        // GET: List?...
+        // GET: Courses
         [HttpGet]
         [Breadcrumb("Courses")]
-        public async Task<IActionResult> Index(ListViewModel<Course> model)
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: Courses/Manage?...
+        [HttpGet]
+        [Breadcrumb("Manage", FromAction = "Index")]
+        public async Task<IActionResult> Manage(ListViewModel<Course> model)
         {
             if (model.PageNumber == null || model.PageNumber < 1)
             {
@@ -125,7 +133,7 @@ namespace Cot.Web.Controllers
                 unitOfWork.Courses.Add(course);
                 await unitOfWork.CompleteAsync();
                 notifyService.Success("Course saved!");
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { course.Id });
             }
             notifyService.Error("Course cannot be saved!");
             return View(model);
@@ -222,7 +230,7 @@ namespace Cot.Web.Controllers
                     }
                 }
                 notifyService.Success("Course updated!");
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), new { course.Id });
             }
             notifyService.Error("Course cannot be updated!");
             return View(model);
@@ -266,7 +274,7 @@ namespace Cot.Web.Controllers
             await unitOfWork.CompleteAsync();
 
             notifyService.Success("Course deleted!");
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Manage));
         }
 
         // GET: Download?...

@@ -9,8 +9,8 @@ namespace Cot.Data.Core.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class, IEntity, new()
     {
-        Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> predicate);
-        Task<bool> IsExistAsync(TEntity entity);
+        Task<bool> IsExistingAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<bool> IsExistingAsync(TEntity entity);
 
         Task<TEntity> GetAsync(params object[] keyValues);
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate);

@@ -99,12 +99,12 @@ namespace Cot.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CourseCreateModel model)
         {
-            if (await unitOfWork.Courses.IsExistAsync(e => e.Code == model.Code))
+            if (await unitOfWork.Courses.IsExistingAsync(e => e.Code == model.Code))
             {
                 ModelState.AddModelError(nameof(model.Code), $"Course Code '{model.Code}' already exists.");
             }
 
-            if (await unitOfWork.Courses.IsExistAsync(e => e.Title == model.Title))
+            if (await unitOfWork.Courses.IsExistingAsync(e => e.Title == model.Title))
             {
                 ModelState.AddModelError(nameof(model.Title), $"Course Title '{model.Title}' already exists.");
             }
@@ -212,7 +212,7 @@ namespace Cot.Web.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!await unitOfWork.Courses.IsExistAsync(e => e.Id == model.Id))
+                    if (!await unitOfWork.Courses.IsExistingAsync(e => e.Id == model.Id))
                     {
                         return NotFound();
                     }
@@ -290,7 +290,7 @@ namespace Cot.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ValidateCourseCode(string code)
         {
-            if (await unitOfWork.Courses.IsExistAsync(e => e.Code == code))
+            if (await unitOfWork.Courses.IsExistingAsync(e => e.Code == code))
             {
                 notifyService.Warning("Please choose a different Code!");
                 return Json($"Course Code '{code}' already exists.");
@@ -303,7 +303,7 @@ namespace Cot.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ValidateCourseTitle(string title)
         {
-            if (await unitOfWork.Courses.IsExistAsync(e => e.Title == title))
+            if (await unitOfWork.Courses.IsExistingAsync(e => e.Title == title))
             {
                 notifyService.Warning("Please choose a different Title!");
                 return Json($"Course Title '{title}' already exists.");

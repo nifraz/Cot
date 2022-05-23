@@ -19,12 +19,13 @@ namespace Cot.Data.Persistence.Repositories
             entities = context.Set<TEntity>();
         }
 
-        public async Task<bool> IsExistAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<bool> IsExistingAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await FindAsync(predicate) != default;
+            return await entities
+                .AnyAsync(predicate);
         }
 
-        public abstract Task<bool> IsExistAsync(TEntity entity);
+        public abstract Task<bool> IsExistingAsync(TEntity entity);
 
 
         public async Task<TEntity> GetAsync(params object[] keyValues)

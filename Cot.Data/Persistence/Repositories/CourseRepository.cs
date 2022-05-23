@@ -14,9 +14,9 @@ namespace Cot.Data.Persistence.Repositories
 
         }
 
-        public override async Task<bool> IsExistAsync(Course entity)
+        public override async Task<bool> IsExistingAsync(Course entity)
         {
-            return await FindAsync(e => e.Id == entity.Id || e.Code == entity.Code || e.Title == entity.Title) != default;
+            return await IsExistingAsync(e => e.Id == entity.Id || e.Code == entity.Code || e.Title == entity.Title);
         }
 
         public override async Task<IEnumerable<Course>> GetAllAsync(string sortField, string sortOrder, string searchField, string searchText)

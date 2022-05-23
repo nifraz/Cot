@@ -8,7 +8,7 @@
 }
 
 <!--Title-->
-<div class="title text-white shadow-sm">
+<div class="title text-white shadow">
     <!--Row-->
     <div class="g-2 row">
         <!--Col-->
@@ -18,7 +18,7 @@
             <!--Buttons-->
             <div class="ms-auto gap-2 d-flex">
                 <!--Overview-->
-                <a class="btn btn-outline-light" asp-action="Index"><i class="bi bi-book"></i></a>
+                <a class="btn btn-primary" asp-action="Index"><i class="bi bi-book"></i></a>
                 <!--Create-->
                 <a class="btn btn-success" asp-action="Create"><i class="bi bi-plus-circle"></i>&nbsp;NEW</a>
             </div>
@@ -27,7 +27,7 @@
 </div>
 
 <!--Section-->
-<div class="section my-sm-2 border rounded shadow">
+<div class="section my-sm-2 border-top shadow">
     <!--Form-->
     <form method="get">
         <!--Section Header-->
@@ -89,11 +89,11 @@
     </form>
 
     <!--Row-->
-    <div class="g-2 row table-responsive">
+    <div class="p-0 g-2 row table-responsive">
         <!--Table-->
-        <table class="m-0 p-0 table table-sm table-hover">
+        <table class="m-0 p-0 table table-sm table-hover table-bordered">
             <thead>
-                <tr class="align-middle">
+                <tr class="align-middle bg-light header-row">
                     <th>
                         <a asp-route-PageNumber="@Model.PageNumber"
                            asp-route-PageSize="@Model.PageSize"
@@ -180,7 +180,7 @@
                     </th>
                     <th>
                         <div class="d-flex justify-content-end gap-1">
-                            <a class="btn btn-sm btn-outline-success rounded-pill"
+                            <a class="btn btn-sm btn-outline-success"
                                asp-action="Download"
                                asp-route-SortField="@Model.SortField"
                                asp-route-SortOrder="@Model.SortOrder"

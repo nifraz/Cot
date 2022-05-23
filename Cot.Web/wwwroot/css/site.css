@@ -11,6 +11,10 @@
     --color-10: #2F2F2F;
     --color-11: #181818;
     --color-12: #000000;
+    --bg-light: #F8F9FA;
+    --table-border: #6C757D;
+    --input-border: #ced4da;
+    --bg-caption: #e9ecef;
 }
 
 a {
@@ -52,8 +56,7 @@ body {
 }
 
 .section-header {
-    background-color: #F7F7F7;
-    border-bottom: 1px solid #6C757D;
+    background-color: var(--bg-light);
 }
 
 .section-body {
@@ -78,18 +81,32 @@ body {
     background-color: var(--color-9);
 }
 
-.page-item.active>.page-link {
-    background-color: var(--color-2);
+.page-item.active > .page-link {
+    background-color: var(--bg-caption);
+    border-color: var(--input-border);
     color: black;
-    border-color: var(--color-3);
 }
 
 .form-floating>textarea.form-control {
     height: 6rem;
 }
 
+.header-row {
+    border-top: 0;
+}
+.header-row > th {
+    padding-top: 0;
+}
 
+tr > td:first-child, th:first-child {
+    border-left-width: 0;
+    padding-left: 0.5rem;
+}
 
+tr > td:last-child, th:last-child {
+    border-right-width: 0;
+    padding-right: 0.5rem;
+}
 
 
 .bg-1 { background-color: var(--color-1); }

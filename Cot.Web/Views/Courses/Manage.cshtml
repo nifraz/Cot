@@ -72,7 +72,7 @@
                 <div class="ms-auto col-12 col-sm-12 col-md-4 col-lg-6 d-flex justify-content-end align-items-center">
                     <!--Pagination-->
                     @Html.PagedListPager(Model.Items,
-               p => Url.Action("Index", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.SearchField, Model.SearchText }),
+               p => Url.Action("Manage", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.SearchField, Model.SearchText }),
                new PagedListRenderOptions
                {
                    ContainerDivClasses = new string[] { "overflow-auto" },
@@ -95,8 +95,7 @@
             <thead>
                 <tr class="align-middle">
                     <th>
-                        <a asp-action="Index"
-                           asp-route-PageNumber="@Model.PageNumber"
+                        <a asp-route-PageNumber="@Model.PageNumber"
                            asp-route-PageSize="@Model.PageSize"
                            asp-route-SortField="Code"
                            asp-route-SortOrder="@(Model.SortField == "Code" ? newSortOrder : Model.SortOrder)"
@@ -110,8 +109,7 @@
                         </a>
                     </th>
                     <th>
-                        <a asp-action="Index"
-                           asp-route-PageNumber="@Model.PageNumber"
+                        <a asp-route-PageNumber="@Model.PageNumber"
                            asp-route-PageSize="@Model.PageSize"
                            asp-route-SortField="Title"
                            asp-route-SortOrder="@(Model.SortField == "Title" ? newSortOrder : Model.SortOrder)"
@@ -125,8 +123,7 @@
                         </a>
                     </th>
                     <th>
-                        <a asp-action="Index"
-                           asp-route-PageNumber="@Model.PageNumber"
+                        <a asp-route-PageNumber="@Model.PageNumber"
                            asp-route-PageSize="@Model.PageSize"
                            asp-route-SortField="Level"
                            asp-route-SortOrder="@(Model.SortField == "Level" ? newSortOrder : Model.SortOrder)"
@@ -140,8 +137,7 @@
                         </a>
                     </th>
                     <th>
-                        <a asp-action="Index"
-                           asp-route-PageNumber="@Model.PageNumber"
+                        <a asp-route-PageNumber="@Model.PageNumber"
                            asp-route-PageSize="@Model.PageSize"
                            asp-route-SortField="Type"
                            asp-route-SortOrder="@(Model.SortField == "Type" ? newSortOrder : Model.SortOrder)"
@@ -155,8 +151,7 @@
                         </a>
                     </th>
                     <th>
-                        <a asp-action="Index"
-                           asp-route-PageNumber="@Model.PageNumber"
+                        <a asp-route-PageNumber="@Model.PageNumber"
                            asp-route-PageSize="@Model.PageSize"
                            asp-route-SortField="AddedDateTime"
                            asp-route-SortOrder="@(Model.SortField == "AddedDateTime" ? newSortOrder : Model.SortOrder)"
@@ -170,8 +165,7 @@
                         </a>
                     </th>
                     <th>
-                        <a asp-action="Index"
-                           asp-route-PageNumber="@Model.PageNumber"
+                        <a asp-route-PageNumber="@Model.PageNumber"
                            asp-route-PageSize="@Model.PageSize"
                            asp-route-SortField="ModifiedDateTime"
                            asp-route-SortOrder="@(Model.SortField == "ModifiedDateTime" ? newSortOrder : Model.SortOrder)"

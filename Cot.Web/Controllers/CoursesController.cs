@@ -29,6 +29,7 @@ namespace Cot.Web.Controllers
 
         // GET: Courses
         [HttpGet]
+        [AllowAnonymous]
         [Breadcrumb("Courses")]
         public IActionResult Index()
         {
@@ -294,8 +295,6 @@ namespace Cot.Web.Controllers
         #region Validation
 
         [HttpGet]
-        [HttpPost] //or use [AcceptVerbs("Get", "Post")] for handling multiple http methods
-        [AllowAnonymous]
         public async Task<IActionResult> ValidateCourseCode(string code)
         {
             if (await unitOfWork.Courses.IsExistingAsync(e => e.Code == code))
@@ -307,8 +306,6 @@ namespace Cot.Web.Controllers
         }
 
         [HttpGet]
-        [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> ValidateCourseTitle(string title)
         {
             if (await unitOfWork.Courses.IsExistingAsync(e => e.Title == title))

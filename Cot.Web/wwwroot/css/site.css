@@ -52,6 +52,7 @@ body {
 }
 
 .title {
+    min-height: 10rem;
     background-color: var(--color-6);
 }
 

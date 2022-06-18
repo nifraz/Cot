@@ -5,7 +5,7 @@
 }
 
 <!--Title-->
-<div class="title text-white shadow">
+<div class="title text-white">
     <!--Row-->
     <div class="g-2 row">
         <!--Col-->
@@ -15,14 +15,14 @@
             <!--Buttons-->
             <div class="ms-auto gap-2 d-flex">
                 <!--Manage-->
-                <a class="btn btn-primary" asp-action="Manage"><i class="bi bi-list-ul"></i></a>
+                <a class="btn btn-primary shadow" asp-action="Manage"><i class="bi bi-list-ul"></i></a>
             </div>
         </div>
     </div>
 </div>
 
 <!--Section-->
-<div class="section my-sm-2 border rounded shadow">
+<div class="section mt-sm-2">
     <!--Section Header-->
     <div class="section-header">
         <!--Row-->
@@ -35,24 +35,27 @@
         </div>
     </div>
 
-    <!--Row-->
-    <div class="g-2 row">
-        <div class="col-12">
-            @Html.DisplayNameFor(model => model.Title)
-        </div>
-        <div class="col-12">
-            @Html.DisplayFor(model => model.Title)
-        </div>
-
-        <form asp-action="Delete">
-            <div class="gap-2 col-12 d-flex">
-                <input type="hidden" asp-for="Code" />
-                <!--Submit-->
-                <button class="btn btn-danger" type="submit"><i class="bi bi-trash3"></i>&nbsp;DELETE</button>
-                <!--Cancel-->
-                <a class="btn btn-secondary" asp-action="Details" asp-route-id="@Model.Id"><i class="bi bi-x-circle"></i>&nbsp;CANCEL</a>
+    <!--Section Body-->
+    <div class="section-body bg-light">
+        <!--Row-->
+        <div class="g-2 row bg-light">
+            <div class="col-12">
+                @Html.DisplayNameFor(model => model.Title)
             </div>
-        </form>
+            <div class="col-12">
+                @Html.DisplayFor(model => model.Title)
+            </div>
+
+            <form asp-action="Delete">
+                <div class="gap-2 col-12 d-flex">
+                    <input type="hidden" asp-for="Code" />
+                    <!--Submit-->
+                    <button class="btn btn-danger shadow" type="submit"><i class="bi bi-trash3"></i>&nbsp;DELETE</button>
+                    <!--Cancel-->
+                    <a class="btn btn-secondary shadow" asp-action="Details" asp-route-id="@Model.Id"><i class="bi bi-x-circle"></i>&nbsp;CANCEL</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

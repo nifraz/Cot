@@ -28,6 +28,7 @@ namespace Cot.Web
             services.AddControllersWithViews();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddBreadcrumbs(GetType().Assembly, options =>
             {

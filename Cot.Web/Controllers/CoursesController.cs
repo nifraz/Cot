@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using AutoMapper;
 using ClosedXML.Excel;
 using ClosedXML.Extensions;
 using Cot.Data.Core;
@@ -19,11 +20,13 @@ namespace Cot.Web.Controllers
     public class CoursesController : Controller
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly IMapper mapper;
         private readonly INotyfService notifyService;
 
-        public CoursesController(IUnitOfWork unitOfWork, INotyfService notifyService)
+        public CoursesController(IUnitOfWork unitOfWork, IMapper mapper, INotyfService notifyService)
         {
             this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
             this.notifyService = notifyService;
         }
 
@@ -120,16 +123,9 @@ namespace Cot.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                var course = new Course()
-                {
-                    Id = Guid.NewGuid(),
-                    Code = model.Code,
-                    Title = model.Title,
-                    Level = model.Level,
-                    Type = model.Type,
-                    Notes = model.Notes,
-                    AddedDateTime = DateTime.Now
-                };
+                var course = mapper.Map<Course>(model);
+                course.Id = Guid.NewGuid();
+                course.AddedDateTime = DateTime.Now;
 
                 unitOfWork.Courses.Add(course);
                 await unitOfWork.CompleteAsync();
@@ -157,15 +153,7 @@ namespace Cot.Web.Controllers
                 return NotFound();
             }
 
-            var model = new CourseEditModel()
-            {
-                Id = course.Id,
-                Code = course.Code,
-                Title = course.Title,
-                Level = course.Level,
-                Type = course.Type,
-                Notes = course.Notes
-            };
+            var model = mapper.Map<CourseEditModel>(course);
             return View(model);
         }
 
@@ -206,30 +194,11 @@ namespace Cot.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    course.Id = model.Id;
-                    course.Code = model.Code;
-                    course.Title = model.Title;
-                    course.Level = model.Level;
-                    course.Type = model.Type;
-                    course.Notes = model.Notes;
-                    course.ModifiedDateTime = DateTime.Now;
+                mapper.Map(model, course);
+                course.ModifiedDateTime = DateTime.Now;
 
-                    unitOfWork.Courses.Update(course);
-                    await unitOfWork.CompleteAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!await unitOfWork.Courses.IsExistingAsync(e => e.Id == model.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                unitOfWork.Courses.Update(course);
+                await unitOfWork.CompleteAsync();
                 notifyService.Success("Course updated!");
                 return RedirectToAction(nameof(Details), new { course.Id });
             }

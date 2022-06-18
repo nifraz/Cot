@@ -5,7 +5,7 @@
 }
 
 <!--Title-->
-<div class="title text-white shadow">
+<div class="title text-white">
     <!--Row-->
     <div class="g-2 row">
         <!--Col-->
@@ -15,16 +15,16 @@
             <!--Buttons-->
             <div class="ms-auto gap-2 d-flex">
                 <!--Manage-->
-                <a class="btn btn-primary" asp-action="Manage"><i class="bi bi-list-ul"></i></a>
+                <a class="btn btn-primary shadow" asp-action="Manage"><i class="bi bi-list-ul"></i></a>
                 <!--Create-->
-                <a class="btn btn-success" asp-action="Create"><i class="bi bi-plus-circle"></i>&nbsp;NEW</a>
+                <a class="btn btn-success shadow" asp-action="Create"><i class="bi bi-plus-circle"></i>&nbsp;NEW</a>
             </div>
         </div>
     </div>
 </div>
 
 <!--Section-->
-<div class="section my-sm-2 border rounded shadow">
+<div class="section mt-sm-2">
     <!--Form-->
     <form method="post">
         <!--Section Header-->
@@ -39,19 +39,22 @@
             </div>
         </div>
 
-        <!--Row-->
-        <div class="g-2 row">
-            <!--Col-->
-            <div class="col-12">
-                <!--Id-->
-                <h4>@Model.Course.Title</h4>
-            </div>
-            <!--Col-->
-            <div class="gap-2 col-12 d-flex">
-                <!--Edit-->
-                <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model.Course.Id"><i class="bi bi-pencil-square"></i>&nbsp;EDIT</a>
-                <!--Delete-->
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Course.Id"><i class="bi bi-trash3"></i>&nbsp;DELETE</a>
+        <!--Section Body-->
+        <div class="section-body bg-light">
+            <!--Row-->
+            <div class="g-2 row">
+                <!--Col-->
+                <div class="col-12">
+                    <!--Id-->
+                    <h4>@Model.Course.Title</h4>
+                </div>
+                <!--Col-->
+                <div class="gap-2 col-12 d-flex">
+                    <!--Edit-->
+                    <a class="btn btn-secondary shadow" asp-action="Edit" asp-route-id="@Model.Course.Id"><i class="bi bi-pencil-square"></i>&nbsp;EDIT</a>
+                    <!--Delete-->
+                    <a class="btn btn-danger shadow" asp-action="Delete" asp-route-id="@Model.Course.Id"><i class="bi bi-trash3"></i>&nbsp;DELETE</a>
+                </div>
             </div>
         </div>
     </form>

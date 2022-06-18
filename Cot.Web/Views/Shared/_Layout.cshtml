@@ -41,9 +41,9 @@
 
 <body class="d-flex flex-column bg-1 min-vh-100">
     <!--Header-->
-    <header class="sticky-top bg-10">
+    <header class="sticky-top shadow-sm">
         <!--Container-->
-        <div class="p-1 p-sm-2 container-fluid">
+        <div class="p-1 p-sm-2 container-fluid bg-10">
             <!--Row-->
             <div class="m-0 p-0 g-2 row">
                 <!--Col-->
@@ -56,7 +56,7 @@
                             <span class="brand-name text-white" style="padding-top: 2px; font: 16px Arial, sans-serif; line-height: 18px; letter-spacing: 1px; display: block; vertical-align: middle; ">COLLEGE OF<br />TECHNOLOGY</span>
                         </a>
                         <!--Navbar Toggler-->
-                        <button class="px-3 py-1 navbar-toggler collapsed rounded-pill border-0" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        <button class="px-3 py-1 navbar-toggler collapsed rounded-pill border-1" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
                             <i class="fs-6 navbar-toggler-icon"></i>
                         </button>
@@ -77,7 +77,7 @@
                                 </li>
                                 <!--User-->
                                 <li class="nav-item dropdown">
-                                    <a class="p-1 nav-link rounded-pill dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="p-1 pe-0 nav-link rounded-pill dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="ms-1 bi bi-person-circle"></i>
                                     </a>
                                     <ul class="m-0 p-0 mt-1 pb-1 dropdown-menu dropdown-menu-dark dropdown-menu-end bg-9 rounded-0 border-0 shadow" aria-labelledby="navbarDarkDropdownMenuLink">
@@ -91,26 +91,26 @@
                 </div>
             </div>
         </div>
-    </header>
-
-    <!--Container-->
-    <div class="p-1 py-0 p-sm-2 py-sm-0 d-none d-sm-block container-fluid">
-        <!--Row-->
-        <div class="m-0 p-0 g-2 row">
-            <!--Col-->
-            <div class="m-0 col-12">
-                <!--Strip-->
-                <div class="d-flex bg-1 small justify-content-between">
-                    <!--Breadcrum-->
-                    <breadcrumb></breadcrumb>
-                    <!--Info-->
-                    <div>
-                        Page retrieved on @DateTime.Now.ToCleanString()
+        <!--Container-->
+        <div class="p-1 py-0 p-sm-2 py-sm-0 d-none d-sm-block container-fluid border-bottom bg-light">
+            <!--Row-->
+            <div class="m-0 p-0 g-2 row">
+                <!--Col-->
+                <div class="m-0 col-12">
+                    <!--Strip-->
+                    <div class="d-flex small justify-content-between">
+                        <!--Breadcrum-->
+                        <breadcrumb></breadcrumb>
+                        <!--Info-->
+                        <div>
+                            Page retrieved on @DateTime.Now.ToCleanString()
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </header>
+
 
     <!--Main-->
     <main>

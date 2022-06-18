@@ -8,7 +8,7 @@
 }
 
 <!--Title-->
-<div class="title text-white shadow">
+<div class="title text-white">
     <!--Row-->
     <div class="g-2 row">
         <!--Col-->
@@ -18,16 +18,16 @@
             <!--Buttons-->
             <div class="ms-auto gap-2 d-flex">
                 <!--Overview-->
-                <a class="btn btn-primary" asp-action="Index"><i class="bi bi-book"></i></a>
+                <a class="btn btn-primary shadow" asp-action="Index"><i class="bi bi-book"></i></a>
                 <!--Create-->
-                <a class="btn btn-success" asp-action="Create"><i class="bi bi-plus-circle"></i>&nbsp;NEW</a>
+                <a class="btn btn-success shadow" asp-action="Create"><i class="bi bi-plus-circle"></i>&nbsp;NEW</a>
             </div>
         </div>
     </div>
 </div>
 
 <!--Section-->
-<div class="section my-sm-2 border-top shadow">
+<div class="section mt-sm-2">
     <!--Form-->
     <form method="get">
         <!--Section Header-->
@@ -39,7 +39,7 @@
                     <!--Page Number-->
                     <input type="hidden" asp-for="PageNumber" />
                     <!--Input Group-->
-                    <div class="input-group w-100">
+                    <div class="input-group w-100 shadow">
                         <!--PageSize-->
                         <label class="input-group-text" asp-for="PageSize">Items</label>
                         <input class="form-control" asp-for="PageSize" placeholder="@(Model.PageSize ?? 25)" min="1" max="100">
@@ -55,7 +55,7 @@
                 <!--Col-->
                 <div class="col-12 col-sm-8 col-md-5 col-lg-4 d-flex justify-content-center align-items-center">
                     <!--Input Group-->
-                    <div class="input-group w-100">
+                    <div class="input-group w-100 shadow">
                         <!--Search Field-->
                         <label class="input-group-text" asp-for="SearchText">Search</label>
                         <select class="form-select overflow-auto" asp-for="SearchField" asp-items="Model.SearchFields">
@@ -75,7 +75,7 @@
                p => Url.Action("Manage", new { PageNumber = p, Model.PageSize, Model.SortField, Model.SortOrder, Model.SearchField, Model.SearchText }),
                new PagedListRenderOptions
                {
-                   ContainerDivClasses = new string[] { "overflow-auto" },
+                   ContainerDivClasses = new string[] { "overflow-auto shadow" },
                    UlElementClasses = new string[] { "pagination m-0" },
                    LiElementClasses = new string[] { "page-item" },
                    PageClasses = new string[] { "page-link" },
@@ -91,11 +91,11 @@
     <!--Row-->
     <div class="p-0 g-2 row table-responsive">
         <!--Table-->
-        <table class="m-0 p-0 table table-sm table-hover table-bordered">
+        <table class="m-0 p-0 table table-sm table-hover table-bordered sticky-header">
             <thead>
                 <tr class="align-middle bg-light header-row">
                     <th>
-                        <a asp-route-PageNumber="@Model.PageNumber"
+                        <a class="nav-link" asp-route-PageNumber="@Model.PageNumber"
                            asp-route-PageSize="@Model.PageSize"
                            asp-route-SortField="Code"
                            asp-route-SortOrder="@(Model.SortField == "Code" ? newSortOrder : Model.SortOrder)"
@@ -217,7 +217,7 @@
     </div>
 
     <!--Row-->
-    <div class="g-2 row">
+    <div class="g-2 row bg-light">
         <!--Col-->
         <div class="col-auto col-sm-7 d-flex justify-content-start align-items-center">
             <!--Items Info-->

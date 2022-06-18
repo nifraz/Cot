@@ -52,12 +52,13 @@ body {
 }
 
 .title {
-    min-height: 10rem;
-    background-color: var(--color-6);
+    /*min-height: 10rem;*/
+    background: linear-gradient(to right, var(--color-6), var(--color-3));
+    /*background-color: var(--color-6);*/
 }
 
 .section-header {
-    background-color: var(--bg-light);
+    background-color: var(--color-3);
 }
 
 .section-body {
@@ -94,9 +95,11 @@ body {
 
 .header-row {
     border-top: 0;
+    
 }
 .header-row > th {
-    padding-top: 0;
+    padding-top: 0.25rem;
+    padding-bottom: 0.125rem;
 }
 
 tr > td:first-child, th:first-child {
@@ -109,6 +112,11 @@ tr > td:last-child, th:last-child {
     padding-right: 0.5rem;
 }
 
+table.floatThead-table {
+    /*    border-top: none;
+    border-bottom: none;
+    background-color: #fff;*/
+}
 
 .bg-1 { background-color: var(--color-1); }
 .bg-2 { background-color: var(--color-2); }

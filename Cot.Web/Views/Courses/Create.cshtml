@@ -5,7 +5,7 @@
 }
 
 <!--Title-->
-<div class="title text-white shadow">
+<div class="title text-white">
     <!--Row-->
     <div class="g-2 row">
         <!--Col-->
@@ -15,14 +15,14 @@
             <!--Buttons-->
             <div class="ms-auto gap-2 d-flex">
                 <!--Manage-->
-                <a class="btn btn-primary" asp-action="Manage"><i class="bi bi-list-ul"></i></a>
+                <a class="btn btn-primary shadow" asp-action="Manage"><i class="bi bi-list-ul"></i></a>
             </div>
         </div>
     </div>
 </div>
 
 <!--Section-->
-<div class="section my-sm-2 border rounded shadow">
+<div class="section mt-sm-2">
     <!--Form-->
     <form method="post">
         <!--Section Header-->
@@ -37,73 +37,76 @@
             </div>
         </div>
 
-        <!--Row-->
-        <div class="g-2 row">
-            <!--Col-->
-            <div class="col-12">
-                <!--Id-->
-                <div class="form-floating w-100">
-                    <input class="form-control" id="Id" placeholder="Course UID" value="(auto-generated)" disabled>
-                    <label for="Id">UID</label>
+        <!--Section Body-->
+        <div class="section-body bg-light">
+            <!--Row-->
+            <div class="g-2 row">
+                <!--Col-->
+                <div class="col-12">
+                    <!--Id-->
+                    <div class="form-floating w-100">
+                        <input class="form-control" id="Id" placeholder="Course UID" value="(auto-generated)" disabled>
+                        <label for="Id">UID</label>
+                    </div>
+                    <span class="text-danger small"></span>
                 </div>
-                <span class="text-danger small"></span>
-            </div>
-            <!--Col-->
-            <div class="col-12 col-sm-4">
-                <!--Code-->
-                <div class="form-floating w-100">
-                    <input class="form-control" asp-for="Code" placeholder="Course Code">
-                    <label asp-for="Code"></label>
+                <!--Col-->
+                <div class="col-12 col-sm-4">
+                    <!--Code-->
+                    <div class="form-floating w-100">
+                        <input class="form-control" asp-for="Code" placeholder="Course Code">
+                        <label asp-for="Code"></label>
+                    </div>
+                    <span class="text-danger small" asp-validation-for="Code"></span>
                 </div>
-                <span class="text-danger small" asp-validation-for="Code"></span>
-            </div>
-            <!--Col-->
-            <div class="col-12 col-sm-8">
-                <!--Title-->
-                <div class="form-floating w-100">
-                    <input class="form-control" asp-for="Title" placeholder="Course Title">
-                    <label asp-for="Title"></label>
+                <!--Col-->
+                <div class="col-12 col-sm-8">
+                    <!--Title-->
+                    <div class="form-floating w-100">
+                        <input class="form-control" asp-for="Title" placeholder="Course Title">
+                        <label asp-for="Title"></label>
+                    </div>
+                    <span class="text-danger small" asp-validation-for="Title"></span>
                 </div>
-                <span class="text-danger small" asp-validation-for="Title"></span>
-            </div>
-            <!--Col-->
-            <div class="col-12 col-sm-6">
-                <!--Level-->
-                <div class="form-floating w-100">
-                    <select class="form-select" asp-for="Level" asp-items="Html.GetEnumSelectList<CourseLevel>()"></select>
-                    <label asp-for="Level"></label>
+                <!--Col-->
+                <div class="col-12 col-sm-6">
+                    <!--Level-->
+                    <div class="form-floating w-100">
+                        <select class="form-select" asp-for="Level" asp-items="Html.GetEnumSelectList<CourseLevel>()"></select>
+                        <label asp-for="Level"></label>
+                    </div>
+                    <span class="text-danger small" asp-validation-for="Level"></span>
                 </div>
-                <span class="text-danger small" asp-validation-for="Level"></span>
-            </div>
-            <!--Col-->
-            <div class="col-12 col-sm-6">
-                <!--Type-->
-                <div class="form-floating w-100">
-                    <select class="form-select" asp-for="Type" asp-items="Html.GetEnumSelectList<CourseType>()"></select>
-                    <label asp-for="Type"></label>
+                <!--Col-->
+                <div class="col-12 col-sm-6">
+                    <!--Type-->
+                    <div class="form-floating w-100">
+                        <select class="form-select" asp-for="Type" asp-items="Html.GetEnumSelectList<CourseType>()"></select>
+                        <label asp-for="Type"></label>
+                    </div>
+                    <span class="text-danger small" asp-validation-for="Type"></span>
                 </div>
-                <span class="text-danger small" asp-validation-for="Type"></span>
-            </div>
-            <!--Col-->
-            <div class="col-12">
-                <!--Notes-->
-                <div class="form-floating w-100">
-                    <textarea class="form-control" asp-for="Notes" placeholder="Notes..."></textarea>
-                    <label asp-for="Notes"></label>
+                <!--Col-->
+                <div class="col-12">
+                    <!--Notes-->
+                    <div class="form-floating w-100">
+                        <textarea class="form-control" asp-for="Notes" placeholder="Notes..."></textarea>
+                        <label asp-for="Notes"></label>
+                    </div>
+                    <span class="text-danger small" asp-validation-for="Notes"></span>
                 </div>
-                <span class="text-danger small" asp-validation-for="Notes"></span>
-            </div>
-            <!--Col-->
-            <div class="col-12">
-                <!--Validation-->
-                <div class="text-danger small" asp-validation-summary="ModelOnly"></div>
-            </div>
-            <!--Col-->
-            <div class="gap-2 col-12 d-flex">
-                <!--Submit-->
-                <button class="btn btn-success" type="submit"><i class="bi bi-save"></i>&nbsp;SAVE</button>
-                <!--Cancel-->
-                <a class="btn btn-secondary" asp-action="Manage"><i class="bi bi-x-circle"></i>&nbsp;CANCEL</a>
+                <!--Col-->
+                <div class="col-12">
+                    <!--Validation-->
+                    <div class="text-danger small" asp-validation-summary="ModelOnly"></div>
+                </div>
+                <!--Col-->
+                <div class="gap-2 col-12 d-flex">
+                    <!--Submit-->
+                    <button class="btn btn-success shadow" type="submit"><i class="bi bi-save"></i>&nbsp;SAVE</button>
+                    <!--Cancel-->
+                    <a class="btn btn-secondary shadow" asp-action="Manage"><i class="bi bi-x-circle"></i>&nbsp;CANCEL</a>
+                </div>
             </div>
         </div>
     </form>
